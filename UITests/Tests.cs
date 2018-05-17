@@ -29,9 +29,9 @@ namespace XamAppCenterSample2018.UITests
         [Test]
         public async void SucceedTranslate()
         {
-			await Task.Delay(2000);
-			app.Tap(c => c.Marked("inputText"));
-			await Task.Delay(2000);
+            await Task.Delay(2000);
+            app.Tap(c => c.Marked("inputText"));
+            await Task.Delay(2000);
             app.EnterText("私は毎日電車に乗って会社に行きます。");
             await Task.Delay(2000);
             app.DismissKeyboard();
@@ -39,8 +39,8 @@ namespace XamAppCenterSample2018.UITests
             app.Tap(c => c.Button("translateButton"));
             await Task.Delay(4000);
             var elements = app.Query(c => c.Marked("translatedText"));
-			await Task.Delay(2000);
-			Assert.AreEqual("I go to the office by train every day.", elements.FirstOrDefault().Text);
+            await Task.Delay(2000);
+            Assert.AreEqual("I go to the office by train every day.", elements.FirstOrDefault().Text);
         }
 
         [Test]
@@ -50,8 +50,8 @@ namespace XamAppCenterSample2018.UITests
             app.Tap(c => c.Button("translateButton"));
             await Task.Delay(4000);
             var elements = app.Query(c => c.Marked("translatedText"));
-			await Task.Delay(2000);
-			Assert.AreEqual("エラーコード： 400005" + Environment.NewLine + "The field Text must be a string or array type with a minimum length of '1'.", elements.FirstOrDefault().Text);
+            await Task.Delay(2000);
+            Assert.AreEqual("エラーコード： 400005" + Environment.NewLine + "The field Text must be a string or array type with a minimum length of '1'.", elements.FirstOrDefault().Text);
         }
     }
 }

@@ -11,11 +11,11 @@ using XamAppCenterSample2018.ViewModels;
 
 namespace XamAppCenterSample2018.iOS
 {
-	[Register("MainView")]
+    [Register("MainView")]
     [MvxRootPresentation(WrapInNavigationController = false)]
     public class MainView : MvxViewController<MainViewModel>
     {
-        nfloat fontSize= 20;
+        nfloat fontSize = 20;
 
         UILabel inputLabel;
         UITextView inputText;
@@ -29,7 +29,7 @@ namespace XamAppCenterSample2018.iOS
 
             InitUI();
             SetBinding();
-		}
+        }
 
         void InitUI()
         {
@@ -40,7 +40,7 @@ namespace XamAppCenterSample2018.iOS
             View.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
 
             inputLabel = new UILabel
-            { 
+            {
                 Frame = new CGRect(0, 0, 375, 20),
                 Opaque = false,
                 UserInteractionEnabled = false,
@@ -95,7 +95,7 @@ namespace XamAppCenterSample2018.iOS
                 LineBreakMode = UILineBreakMode.MiddleTruncation,
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 Font = UIFont.SystemFontOfSize(fontSize),
-				AccessibilityIdentifier = "translateButton",
+                AccessibilityIdentifier = "translateButton",
             };
 
             translateButton.SetTitle("英語に翻訳する", UIControlState.Normal);
@@ -139,8 +139,8 @@ namespace XamAppCenterSample2018.iOS
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
-				AccessibilityIdentifier = "translatedText",
-           };
+                AccessibilityIdentifier = "translatedText",
+            };
 
             translatedText.Layer.BorderWidth = 1;
             translatedText.Layer.BorderColor = UIColor.LightGray.CGColor;

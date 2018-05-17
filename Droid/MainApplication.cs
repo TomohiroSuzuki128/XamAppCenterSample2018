@@ -9,7 +9,7 @@ using XamAppCenterSample2018;
 
 namespace XamAppCenterSample2018.Droid
 {
-	[Application]
+    [Application]
     public class MainApplication : MvxAndroidApplication<MvxAndroidSetup<App>, App>
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer)

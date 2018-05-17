@@ -9,7 +9,7 @@ namespace XamAppCenterSample2018.Models
     public class ErrorResult
     {
         [JsonProperty("error")]
-        public Error Error{ get; set; }
+        public Error Error { get; set; }
     }
 
     [JsonObject("error")]

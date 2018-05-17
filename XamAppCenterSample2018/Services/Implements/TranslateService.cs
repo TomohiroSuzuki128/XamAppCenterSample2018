@@ -31,7 +31,7 @@ namespace XamAppCenterSample2018.Services.Implements
                 request.Method = HttpMethod.Post;
                 request.RequestUri = new Uri(uri);
                 request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
-				request.Headers.Add("Ocp-Apim-Subscription-Key", Variables.ApiKey);
+                request.Headers.Add("Ocp-Apim-Subscription-Key", Variables.ApiKey);
 
                 var response = await client.SendAsync(request);
                 if (response.StatusCode == HttpStatusCode.OK)

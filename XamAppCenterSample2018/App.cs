@@ -18,9 +18,9 @@ namespace XamAppCenterSample2018
                 .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
-         
+
             RegisterAppStart<MainViewModel>();
         }
-  
+
     }
 }

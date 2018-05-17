@@ -68,4 +68,16 @@ Global
 		{95E66930-CABF-42C4-BA25-C64BE1227245}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{95E66930-CABF-42C4-BA25-C64BE1227245}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.inheritsSet = null
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.scope = text/x-csharp
+		$0.TextStylePolicy = $3
+		$3.FileWidth = 80
+		$3.TabsToSpaces = True
+		$3.scope = text/plain
+	EndGlobalSection
 EndGlobal

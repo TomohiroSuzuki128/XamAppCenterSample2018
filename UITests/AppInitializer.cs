@@ -13,16 +13,18 @@ namespace XamAppCenterSample2018.UITests
             if (platform == Platform.Android)
             {
                 return ConfigureApp
-					.Android
-					.EnableLocalScreenshots()
-					.InstalledApp("com.hiro128777.XamAppCenterSample2018")
-					.StartApp();
+                    .Android
+                    .EnableLocalScreenshots()
+                    .InstalledApp("com.hiro128777.XamAppCenterSample2018")
+                    .StartApp();
             }
 
             return ConfigureApp
-				.iOS
-				.EnableLocalScreenshots()                 .PreferIdeSettings() 				.InstalledApp("com.hiro128777.XamAppCenterSample2018")
-				.StartApp();
+                .iOS
+                .EnableLocalScreenshots()
+                .PreferIdeSettings()
+                .InstalledApp("com.hiro128777.XamAppCenterSample2018")
+                .StartApp();
         }
     }
 }
