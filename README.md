@@ -48,3 +48,7 @@ Translator Text API を選択します。
 項目を入力して「作成」をクリックします。 
 価格レベルは必ず「F0」（無料）にしてください！
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/004.png?raw=true)
+  
+  
+作成した Translator Text API を開いて Key をコピーし保管しておいて下さい。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/005.png?raw=true)
