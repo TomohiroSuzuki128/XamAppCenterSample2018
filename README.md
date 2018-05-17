@@ -65,7 +65,7 @@ Translator Text API を選択します。
 # iOSの自動ビルド #
   
   
-## 証明書、Provisioning Profile の作成 ##
+## 証明書、Provisioning Profile の作成（実機自動ビルドしたい場合のみ） ##
 Apple Developer Program のサイトで証明書（.cer）、Provisioning Profile（.mobileprovision） を作成し、ローカルの Mac の キーチェーンアクセス で 証明書（.p12） を作成します。
 この方法についてはWeb上に情報がたくさんあるので、Webの情報を参考に行なってください。
   
@@ -74,7 +74,9 @@ Apple Developer Program のサイトで証明書（.cer）、Provisioning Profil
   
   
 ## App Center で iOS の App の作成 ##
-  
+
+ここからは、実機自動ビルド、シミュレータ自動ビルド共通の手順です。
+
 App Center にログインし、右上の「add new」から「add new app」を選択
 
 App Name, OS, Platform を入力、選択し、「Add new app」をクリック
@@ -101,5 +103,16 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
 
 ビルドが始まるのでしばらく待ち、成功すれば完了です。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/011.png?raw=true)
+  
+  
+  
+  
+  
+  
+# iOS の UITest #
+## 署名なしの ipa の作成 ##
+  
+  
+iOSプロジェクトを実機ビルドします。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/012.png?raw=true)
 
-## App Center で iOS の UITest の設定 ##
