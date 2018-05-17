@@ -113,6 +113,23 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
 ## 署名なしの ipa の作成 ##
   
   
-iOSプロジェクトを実機ビルドします。
+iOSプロジェクトを Debug で 実機ビルドに設定します。
+
+
+「単体テスト」タブを開き、
+
+
+iOSプロジェクトを追加します。
+
+
+
+「テストのデバッグ」を実行します。
+
+
+
+完了したら、Finder でiOSプロジェクトのフォルダを見てみると、
+署名はされていませんが、ipaファイルが生成されています。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/012.png?raw=true)
+
+完了したら
 
