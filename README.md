@@ -10,8 +10,10 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 ## Android ##
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android.png?raw=true)
   
-
-
+  
+  
+  
+  
 # 必要環境 #
 
 ## iOS,Android 自動ビルド ##
@@ -20,7 +22,6 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 - App Center のアカウント
 
 ### iOSで実機ビルドする場合 ###
-- iOS11 以上の iPhone 実機
 - Apple Developer Program への加入
 
 ## iOS UIテスト ##
@@ -29,6 +30,9 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 
 ## Android UIテスト ##
 - （必須ではないがあると望ましい） Android 7.0 以上の Android 実機
+  
+  
+  
   
   
 # Cognitive Services の Translator Text API 作成 #
@@ -52,3 +56,32 @@ Translator Text API を選択します。
   
 作成した Translator Text API を開いて Key をコピーし保管しておいて下さい。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/005.png?raw=true)
+  
+  
+  
+  
+  
+# iOSの自動ビルド #
+  
+  
+## 証明書、Provisioning Profile の作成 ##
+Apple Developer Program のサイトで証明書（.cer）、Provisioning Profile（.mobileprovision） を作成し、ローカルの Mac の キーチェーンアクセス で 証明書（.p12） を作成します。
+この方法についてはWeb上に情報がたくさんあるので、Webの情報を参考に行なってください。
+  
+  
+作成した Provisioning Profile（.mobileprovision）、証明書（.p12）を保管しておきます。
+  
+  
+## App Center で iOS の App の作成 ##
+  
+App Center にログインし、右上の「add new」から「add new app」を選択
+
+App Name, OS, Platform を入力、選択し、「Add new app」をクリック
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/006.png?raw=true)
+
+  
+## App Center で iOS のビルドの設定 ##
+
+
+
+
