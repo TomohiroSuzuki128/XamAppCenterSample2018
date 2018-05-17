@@ -5,10 +5,10 @@ App Center で自動ビルド、UIテストが試せる iOS, Android のサン�
 Cognitive Services の Translator Text API を利用して、入力した日本語を英語に翻訳してくれます。
 
 **iOS**
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/020.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/iPhone.png?raw=true)
 
 **Android**
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/020.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android.png?raw=true)
 
 
 #必要環境#
