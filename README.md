@@ -43,3 +43,8 @@ Translator Text API を選択します。
   
 「作成」をクリックします。 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/003.png?raw=true)
+  
+  
+項目を入力して「作成」をクリックします。 
+価格レベルは必ず「F0」（無料）にしてください！
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/004.png?raw=true)
