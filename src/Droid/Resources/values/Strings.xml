@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="input">翻訳したい日本語</string>
+    <string name="translate">英語に翻訳する</string>
+    <string name="translated">翻訳された英語</string>
+    <string name="app_name">XamAppCenterSample2018.Droid</string>
+</resources>
