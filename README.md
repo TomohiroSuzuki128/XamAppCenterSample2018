@@ -154,7 +154,7 @@ iOSプロジェクトを追加します。
 
 完了したら、Finder でiOSプロジェクトのフォルダを見てみると、
 署名はされていませんが、ipaファイルが生成されています。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/013.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/014.png?raw=true)
 
 
 
