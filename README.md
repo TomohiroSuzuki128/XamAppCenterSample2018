@@ -149,16 +149,16 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
 iOSプロジェクトを Debug で 実機ビルドに設定します。
 「単体テスト」タブを開き、「アプリのテスト」->「Add App Project」
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/012.png?raw=true)
-
-
+  
+  
 iOSプロジェクトを追加します。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/013.png?raw=true)
-
-
+  
+  
 「テストのデバッグ」を実行します。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/013.png?raw=true)
-
-
+  
+  
 完了したら、Finder でiOSプロジェクトのフォルダを見てみると、
 署名はされていませんが、ipaファイルが生成されています。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/014.png?raw=true)
