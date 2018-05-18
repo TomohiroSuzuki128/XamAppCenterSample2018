@@ -32,8 +32,33 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 - （必須ではないがあると望ましい） Android 7.0 以上の Android 実機
   
   
-  
-  
+# 環境構築 #
+
+## node.js のインストール ## 
+この方法についてはWeb上に情報がたくさんあるので、Webの情報を参考に行なってください。
+
+## App Center CLI のインストール ## 
+
+コマンドラインから、以下のコマンドでインストール
+npm install -g appcenter-cli
+
+権限が無いと怒られて、パッケージのインストールに失敗する場合、下記の手順でnpmのデフォルトディレクトリの権限を変更する
+
+npm ディレクトリのパスを確認
+```bash
+npm config get prefix
+```
+
+（例）/usr/local が表示された場合、
+npm ディレクトリのオーナーを自分のアカウントに変更
+```bash
+sudo chown -R <アカウント名> /usr/local/lib/node_modules
+sudo chown -R <アカウント名> /usr/local/bin
+sudo chown -R <アカウント名> /usr/local/share
+```
+
+インストールが終われば準備完了です。
+
   
 # Cognitive Services の Translator Text API 作成 #
 
@@ -62,7 +87,7 @@ Translator Text API を選択します。
 ソリューションのソースコードを、VSTS, Github, Bitbucketのいずれかにプッシュし下さい。 
   
   
-# iOSの自動ビルド #
+# iOSの自動ビルドを設定する #
   
   
 ## 証明書、Provisioning Profile の作成（実機自動ビルドしたい場合のみ） ##
@@ -81,26 +106,26 @@ App Center にログインし、右上の「add new」から「add new app」を
 
 App Name, OS, Platform を入力、選択し、「Add new app」をクリック
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/006.png?raw=true)
-
+  
   
 ## App Center で iOS のビルドの設定 ##
 
 「Build」を選択し、ソースコードをホストしたサービスを選択します。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/007.png?raw=true)
-
-
+  
+  
 「XamAppCenterSample2018」を選択します。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/008.png?raw=true)
-
-
+  
+  
 自動ビルドしたいブランチの設定アイコンを選択します。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/009.png?raw=true)
-
-
+  
+  
 ビルド設定を選択し、入力し、「Save & Build」を選択。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/010.png?raw=true)
-
-
+  
+  
 ビルドが始まるのでしばらく待ち、成功すれば完了です。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/011.png?raw=true)
   
@@ -109,7 +134,7 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
   
   
   
-# iOS の UITest #
+# iOS の 自動 UITest を設定 #
 
 ## 署名なしの ipa の作成 ##
   
@@ -131,3 +156,11 @@ iOSプロジェクトを追加します。
 署名はされていませんが、ipaファイルが生成されています。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/013.png?raw=true)
 
+
+
+## App Center にファイルを転送し、テストを実行する ##
+
+
+
+  
+  
