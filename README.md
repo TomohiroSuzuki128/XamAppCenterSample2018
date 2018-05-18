@@ -4,7 +4,7 @@ App Center で自動ビルド、UIテストが試せる iOS, Android のサン�
 
 Cognitive Services の Translator Text API を利用して、入力した日本語を英語に翻訳してくれます。
 
-&copy;2018 Tomohiro Suzuki All rights reserved.
+&copy;2018 Tomohiro Suzuki All rights reserved.  
 本コンテンツの著作権、および本コンテンツ中に出てくる商標権、団体名、ロゴ、製品、サービスなどはそれぞれ、各権利保有者に帰属します。
 
 ## iOS ##
