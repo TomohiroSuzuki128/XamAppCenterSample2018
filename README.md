@@ -186,12 +186,17 @@ Test series, System language, Test frameworkを選択
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/020.png?raw=true)
 
 ```bash
-appcenter test run uitest --app <App Center のURLに表示されているアプリの名前> --devices <デバイスのID> --app-path <ipaのパス> --test-series "master" --locale "ja_JP" --build-dir <ipaがビルドされたディレクトリのパス> --uitest-tools-dir <test-cloud.exeのディレクトリのパス>
+appcenter test run uitest --app <App Center のURLに表示されているアプリの名前>
+ --devices <デバイスのID> --app-path <ipaのパス> --test-series "master" --locale "ja_JP"
+ --build-dir <ipaがビルドされたディレクトリのパス> --uitest-tools-dir <test-cloud.exeのディレクトリのパス>
 ```
 
 （例）
 ```bash
-appcenter test run uitest --app "TomohiroSuzuki128/XamAppCenterSample2018iOS" --devices 1b6ada99 --app-path "/Users/hiro128/Projects/XamAppCenterSample2018/src/iOS/bin/iPhone/Debug/device-builds/iphone10.2-11.3.1/XamAppCenterSample2018.iOS.ipa" --test-series "master" --locale "ja_JP" --build-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/UITests/bin/Debug/" --uitest-tools-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/packages/Xamarin.UITest.2.2.4/tools"
+appcenter test run uitest --app "TomohiroSuzuki128/XamAppCenterSample2018iOS"
+ --devices 1b6ada99
+ --app-path "/Users/hiro128/Projects/XamAppCenterSample2018/src/iOS/bin/iPhone/Debug/device-builds/iphone10.2-11.3.1/XamAppCenterSample2018.iOS.ipa"
+--test-series "master" --locale "ja_JP" --build-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/UITests/bin/Debug/" --uitest-tools-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/packages/Xamarin.UITest.2.2.4/tools"
 ```  
 
 コンソールで App Center にログインします
@@ -208,7 +213,45 @@ appcenter login
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/021.png?raw=true)
 
 テストが成功すれば完了です。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/022.png?raw=true)
 
+
+
+# Android の自動ビルドを設定する #
+  
+  
+ 
+## App Center で Android の App の作成 ##
+
+App Center にログインし、右上の「add new」から「add new app」を選択
+
+App Name, OS, Platform を入力、選択し、「Add new app」をクリック
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/006.png?raw=true)
+  
+  
+## App Center で Android のビルドの設定 ##
+
+「Build」を選択し、ソースコードをホストしたサービスを選択します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/007.png?raw=true)
+  
+  
+「XamAppCenterSample2018」を選択します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/008.png?raw=true)
+  
+  
+自動ビルドしたいブランチの設定アイコンを選択します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/009.png?raw=true)
+  
+  
+ビルド設定を選択し、入力し、「Save & Build」を選択。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/010.png?raw=true)
+  
+  
+ビルドが始まるのでしばらく待ち、成功すれば完了です。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/011.png?raw=true)
+  
+  
+  
 
 
 
