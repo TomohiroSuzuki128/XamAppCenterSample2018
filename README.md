@@ -278,19 +278,19 @@ Androidプロジェクトを Release で シミュレータビルドに設定し
 ## App Center にファイルを転送し、テストを実行する ##
 
 「Test」 -> 「new test run」をクリック
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/016.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/029.png?raw=true)
 
 
-「Start 30-day trial」をクリック
+「Start 30-day trial」をクリック（表示された場合のみ）
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/017.png?raw=true)
 
 
-iOS 11 のデバイスを選択
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/018.png?raw=true)
+Android 7.0 のデバイスを選択
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/030.png?raw=true)
 
 
 Test series, System language, Test frameworkを選択
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/019.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/031.png?raw=true)
   
   
 画面に表示されたリファレンスを参考にコマンドを作成する。リファレンスには、--uitest-tools-dir　が指定されていないが追加で指定する。
