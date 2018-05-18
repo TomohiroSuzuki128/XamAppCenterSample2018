@@ -40,7 +40,9 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 ## App Center CLI のインストール ## 
 
 コマンドラインから、以下のコマンドでインストール
+```bash
 npm install -g appcenter-cli
+```
 
 権限が無いと怒られて、パッケージのインストールに失敗する場合、下記の手順でnpmのデフォルトディレクトリの権限を変更する
 
