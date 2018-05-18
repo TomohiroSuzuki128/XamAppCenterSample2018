@@ -156,18 +156,32 @@ iOSプロジェクトを追加します。
   
   
 「テストのデバッグ」を実行します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/013.png?raw=true)
-  
-  
-完了したら、Finder でiOSプロジェクトのフォルダを見てみると、
-署名はされていませんが、ipaファイルが生成されています。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/014.png?raw=true)
+  
+  
+完了したら、Finder でiOSプロジェクトのフォルダを見てみると、署名はされていませんが、ipaファイルが生成されています。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/015.png?raw=true)
 
 
 
 ## App Center にファイルを転送し、テストを実行する ##
 
+「Test」 -> 「new test run」をクリック
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/016.png?raw=true)
 
 
+「Start 30-day trial」をクリック
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/017.png?raw=true)
+
+
+iOS 11 のデバイスを選択
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/018.png?raw=true)
+
+
+Test series, System language, Test frameworkを選択
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/019.png?raw=true)
   
+
+デバイスのIDを保管して、「Done」
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/020.png?raw=true)
   
