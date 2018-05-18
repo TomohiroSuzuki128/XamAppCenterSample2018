@@ -136,6 +136,13 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
   
 # iOS の 自動 UITest を設定 #
 
+
+## API Key を設定 ##
+
+先ほど Azure で作成した API Key をローカルのプロジェクトに記述します。
+（プッシュしないで下さい）
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/011a.png?raw=true)
+
 ## 署名なしの ipa の作成 ##
   
   
