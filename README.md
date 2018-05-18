@@ -140,7 +140,7 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
 ## API Key を設定 ##
 
 先ほど Azure で作成した API Key をローカルのプロジェクトに記述します。
-（プッシュしないで下さい）
+（API Key を含むソースをプッシュしないで下さい）
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/011a.png?raw=true)
 
 ## 署名なしの ipa の作成 ##
@@ -226,13 +226,13 @@ appcenter login
 App Center にログインし、右上の「add new」から「add new app」を選択
 
 App Name, OS, Platform を入力、選択し、「Add new app」をクリック
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/006.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/023.png?raw=true)
   
   
 ## App Center で Android のビルドの設定 ##
 
 「Build」を選択し、ソースコードをホストしたサービスを選択します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/007.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/024.png?raw=true)
   
   
 「XamAppCenterSample2018」を選択します。
@@ -244,11 +244,57 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
   
   
 ビルド設定を選択し、入力し、「Save & Build」を選択。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/010.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/025.png?raw=true)
   
   
 ビルドが始まるのでしばらく待ち、成功すれば完了です。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/011.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/026.png?raw=true)
+
+
+
+# Android の 自動 UITest を設定 #
+
+
+## API Key を設定 ##
+
+先ほど Azure で作成した API Key をローカルのプロジェクトに記述します。
+（iOSの時に記述していれば不要）
+（API Key を含むソースをプッシュしないで下さい）
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/011a.png?raw=true)
+  
+  
+## 署名なしの apk の作成 ##
+  
+  
+Androidプロジェクトを Release で シミュレータビルドに設定します。
+「発行のためのアーカイブ」を実行します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/027.png?raw=true)
+  
+  
+ビルドが完了したら、Finder でAndroidプロジェクトのフォルダを見てみると、署名はされていませんが、apkファイルが生成されています。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/028.png?raw=true)
+  
+  
+## App Center にファイルを転送し、テストを実行する ##
+
+「Test」 -> 「new test run」をクリック
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/016.png?raw=true)
+
+
+「Start 30-day trial」をクリック
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/017.png?raw=true)
+
+
+iOS 11 のデバイスを選択
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/018.png?raw=true)
+
+
+Test series, System language, Test frameworkを選択
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/019.png?raw=true)
+  
+  
+画面に表示されたリファレンスを参考にコマンドを作成する。リファレンスには、--uitest-tools-dir　が指定されていないが追加で指定する。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/020.png?raw=true)
   
   
   
