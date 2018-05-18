@@ -136,6 +136,10 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
   
 # iOS の 自動 UITest を設定 #
 
+## テストプロジェクトを一度ビルド ##
+
+XamAppCenterSample2018.UITests を一度ビルドします。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/015a.png?raw=true)
 
 ## API Key を設定 ##
 
@@ -188,7 +192,7 @@ Test series, System language, Test frameworkを選択
 ```bash
 appcenter test run uitest --app <App Center のURLに表示されているアプリの名前>
  --devices <デバイスのID> --app-path <ipaのパス> --test-series "master" --locale "ja_JP"
- --build-dir <ipaがビルドされたディレクトリのパス> --uitest-tools-dir <test-cloud.exeのディレクトリのパス>
+ --build-dir <UITestがビルドされたディレクトリのパス> --uitest-tools-dir <test-cloud.exeのディレクトリのパス>
 ```
 
 （例）
@@ -196,7 +200,9 @@ appcenter test run uitest --app <App Center のURLに表示されているアプ
 appcenter test run uitest --app "TomohiroSuzuki128/XamAppCenterSample2018iOS"
  --devices 1b6ada99
  --app-path "/Users/hiro128/Projects/XamAppCenterSample2018/src/iOS/bin/iPhone/Debug/device-builds/iphone10.2-11.3.1/XamAppCenterSample2018.iOS.ipa"
---test-series "master" --locale "ja_JP" --build-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/UITests/bin/Debug/" --uitest-tools-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/packages/Xamarin.UITest.2.2.4/tools"
+ --test-series "master" --locale "ja_JP"
+ --build-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/UITests/bin/Debug/"
+ --uitest-tools-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/packages/Xamarin.UITest.2.2.4/tools"
 ```  
 
 コンソールで App Center にログインします
@@ -253,7 +259,12 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
 
 
 # Android の 自動 UITest を設定 #
+  
+  
+## テストプロジェクトを一度ビルド ##
 
+XamAppCenterSample2018.UITests を一度ビルドします。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/015a.png?raw=true)
 
 ## API Key を設定 ##
 
@@ -294,10 +305,36 @@ Test series, System language, Test frameworkを選択
   
   
 画面に表示されたリファレンスを参考にコマンドを作成する。リファレンスには、--uitest-tools-dir　が指定されていないが追加で指定する。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/020.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/032.png?raw=true)
   
   
-  
+```bash
+appcenter test run uitest --app <App Center のURLに表示されているアプリの名前>
+ --devices <デバイスのID> --app-path <apkのパス> --test-series "master" --locale "ja_JP"
+ --build-dir <UITestがビルドされたディレクトリのパス> --uitest-tools-dir <test-cloud.exeのディレクトリのパス>
+```
+
+（例）
+```bash
+appcenter test run uitest --app "TomohiroSuzuki128/XamAppCenterSample2018Droid" --devices c8376925 --app-path "/Users/hiro128/Projects/XamAppCenterSample2018/src/Droid/bin/Release/com.hiro128777.XamAppCenterSample2018.apk" --test-series "master" --locale "ja_JP" --build-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/UITests/bin/Debug/" --uitest-tools-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/packages/Xamarin.UITest.2.2.4/tools"
+
+```  
+
+コンソールで App Center にログインします（まだログインしていない場合）
+
+```bash
+appcenter login
+``` 
+
+ブラウザに表示された認証コードをコンソールに入力します。
+
+上で作成した、appcenter test run uitest コマンドを実行します。
+
+テストが実行されます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/033.png?raw=true)
+
+テストが成功すれば完了です。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/034.png?raw=true) 
 
 
 

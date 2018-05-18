@@ -51,7 +51,7 @@ namespace XamAppCenterSample2018.UITests
             await Task.Delay(4000);
             var elements = app.Query(c => c.Marked("translatedText"));
             await Task.Delay(2000);
-            Assert.AreEqual("エラーコード： 400005" + Environment.NewLine + "The field Text must be a string or array type with a minimum length of '1'.", elements.FirstOrDefault().Text);
+            StringAssert.Contains("エラーコード： 400005", elements.FirstOrDefault().Text);
         }
     }
 }
