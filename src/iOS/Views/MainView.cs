@@ -85,6 +85,21 @@ namespace XamAppCenterSample2018.iOS
             inputText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             inputText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
+            var toolBar = new UIToolbar
+            {
+                BarStyle = UIBarStyle.Default,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            toolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            toolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+
+            var spacer = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
+            var commitButton = new UIBarButtonItem(UIBarButtonSystemItem.Done);
+
+            commitButton.Clicked += (s, e) => View.EndEditing(true);
+            toolBar.SetItems(new UIBarButtonItem[] { spacer, commitButton }, false);
+            inputText.InputAccessoryView = toolBar;
+
             translateButton = new UIButton(UIButtonType.RoundedRect)
             {
                 Frame = new CGRect(0, 0, 375, 20),
@@ -140,6 +155,7 @@ namespace XamAppCenterSample2018.iOS
                 KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
                 AccessibilityIdentifier = "translatedText",
+                Editable = false,
             };
 
             translatedText.Layer.BorderWidth = 1;
@@ -153,7 +169,6 @@ namespace XamAppCenterSample2018.iOS
             translatedText.TopAnchor.ConstraintEqualTo(translatedLabel.BottomAnchor, 5).Active = true;
             translatedText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             translatedText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
-
         }
 
         void SetBinding()
