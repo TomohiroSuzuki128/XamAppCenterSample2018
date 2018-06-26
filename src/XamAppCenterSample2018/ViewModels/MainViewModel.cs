@@ -9,24 +9,16 @@ namespace XamAppCenterSample2018.ViewModels
         string inputText = string.Empty;
         public string InputText
         {
-            get { return inputText; }
-            set
-            {
-                inputText = value;
-                RaisePropertyChanged();
-            }
+            get => inputText;
+            set => SetProperty(ref inputText, value);
         }
 
         string translatedText = string.Empty;
         public string TranslatedText
         {
-            get { return translatedText; }
-            set
-            {
-                translatedText = value;
-                RaisePropertyChanged();
-            }
-        }
+            get => translatedText;
+            set => SetProperty(ref translatedText, value);
+        } 
 
         public IMvxAsyncCommand TranslateCommand { get; private set; }
 
