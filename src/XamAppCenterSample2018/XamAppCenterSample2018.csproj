@@ -7,8 +7,8 @@
     <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MvvmCross" Version="6.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="MvvmCross" Version="6.1.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
