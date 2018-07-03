@@ -33,7 +33,64 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 
 ## Android UIテスト ##
 - （必須ではないがあると望ましい） Android 7.0 以上の Android 実機
-  
+
+
+# アプリの作成 #
+
+## ViewModel ## 
+
+まず、ViewModel を作成しましょう。
+
+\XamAppCenterSample2018\ViewModels\MainViewModel.cs ファイルを作成します。
+
+まずは、using を追加します。
+```csharp
+using MvvmCross.Commands;
+using MvvmCross.ViewModels;
+using XamAppCenterSample2018.Services.Interfaces;
+```
+
+MainViewModel を MvxViewModel の派生とします。
+
+```csharp
+    public class MainViewModel : MvxViewModel
+```
+
+画面には、「翻訳したい日本語入力欄」「翻訳された英語表示欄」「英語に翻訳するボタン」の要素があります。
+これらを入力欄はプロパティ、ボタンはコマンドとして実装してきます。
+
+```csharp
+        string inputText = string.Empty;
+        public string InputText
+        {
+            get => inputText;
+            set => SetProperty(ref inputText, value);
+        }
+
+        string translatedText = string.Empty;
+        public string TranslatedText
+        {
+            get => translatedText;
+            set => SetProperty(ref translatedText, value);
+        } 
+
+        public IMvxAsyncCommand TranslateCommand { get; private set; }
+```
+
+コンストラクタでコマンドを実装します。
+DI された Service のメソッドをコールするようにします。
+
+```csharp
+        public MainViewModel(ITranslateService translateService) : base()
+        {
+            TranslateCommand = new MvxAsyncCommand(async () =>
+            {
+                TranslatedText = await translateService.Translate(InputText);
+            });
+        }
+```
+
+これで、ViewModelは完成です。
   
 # 環境構築 #
 
