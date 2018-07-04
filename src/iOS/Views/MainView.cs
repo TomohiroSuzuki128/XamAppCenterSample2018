@@ -150,7 +150,6 @@ namespace XamAppCenterSample2018.iOS.Views
                 Frame = new CGRect(0, 0, 375, 200),
                 ContentMode = UIViewContentMode.ScaleToFill,
                 TranslatesAutoresizingMaskIntoConstraints = false,
-                KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
                 AccessibilityIdentifier = "translatedText",
                 Editable = false,

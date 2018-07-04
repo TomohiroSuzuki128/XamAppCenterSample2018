@@ -125,7 +125,7 @@ MainView を MvxViewController<MainViewModel> の派生とし、属性を設定�
 フォントサイズや UI エレメントのフィールドを定義します。
 
 ```csharp
-		static readonly nfloat fontSize = 20;
+        static readonly nfloat fontSize = 20;
 
         UILabel inputLabel;
         UITextView inputText;
@@ -291,7 +291,6 @@ translatedText の設定値と View への追加、制約の設定です。
                 Frame = new CGRect(0, 0, 375, 200),
                 ContentMode = UIViewContentMode.ScaleToFill,
                 TranslatesAutoresizingMaskIntoConstraints = false,
-                KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
                 AccessibilityIdentifier = "translatedText",
                 Editable = false,
