@@ -37,13 +37,14 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 
 # アプリの作成 #
 
-## ViewModel ## 
+## ViewModel の作成 ## 
 
 まず、ViewModel を作成しましょう。
 
 \XamAppCenterSample2018\ViewModels\MainViewModel.cs ファイルを作成します。
 
 まずは、using を追加します。
+
 ```csharp
 using MvvmCross.Commands;
 using MvvmCross.ViewModels;
@@ -91,7 +92,245 @@ DI された Service のメソッドをコールするようにします。
 ```
 
 これで、ViewModelは完成です。
-  
+
+
+## iOS の View の作成 ## 
+
+iOS の View を作成します。
+storyborad、xib は、IDEによって更新部分以外も勝手にコードが更新され、 Git との相性が悪いので、今回はコードで UI を記述します。
+
+\iOS\Views\MainView.cs ファイルを作成します。
+
+まずは、using を追加します。
+
+```csharp
+using System;
+using UIKit;
+using Foundation;
+using CoreGraphics;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platforms.Ios.Presenters.Attributes;
+using MvvmCross.Platforms.Ios.Views;
+using XamAppCenterSample2018.ViewModels;
+```
+
+MainView を MvxViewController<MainViewModel> の派生とし、属性を設定します。
+
+```csharp
+    [Register("MainView")]
+    [MvxRootPresentation(WrapInNavigationController = false)]
+    public class MainView : MvxViewController<MainViewModel>
+```
+
+フォントサイズや UI エレメントのフィールドを定義します。
+
+```csharp
+		static readonly nfloat fontSize = 20;
+
+        UILabel inputLabel;
+        UITextView inputText;
+        UIButton translateButton;
+        UILabel translatedLabel;
+        UITextView translatedText;
+```  
+
+UI エレメントを初期設定するメソッドを定義します。
+
+```csharp
+        void InitUI()
+        {
+        }
+```  
+
+InitUI の中に UI エレメントの設定値を記述していきます。
+
+MainView 自体の設定値です。
+
+```csharp
+            View.ContentMode = UIViewContentMode.ScaleToFill;
+            View.LayoutMargins = new UIEdgeInsets(0, 16, 0, 16);
+            View.Frame = new CGRect(0, 0, 375, 667);
+            View.BackgroundColor = UIColor.White;
+            View.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
+``` 
+
+inputLabel の設定値と View への追加、制約の設定です。
+
+```csharp
+            inputLabel = new UILabel
+            {
+                Frame = new CGRect(0, 0, 375, 20),
+                Opaque = false,
+                UserInteractionEnabled = false,
+                ContentMode = UIViewContentMode.Left,
+                Text = "翻訳したい日本語",
+                TextAlignment = UITextAlignment.Left,
+                LineBreakMode = UILineBreakMode.TailTruncation,
+                Lines = 0,
+                BaselineAdjustment = UIBaselineAdjustment.AlignBaselines,
+                AdjustsFontSizeToFitWidth = false,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(fontSize),
+            };
+            View.AddSubview(inputLabel);
+
+            inputLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
+            inputLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            inputLabel.TopAnchor.ConstraintEqualTo(View.TopAnchor, 70).Active = true;
+            inputLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            inputLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+```  
+
+inputLabel の設定値と View への追加、制約の設定です。
+
+```csharp
+            inputText = new UITextView
+            {
+                Frame = new CGRect(0, 0, 375, 200),
+                ContentMode = UIViewContentMode.ScaleToFill,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                KeyboardType = UIKeyboardType.Twitter,
+                Font = UIFont.SystemFontOfSize(fontSize),
+                AccessibilityIdentifier = "inputText",
+            };
+
+            inputText.Layer.BorderWidth = 1;
+            inputText.Layer.BorderColor = UIColor.LightGray.CGColor;
+
+            View.AddSubview(inputText);
+
+            inputText.HeightAnchor.ConstraintEqualTo(View.HeightAnchor, 0.3f).Active = true;
+            inputText.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            inputText.TopAnchor.ConstraintEqualTo(inputLabel.BottomAnchor, 5).Active = true;
+            inputText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            inputText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+```  
+
+入力完了時にソフトキーボードを閉じるボタンの設定です。
+
+```csharp
+            var toolBar = new UIToolbar
+            {
+                BarStyle = UIBarStyle.Default,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            toolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            toolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+
+            var spacer = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
+            var commitButton = new UIBarButtonItem(UIBarButtonSystemItem.Done);
+
+            commitButton.Clicked += (s, e) => View.EndEditing(true);
+            toolBar.SetItems(new UIBarButtonItem[] { spacer, commitButton }, false);
+            inputText.InputAccessoryView = toolBar;
+```  
+
+translateButton の設定値と View への追加、制約の設定です。
+
+```csharp
+            translateButton = new UIButton(UIButtonType.RoundedRect)
+            {
+                Frame = new CGRect(0, 0, 375, 20),
+                Opaque = false,
+                ContentMode = UIViewContentMode.ScaleToFill,
+                HorizontalAlignment = UIControlContentHorizontalAlignment.Center,
+                VerticalAlignment = UIControlContentVerticalAlignment.Center,
+                LineBreakMode = UILineBreakMode.MiddleTruncation,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(fontSize),
+                AccessibilityIdentifier = "translateButton",
+            };
+
+            translateButton.SetTitle("英語に翻訳する", UIControlState.Normal);
+            View.AddSubview(translateButton);
+
+            translateButton.HeightAnchor.ConstraintEqualTo(40f).Active = true;
+            translateButton.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            translateButton.TopAnchor.ConstraintEqualTo(inputText.BottomAnchor, 20).Active = true;
+            translateButton.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            translateButton.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+```  
+
+translateButton の設定値と View への追加、制約の設定です。
+
+```csharp
+            translatedLabel = new UILabel
+            {
+                Frame = new CGRect(0, 0, 375, 20),
+                Opaque = false,
+                UserInteractionEnabled = false,
+                ContentMode = UIViewContentMode.Left,
+                Text = "翻訳された英語",
+                TextAlignment = UITextAlignment.Left,
+                LineBreakMode = UILineBreakMode.TailTruncation,
+                Lines = 0,
+                BaselineAdjustment = UIBaselineAdjustment.AlignBaselines,
+                AdjustsFontSizeToFitWidth = false,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(fontSize),
+            };
+            View.AddSubview(translatedLabel);
+
+            translatedLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
+            translatedLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            translatedLabel.TopAnchor.ConstraintEqualTo(translateButton.BottomAnchor, 20).Active = true;
+            translatedLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            translatedLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
+```  
+
+translatedText の設定値と View への追加、制約の設定です。
+
+```csharp
+            translatedText = new UITextView
+            {
+                Frame = new CGRect(0, 0, 375, 200),
+                ContentMode = UIViewContentMode.ScaleToFill,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                KeyboardType = UIKeyboardType.Twitter,
+                Font = UIFont.SystemFontOfSize(fontSize),
+                AccessibilityIdentifier = "translatedText",
+                Editable = false,
+            };
+
+            translatedText.Layer.BorderWidth = 1;
+            translatedText.Layer.BorderColor = UIColor.LightGray.CGColor;
+
+            View.AddSubview(translatedText);
+
+            translatedText.HeightAnchor.ConstraintEqualTo(View.HeightAnchor, 0.3f).Active = true;
+            translatedText.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            translatedText.TopAnchor.ConstraintEqualTo(translatedLabel.BottomAnchor, 5).Active = true;
+            translatedText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            translatedText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
+``` 
+
+バインディングを設定するメソッドです。
+
+```csharp
+        void SetBinding()
+        {
+            var set = this.CreateBindingSet<MainView, MainViewModel>();
+
+            set.Bind(inputText).To(vm => vm.InputText);
+            set.Bind(translatedText).To(vm => vm.TranslatedText);
+            set.Bind(translateButton).To(vm => vm.TranslateCommand);
+
+            set.Apply();
+        }
+
+```  
+
+これで、iOS の View は完成です。
+
+
+
 # 環境構築 #
 
 ## node.js のインストール ## 

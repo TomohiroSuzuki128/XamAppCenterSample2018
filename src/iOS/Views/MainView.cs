@@ -1,21 +1,19 @@
 ﻿using System;
-
 using UIKit;
 using Foundation;
-using CoreFoundation;
 using CoreGraphics;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using XamAppCenterSample2018.ViewModels;
 
-namespace XamAppCenterSample2018.iOS
+namespace XamAppCenterSample2018.iOS.Views
 {
     [Register("MainView")]
     [MvxRootPresentation(WrapInNavigationController = false)]
     public class MainView : MvxViewController<MainViewModel>
     {
-        nfloat fontSize = 20;
+		static readonly nfloat fontSize = 20;
 
         UILabel inputLabel;
         UITextView inputText;
