@@ -78,7 +78,7 @@ MainViewModel を MvxViewModel の派生とします。
         public IMvxAsyncCommand TranslateCommand { get; private set; }
 ```
 
-コンストラクタでコマンドを実装します。
+コンストラクタでコマンドの処理を実装します。
 DI された Service のメソッドをコールするようにします。
 
 ```csharp
@@ -97,6 +97,7 @@ DI された Service のメソッドをコールするようにします。
 ## iOS の View の作成 ## 
 
 iOS の View を作成します。
+
 storyborad、xib は、IDEによって更新部分以外も勝手にコードが更新され、 Git との相性が悪いので、今回はコードで UI を記述します。
 
 /OS/Views/MainView.cs ファイルを作成します。
@@ -552,7 +553,7 @@ Android の axml は、Git との相性も問題がないので、そのまま a
 「翻訳したい日本語の入力欄」inputText を追加します。
 また、Binding も記述します。
 
-local:MvxBind="[View のプロパティ名] ＜ViewModel のプロパティ名＞"
+local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
 というフォーマットで記述します。
 
 ```xml
