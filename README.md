@@ -99,7 +99,7 @@ DI された Service のメソッドをコールするようにします。
 iOS の View を作成します。
 storyborad、xib は、IDEによって更新部分以外も勝手にコードが更新され、 Git との相性が悪いので、今回はコードで UI を記述します。
 
-\iOS\Views\MainView.cs ファイルを作成します。
+/OS/Views/MainView.cs ファイルを作成します。
 
 まずは、using を追加します。
 
@@ -143,6 +143,9 @@ UI エレメントを初期設定するメソッドを定義します。
 ```  
 
 InitUI の中に UI エレメントの設定値を記述していきます。
+画面には、「翻訳したい日本語のラベル」「翻訳したい日本語の入力欄」「翻訳された英語のラベル」「翻訳された英語の表示欄」「英語に翻訳するボタン」の要素があります。
+
+
 
 MainView 自体の設定値です。
 
@@ -154,7 +157,7 @@ MainView 自体の設定値です。
             View.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
 ``` 
 
-inputLabel の設定値と View への追加、制約の設定です。
+「翻訳したい日本語ラベル」inputLabel の設定値と View への追加、制約の設定です。
 
 ```csharp
             inputLabel = new UILabel
@@ -182,7 +185,7 @@ inputLabel の設定値と View への追加、制約の設定です。
             inputLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
 
-inputLabel の設定値と View への追加、制約の設定です。
+「翻訳したい日本語の入力欄」inputText の設定値と View への追加、制約の設定です。
 
 ```csharp
             inputText = new UITextView
@@ -227,7 +230,7 @@ inputLabel の設定値と View への追加、制約の設定です。
             inputText.InputAccessoryView = toolBar;
 ```  
 
-translateButton の設定値と View への追加、制約の設定です。
+「英語に翻訳するボタン」translateButton の設定値と View への追加、制約の設定です。
 
 ```csharp
             translateButton = new UIButton(UIButtonType.RoundedRect)
@@ -254,7 +257,7 @@ translateButton の設定値と View への追加、制約の設定です。
             translateButton.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
 
-translateButton の設定値と View への追加、制約の設定です。
+「翻訳された英語のラベル」translatedLabel の設定値と View への追加、制約の設定です。
 
 ```csharp
             translatedLabel = new UILabel
@@ -283,7 +286,7 @@ translateButton の設定値と View への追加、制約の設定です。
 
 ```  
 
-translatedText の設定値と View への追加、制約の設定です。
+「翻訳された英語の表示欄」translatedText の設定値と View への追加、制約の設定です。
 
 ```csharp
             translatedText = new UITextView
@@ -326,9 +329,331 @@ translatedText の設定値と View への追加、制約の設定です。
 
 ```  
 
+ViewDidLoad で InitUI, SetBindingをコールします。
+
+```csharp
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            InitUI();
+            SetBinding();
+        }
+```  
+
 これで、iOS の View は完成です。
+完成したコードは以下のようになります。
+
+```csharp
+using System;
+using UIKit;
+using Foundation;
+using CoreGraphics;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platforms.Ios.Presenters.Attributes;
+using MvvmCross.Platforms.Ios.Views;
+using XamAppCenterSample2018.ViewModels;
+
+namespace XamAppCenterSample2018.iOS.Views
+{
+    [Register("MainView")]
+    [MvxRootPresentation(WrapInNavigationController = false)]
+    public class MainView : MvxViewController<MainViewModel>
+    {
+		static readonly nfloat fontSize = 20;
+
+        UILabel inputLabel;
+        UITextView inputText;
+        UIButton translateButton;
+        UILabel translatedLabel;
+        UITextView translatedText;
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            InitUI();
+            SetBinding();
+        }
+
+        void InitUI()
+        {
+            View.ContentMode = UIViewContentMode.ScaleToFill;
+            View.LayoutMargins = new UIEdgeInsets(0, 16, 0, 16);
+            View.Frame = new CGRect(0, 0, 375, 667);
+            View.BackgroundColor = UIColor.White;
+            View.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
+
+            inputLabel = new UILabel
+            {
+                Frame = new CGRect(0, 0, 375, 20),
+                Opaque = false,
+                UserInteractionEnabled = false,
+                ContentMode = UIViewContentMode.Left,
+                Text = "翻訳したい日本語",
+                TextAlignment = UITextAlignment.Left,
+                LineBreakMode = UILineBreakMode.TailTruncation,
+                Lines = 0,
+                BaselineAdjustment = UIBaselineAdjustment.AlignBaselines,
+                AdjustsFontSizeToFitWidth = false,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(fontSize),
+            };
+            View.AddSubview(inputLabel);
+
+            inputLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
+            inputLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            inputLabel.TopAnchor.ConstraintEqualTo(View.TopAnchor, 70).Active = true;
+            inputLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            inputLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
+            inputText = new UITextView
+            {
+                Frame = new CGRect(0, 0, 375, 200),
+                ContentMode = UIViewContentMode.ScaleToFill,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                KeyboardType = UIKeyboardType.Twitter,
+                Font = UIFont.SystemFontOfSize(fontSize),
+                AccessibilityIdentifier = "inputText",
+            };
+
+            inputText.Layer.BorderWidth = 1;
+            inputText.Layer.BorderColor = UIColor.LightGray.CGColor;
+
+            View.AddSubview(inputText);
+
+            inputText.HeightAnchor.ConstraintEqualTo(View.HeightAnchor, 0.3f).Active = true;
+            inputText.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            inputText.TopAnchor.ConstraintEqualTo(inputLabel.BottomAnchor, 5).Active = true;
+            inputText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            inputText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
+            var toolBar = new UIToolbar
+            {
+                BarStyle = UIBarStyle.Default,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            toolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            toolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+
+            var spacer = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
+            var commitButton = new UIBarButtonItem(UIBarButtonSystemItem.Done);
+
+            commitButton.Clicked += (s, e) => View.EndEditing(true);
+            toolBar.SetItems(new UIBarButtonItem[] { spacer, commitButton }, false);
+            inputText.InputAccessoryView = toolBar;
+
+            translateButton = new UIButton(UIButtonType.RoundedRect)
+            {
+                Frame = new CGRect(0, 0, 375, 20),
+                Opaque = false,
+                ContentMode = UIViewContentMode.ScaleToFill,
+                HorizontalAlignment = UIControlContentHorizontalAlignment.Center,
+                VerticalAlignment = UIControlContentVerticalAlignment.Center,
+                LineBreakMode = UILineBreakMode.MiddleTruncation,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(fontSize),
+                AccessibilityIdentifier = "translateButton",
+            };
+
+            translateButton.SetTitle("英語に翻訳する", UIControlState.Normal);
+            View.AddSubview(translateButton);
+
+            translateButton.HeightAnchor.ConstraintEqualTo(40f).Active = true;
+            translateButton.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            translateButton.TopAnchor.ConstraintEqualTo(inputText.BottomAnchor, 20).Active = true;
+            translateButton.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            translateButton.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
+            translatedLabel = new UILabel
+            {
+                Frame = new CGRect(0, 0, 375, 20),
+                Opaque = false,
+                UserInteractionEnabled = false,
+                ContentMode = UIViewContentMode.Left,
+                Text = "翻訳された英語",
+                TextAlignment = UITextAlignment.Left,
+                LineBreakMode = UILineBreakMode.TailTruncation,
+                Lines = 0,
+                BaselineAdjustment = UIBaselineAdjustment.AlignBaselines,
+                AdjustsFontSizeToFitWidth = false,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(fontSize),
+            };
+            View.AddSubview(translatedLabel);
+
+            translatedLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
+            translatedLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            translatedLabel.TopAnchor.ConstraintEqualTo(translateButton.BottomAnchor, 20).Active = true;
+            translatedLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            translatedLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
+            translatedText = new UITextView
+            {
+                Frame = new CGRect(0, 0, 375, 200),
+                ContentMode = UIViewContentMode.ScaleToFill,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(fontSize),
+                AccessibilityIdentifier = "translatedText",
+                Editable = false,
+            };
+
+            translatedText.Layer.BorderWidth = 1;
+            translatedText.Layer.BorderColor = UIColor.LightGray.CGColor;
+
+            View.AddSubview(translatedText);
+
+            translatedText.HeightAnchor.ConstraintEqualTo(View.HeightAnchor, 0.3f).Active = true;
+            translatedText.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            translatedText.TopAnchor.ConstraintEqualTo(translatedLabel.BottomAnchor, 5).Active = true;
+            translatedText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            translatedText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+        }
+
+        void SetBinding()
+        {
+            var set = this.CreateBindingSet<MainView, MainViewModel>();
+
+            set.Bind(inputText).To(vm => vm.InputText);
+            set.Bind(translatedText).To(vm => vm.TranslatedText);
+            set.Bind(translateButton).To(vm => vm.TranslateCommand);
+
+            set.Apply();
+        }
+
+    }
+}
+``` 
 
 
+## Android の View の作成 ## 
+
+/Droid/Resources/layout/Main.axml を開きます。
+
+Android の View を作成します。
+Android の axml は、Git との相性も問題がないので、そのまま axml に記述します。
+
+「翻訳したい日本語ラベル」inputTextView を追加します。
+
+```xml
+    <TextView
+        android:text="@string/input"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputTextView" />
+```
+
+「翻訳したい日本語の入力欄」inputText を追加します。
+また、Binding も記述します。
+
+local:MvxBind="[View のプロパティ名] ＜ViewModel のプロパティ名＞"
+というフォーマットで記述します。
+
+```xml
+    <EditText
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lines="7"
+        local:MvxBind="Text InputText"
+        android:id="@+id/inputText" />
+```
+
+「英語に翻訳するボタン」translateButton を追加します。
+また、Binding も記述します。
+
+```xml
+    <Button
+        android:id="@+id/translateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxBind="Click TranslateCommand"
+        android:text="@string/translate" />
+```
+
+「翻訳された英語のラベル」translatedTextView を追加します。
+
+```xml
+    <TextView
+        android:text="@string/translated"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/translatedTextView" />
+```
+
+「翻訳された英語の表示欄」translatedText を追加します。
+また、Binding も記述します。
+
+```xml
+    <TextView
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lines="7"
+        local:MvxBind="Text TranslatedText"
+        android:id="@+id/translatedText" />
+```
+
+これで、Android の View は完成です。
+完成した axml は以下のようになります。
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="@string/input"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputTextView" />
+    <EditText
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lines="7"
+        local:MvxBind="Text InputText"
+        android:id="@+id/inputText" />
+    <Button
+        android:id="@+id/translateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxBind="Click TranslateCommand"
+        android:text="@string/translate" />
+    <TextView
+        android:text="@string/translated"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/translatedTextView" />
+    <TextView
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lines="7"
+        local:MvxBind="Text TranslatedText"
+        android:id="@+id/translatedText" />
+</LinearLayout>
+```
 
 # 環境構築 #
 
