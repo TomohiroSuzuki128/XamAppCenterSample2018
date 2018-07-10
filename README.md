@@ -531,10 +531,12 @@ namespace XamAppCenterSample2018.iOS.Views
 }
 ``` 
 
+
+
 では、ここでiOSのアプリを実機デバッグしてみましょう。
 iOSのアプリを実機デバッグするにはXcodeでダミーアプリを実行する必要があります。
 
-# Xcodeでダミーアプリを実行 #
+## Xcode でのダミーアプリ実行 ##
 
 プロビジョニングプロファイルや証明書の紐付けが自動で行われるようにXcodeでSwiftのダミーアプリを作成します。
 
@@ -596,13 +598,13 @@ Signingの部分が自動で修正されて、Provisioning Profile と Signing C
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app010.png?raw=true)
 
 
-以下の表示が出た場合、ご自分のiPhoneの中にAVCamSampleと言う名前のアプリが既にインストールされているか確認し、インストールされている場合、アンインストールしてください。
+以下の表示が出た場合、ご自分の iPhoneの中 に XamAppCenterSample2018 と言う名前のアプリが既にインストールされているか確認し、インストールされている場合、アンインストールしてください。
 
 ![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/027.png?raw=true)
 
 再度、デバッグ実行し、無事アプリが起動して真っ白な画面が表示されたら成功です。
 
-これで、準備作業は完了です。
+これで、Xcode でのダミーアプリ実行は完了です。
 
 
 
