@@ -41,7 +41,7 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 
 まず、ViewModel を作成しましょう。
 
-\XamAppCenterSample2018\ViewModels\MainViewModel.cs ファイルを作成します。
+/XamAppCenterSample2018/ViewModels/MainViewModel.cs ファイルを作成します。
 
 まずは、using を追加します。
 
@@ -600,36 +600,38 @@ Signingの部分が自動で修正されて、Provisioning Profile と Signing C
 
 以下の表示が出た場合、ご自分の iPhoneの中 に XamAppCenterSample2018 と言う名前のアプリが既にインストールされているか確認し、インストールされている場合、アンインストールしてください。
 
-![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/027.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app011.png?raw=true)
 
 再度、デバッグ実行し、無事アプリが起動して真っ白な画面が表示されたら成功です。
 
 これで、Xcode でのダミーアプリ実行は完了です。
 
 
+## iOS アプリのビルド ## 
+
+/XamAppCenterSample2018/XamAppCenterSample2018.iOS/Info.plist ファイルを開きます。
+
+「バンドル識別子」の文字列を先ほど Xcode で設定した、Bundle Identifier と一字一句違わないように設定します。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build001.png?raw=true)
 
 
 
+XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build002.png?raw=true)
 
 
 
+「デバッグの開始」を実行します。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build003.png?raw=true)
 
 
 
+アプリが起動すれば成功です。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build004.png?raw=true)
 
 
 
