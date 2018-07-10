@@ -585,15 +585,15 @@ Signingの部分が自動で修正されて、Provisioning Profile と Signing C
 
 実機の設定アプリを開き[プロファイルとデバイス管理]を開きます。
 
-![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/013.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app008.png?raw=true)
 
 デベロッパAPPに[Xcodeに設定したApple ID]が表示されていますのでタップします。
 
-![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/014.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app009.png?raw=true)
 
 [Xcodeに設定したApple ID]を信頼をタップして信頼させます。
 
-![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/015.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app010.png?raw=true)
 
 
 以下の表示が出た場合、ご自分のiPhoneの中にAVCamSampleと言う名前のアプリが既にインストールされているか確認し、インストールされている場合、アンインストールしてください。
