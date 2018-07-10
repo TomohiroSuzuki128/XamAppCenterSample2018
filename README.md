@@ -574,14 +574,14 @@ Signingの部分が自動で修正されて、Provisioning Profile と Signing C
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app005.png?raw=true)
 
-以下の表示が出たら、[常に許可]を押します。
+もし、以下の表示が出た場合、[常に許可]を押します。
 
-![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/025.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app006.png?raw=true)
 
 
-以下の表示が出たら、実機の設定で開発元を信頼させます。
+以下の表示が出たら、次の手順で実機の設定で開発元を信頼させます。
 
-![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/026.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app007.png?raw=true)
 
 実機の設定アプリを開き[プロファイルとデバイス管理]を開きます。
 
