@@ -543,9 +543,12 @@ iOSのアプリを実機デバッグするにはXcodeでダミーアプリを実
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app001.png?raw=true)
 
 
+
 iOSのSingle View Applicationを選択し、[Next]を押します。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app002.png?raw=true)
+
+
 
 Product Name は XamAppCenterSample2018 にして下さい。
 Organization Identifier はユニークな名前になるようにしてください。
@@ -553,13 +556,20 @@ Organization Identifier はユニークな名前になるようにしてくだ�
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app003.png?raw=true)
 
+
+
 <code>XamAppCenterSample2018Xcode</code>というフォルダを作成し、その中にプロジェクトを保存してください。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app004.png?raw=true)
 
+
+
 Bundle Identifier が正しく設定されているのを確認して下さい。
-Signingの部分が自動で修正されて、Provisioning Profile と Signing　Certificate の部分にエラーのアイコンが表示されてないことを確認してください。
+
+Signingの部分が自動で修正されて、Provisioning Profile と Signing Certificate の部分にエラーのアイコンが表示されてないことを確認してください。
+
 左上のデバッグ実行の部分にご自分のiPhoneが認識されているのを確認してください。
+
 全て確認できたらデバッグ実行します。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app005.png?raw=true)
