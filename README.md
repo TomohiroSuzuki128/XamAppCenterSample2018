@@ -531,6 +531,97 @@ namespace XamAppCenterSample2018.iOS.Views
 }
 ``` 
 
+では、ここでiOSのアプリを実機デバッグしてみましょう。
+iOSのアプリを実機デバッグするにはXcodeでダミーアプリを実行する必要があります。
+
+# Xcodeでダミーアプリを実行 #
+
+プロビジョニングプロファイルや証明書の紐付けが自動で行われるようにXcodeでSwiftのダミーアプリを作成します。
+
+[File]->[New]->[Project]でプロジェクトを作成します。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app001.png?raw=true)
+
+
+iOSのSingle View Applicationを選択し、[Next]を押します。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app002.png?raw=true)
+
+Product Name は XamAppCenterSample2018 にして下さい。
+Organization Identifier はユニークな名前になるようにしてください。
+[Next]を押します。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app003.png?raw=true)
+
+<code>XamAppCenterSample2018Xcode</code>というフォルダを作成し、その中にプロジェクトを保存してください。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app004.png?raw=true)
+
+Product Name と　Organization Identifier が正しく設定されているのを確認して下さい。
+Signingの部分が自動で修正されて、Provisioning ProfileとSigning　Certificateが下記のように設定されているのを確認してください。
+左上のデバッグ実行の部分にご自分のiPhoneが認識されているのを確認してください。
+全て確認できたらデバッグ実行します。
+
+![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/024.png?raw=true)
+
+以下の表示が出たら、[常に許可]を押します。
+
+![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/025.png?raw=true)
+
+
+以下の表示が出たら、実機の設定で開発元を信頼させます。
+
+![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/026.png?raw=true)
+
+実機の設定アプリを開き[プロファイルとデバイス管理]を開きます。
+
+![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/013.png?raw=true)
+
+デベロッパAPPに[Xcodeに設定したApple ID]が表示されていますのでタップします。
+
+![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/014.png?raw=true)
+
+[Xcodeに設定したApple ID]を信頼をタップして信頼させます。
+
+![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/015.png?raw=true)
+
+
+以下の表示が出た場合、ご自分のiPhoneの中にAVCamSampleと言う名前のアプリが既にインストールされているか確認し、インストールされている場合、アンインストールしてください。
+
+![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/027.png?raw=true)
+
+再度、デバッグ実行し、無事アプリが起動して真っ白な画面が表示されたら成功です。
+
+これで、準備作業は完了です。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Android の View の作成 ## 
 
