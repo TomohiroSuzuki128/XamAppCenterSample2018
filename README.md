@@ -557,12 +557,12 @@ Organization Identifier はユニークな名前になるようにしてくだ�
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app004.png?raw=true)
 
-Product Name と　Organization Identifier が正しく設定されているのを確認して下さい。
-Signingの部分が自動で修正されて、Provisioning ProfileとSigning　Certificateが下記のように設定されているのを確認してください。
+Bundle Identifier が正しく設定されているのを確認して下さい。
+Signingの部分が自動で修正されて、Provisioning Profile と Signing　Certificate の部分にエラーのアイコンが表示されてないことを確認してください。
 左上のデバッグ実行の部分にご自分のiPhoneが認識されているのを確認してください。
 全て確認できたらデバッグ実行します。
 
-![](https://github.com/TomohiroSuzuki128/XamiOSHandsOn01/blob/master/images/024.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app005.png?raw=true)
 
 以下の表示が出たら、[常に許可]を押します。
 
