@@ -712,13 +712,22 @@ XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します�
 「デバッグの開始」を実行します。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build003.png?raw=true)
-
-
-
-アプリが起動すれば成功です。
-
+  
+  
+  
+アプリが起動します。
+  
+  
+     
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build004.png?raw=true)
-
+  
+  
+  
+飜訳が動作すれば成功です。
+  
+  
+   
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build005.png?raw=true)
 
 
 
