@@ -68,7 +68,7 @@ Translator Text API を選択します。
   
 ## ソリューションを開く ## 
   
-https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
+https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/  
 にアクセスしてソリューションを clone または zip ダウンロードしてください。
   
 /src/Start/XamAppCenterSample2018.sln を開きます。
