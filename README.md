@@ -200,7 +200,9 @@ using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using XamAppCenterSample2018.ViewModels;
 ```
-
+  
+  
+  
 MainView を MvxViewController<MainViewModel> の派生とし、属性を設定します。
 
 ```csharp
@@ -208,7 +210,9 @@ MainView を MvxViewController<MainViewModel> の派生とし、属性を設定�
     [MvxRootPresentation(WrapInNavigationController = false)]
     public class MainView : MvxViewController<MainViewModel>
 ```
-
+  
+  
+  
 フォントサイズや UI エレメントのフィールドを定義します。
 
 ```csharp
@@ -220,7 +224,9 @@ MainView を MvxViewController<MainViewModel> の派生とし、属性を設定�
         UILabel translatedLabel;
         UITextView translatedText;
 ```  
-
+  
+  
+  
 UI エレメントを初期設定するメソッドを定義します。
 
 ```csharp
@@ -228,12 +234,14 @@ UI エレメントを初期設定するメソッドを定義します。
         {
         }
 ```  
-
+  
+  
+  
 InitUI の中に UI エレメントの設定値を記述していきます。  
 画面には、「翻訳したい日本語のラベル」「翻訳したい日本語の入力欄」「翻訳された英語のラベル」「翻訳された英語の表示欄」「英語に翻訳するボタン」の要素があります。
-
-
-
+  
+  
+  
 MainView 自体の設定値です。
 
 ```csharp
@@ -243,7 +251,9 @@ MainView 自体の設定値です。
             View.BackgroundColor = UIColor.White;
             View.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
 ``` 
-
+  
+  
+  
 「翻訳したい日本語ラベル」inputLabel の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -271,7 +281,9 @@ MainView 自体の設定値です。
             inputLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             inputLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
-
+  
+  
+  
 「翻訳したい日本語の入力欄」inputText の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -297,7 +309,9 @@ MainView 自体の設定値です。
             inputText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             inputText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
-
+  
+  
+  
 入力完了時にソフトキーボードを閉じるボタンの設定です。
 
 ```csharp
@@ -316,7 +330,9 @@ MainView 自体の設定値です。
             toolBar.SetItems(new UIBarButtonItem[] { spacer, commitButton }, false);
             inputText.InputAccessoryView = toolBar;
 ```  
-
+  
+  
+  
 「英語に翻訳するボタン」translateButton の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -343,7 +359,9 @@ MainView 自体の設定値です。
             translateButton.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             translateButton.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
-
+  
+  
+  
 「翻訳された英語のラベル」translatedLabel の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -372,7 +390,9 @@ MainView 自体の設定値です。
             translatedLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
 ```  
-
+  
+  
+  
 「翻訳された英語の表示欄」translatedText の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -399,7 +419,9 @@ MainView 自体の設定値です。
             translatedText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
 ``` 
-
+  
+  
+  
 バインディングを設定するメソッドです。
 
 ```csharp
@@ -415,7 +437,9 @@ MainView 自体の設定値です。
         }
 
 ```  
-
+  
+  
+  
 ViewDidLoad で InitUI, SetBindingをコールします。
 
 ```csharp
@@ -427,7 +451,9 @@ ViewDidLoad で InitUI, SetBindingをコールします。
             SetBinding();
         }
 ```  
-
+  
+  
+  
 これで、iOS の View は完成です。
 完成したコードは以下のようになります。
 
@@ -749,7 +775,9 @@ Android の axml は、Git との相性も問題がないので、そのまま a
         android:layout_height="wrap_content"
         android:id="@+id/inputTextView" />
 ```
-
+  
+  
+  
 「翻訳したい日本語の入力欄」inputText を追加します。
 また、Binding も記述します。
 
@@ -767,7 +795,9 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         local:MvxBind="Text InputText"
         android:id="@+id/inputText" />
 ```
-
+  
+  
+  
 「英語に翻訳するボタン」translateButton を追加します。
 また、Binding も記述します。
 
@@ -779,7 +809,9 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         local:MvxBind="Click TranslateCommand"
         android:text="@string/translate" />
 ```
-
+  
+  
+  
 「翻訳された英語のラベル」translatedTextView を追加します。
 
 ```xml
@@ -790,7 +822,9 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         android:layout_height="wrap_content"
         android:id="@+id/translatedTextView" />
 ```
-
+  
+  
+  
 「翻訳された英語の表示欄」translatedText を追加します。
 また、Binding も記述します。
 
@@ -805,7 +839,9 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         local:MvxBind="Text TranslatedText"
         android:id="@+id/translatedText" />
 ```
-
+  
+  
+  
 これで、Android の View は完成です。
 完成した axml は以下のようになります。
 
@@ -854,6 +890,58 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         local:MvxBind="Text TranslatedText"
         android:id="@+id/translatedText" />
 </LinearLayout>
+```
+  
+  
+  
+## Android の コードビハインド の作成 ## 
+
+アプリとしての基本動作は View と ViewModel で完成していますが、入力後にソフトキーボードを消す動作が抜けているので、コードビハインドに記述します。
+  
+/Droid/Views/MainActivity.cs を開きます。 
+  
+まずは、using を追加します。  
+  
+```csharp
+using Android.App;
+using Android.Content;
+using Android.Views;
+using Android.Views.InputMethods;
+using Android.OS;
+using Android.Widget;
+using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Binding;
+using XamAppCenterSample2018.ViewModels;
+```
+  
+  
+  
+MainActivity を MvxActivity<MainViewModel> の派生とします。
+  
+```csharp
+    public class MainActivity : MvxActivity<MainViewModel>
+```
+  
+  
+  
+UI エレメントのフィールドを定義します。
+
+```csharp
+        InputMethodManager inputMethodManager;
+        LinearLayout mainLayout;
+        EditText editText;
+```  
+  
+  
+  
+ソフトキーボードを消すメソッドを作成します。
+
+```csharp
+        void HideSoftInput()
+        {
+            inputMethodManager.HideSoftInputFromWindow(mainLayout.WindowToken, HideSoftInputFlags.NotAlways);
+            mainLayout.RequestFocus(); 
+        }
 ```
 
 # 環境構築 #
