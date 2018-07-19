@@ -119,7 +119,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Views\MainView.cs" />
     <Compile Include="Presenters\ExPresenter.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
   </ItemGroup>

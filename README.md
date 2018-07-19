@@ -37,6 +37,30 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 
 # アプリの作成 #
 
+## Cognitive Services の Translator Text API 作成 ##
+
+Azure ポータルにログインし、「新規」 -> 「translate」 で検索します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/001.png?raw=true)
+  
+  
+Translator Text API を選択します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/002.png?raw=true)
+  
+  
+「作成」をクリックします。 
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/003.png?raw=true)
+  
+  
+項目を入力して「作成」をクリックします。 
+価格レベルは必ず「F0」（無料）にしてください！
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/004.png?raw=true)
+  
+  
+作成した Translator Text API を開いて Key をコピーし保管しておいて下さい。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/005.png?raw=true)
+  
+  
+
 ## ViewModel の作成 ## 
 
 まず、ViewModel を作成しましょう。
@@ -828,29 +852,6 @@ sudo chown -R <アカウント名> /usr/local/share
 
 インストールが終われば準備完了です。
 
-  
-# Cognitive Services の Translator Text API 作成 #
-
-Azure ポータルにログインし、「新規」 -> 「translate」 で検索します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/001.png?raw=true)
-  
-  
-Translator Text API を選択します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/002.png?raw=true)
-  
-  
-「作成」をクリックします。 
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/003.png?raw=true)
-  
-  
-項目を入力して「作成」をクリックします。 
-価格レベルは必ず「F0」（無料）にしてください！
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/004.png?raw=true)
-  
-  
-作成した Translator Text API を開いて Key をコピーし保管しておいて下さい。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/005.png?raw=true)
-  
   
 # ソースコードをリポジトリにプッシュ # 
 ソリューションのソースコードを、VSTS, Github, Bitbucketのいずれかにプッシュし下さい。 
