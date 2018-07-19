@@ -57,7 +57,7 @@ MainViewModel を MvxViewModel の派生とします。
     public class MainViewModel : MvxViewModel
 ```
 
-画面には、「翻訳したい日本語入力欄」「翻訳された英語表示欄」「英語に翻訳するボタン」の要素があります。
+画面には、「翻訳したい日本語入力欄」「翻訳された英語表示欄」「英語に翻訳するボタン」の要素があります。  
 これらを入力欄、表示欄はプロパティ、ボタンはコマンドとして実装してきます。
 
 ```csharp
@@ -78,7 +78,7 @@ MainViewModel を MvxViewModel の派生とします。
         public IMvxAsyncCommand TranslateCommand { get; private set; }
 ```
 
-コンストラクタでコマンドの処理を実装します。
+コンストラクタでコマンドの処理を実装します。  
 DI された Service のメソッドをコールするようにします。
 
 ```csharp
@@ -91,18 +91,56 @@ DI された Service のメソッドをコールするようにします。
         }
 ```
 
-これで、ViewModelは完成です。
+これで、ViewModelは完成です。  
+完成したコードは以下のようになります。
+
+```csharp
+using MvvmCross.Commands;
+using MvvmCross.ViewModels;
+using XamAppCenterSample2018.Services.Interfaces;
+
+namespace XamAppCenterSample2018.ViewModels
+{
+    public class MainViewModel : MvxViewModel
+    {
+        string inputText = string.Empty;
+        public string InputText
+        {
+            get => inputText;
+            set => SetProperty(ref inputText, value);
+        }
+
+        string translatedText = string.Empty;
+        public string TranslatedText
+        {
+            get => translatedText;
+            set => SetProperty(ref translatedText, value);
+        } 
+
+        public IMvxAsyncCommand TranslateCommand { get; private set; }
+
+        public MainViewModel(ITranslateService translateService) : base()
+        {
+            TranslateCommand = new MvxAsyncCommand(async () =>
+            {
+                TranslatedText = await translateService.Translate(InputText);
+            });
+        }
+
+    }
+}
+```
 
 
 ## iOS の View の作成 ## 
 
-iOS の View を作成します。
+iOS の View を作成します。  
 
-storyborad、xib は、IDEによって更新部分以外も勝手にコードが更新され、 Git との相性が悪いので、今回はコードで UI を記述します。
+storyborad、xib は、IDEによって更新部分以外も勝手にコードが更新され、 Git との相性が悪いので、今回はコードで UI を記述します。  
 
-/OS/Views/MainView.cs ファイルを作成します。
+/OS/Views/MainView.cs ファイルを作成します。  
 
-まずは、using を追加します。
+まずは、using を追加します。  
 
 ```csharp
 using System;
@@ -143,7 +181,7 @@ UI エレメントを初期設定するメソッドを定義します。
         }
 ```  
 
-InitUI の中に UI エレメントの設定値を記述していきます。
+InitUI の中に UI エレメントの設定値を記述していきます。  
 画面には、「翻訳したい日本語のラベル」「翻訳したい日本語の入力欄」「翻訳された英語のラベル」「翻訳された英語の表示欄」「英語に翻訳するボタン」の要素があります。
 
 
