@@ -33,10 +33,58 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 
 ## Android UIテスト ##
 - （必須ではないがあると望ましい） Android 7.0 以上の Android 実機
-
+  
+  
+  
 
 # アプリの作成 #
+  
+    
+  
+## Cognitive Services の Translator Text API 作成 ##
 
+Azure ポータルにログインし、「新規」 -> 「translate」 で検索します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/001.png?raw=true)
+  
+  
+Translator Text API を選択します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/002.png?raw=true)
+  
+  
+「作成」をクリックします。 
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/003.png?raw=true)
+  
+  
+項目を入力して「作成」をクリックします。 
+価格レベルは必ず「F0」（無料）にしてください！
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/004.png?raw=true)
+  
+  
+作成した Translator Text API を開いて Key をコピーし保管しておいて下さい。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/005.png?raw=true)
+   
+  
+  
+  
+## ソリューションを開く ## 
+  
+https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/  
+にアクセスしてソリューションを clone または zip ダウンロードしてください。
+  
+/src/Start/XamAppCenterSample2018.sln を開きます。
+  
+  
+## API Key の記述 ##   
+  
+/XamAppCenterSample2018/Variables.cs ファイルを開きます。  
+
+先ほど作成した API の Key を記述します。
+
+注意：API Key を記述したソースをパブリックなリポジトリにコミットしないで下さい。
+
+ ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/api_key001.png?raw=true)   
+
+  
 ## ViewModel の作成 ## 
 
 まず、ViewModel を作成しましょう。
@@ -57,7 +105,7 @@ MainViewModel を MvxViewModel の派生とします。
     public class MainViewModel : MvxViewModel
 ```
 
-画面には、「翻訳したい日本語入力欄」「翻訳された英語表示欄」「英語に翻訳するボタン」の要素があります。
+画面には、「翻訳したい日本語入力欄」「翻訳された英語表示欄」「英語に翻訳するボタン」の要素があります。  
 これらを入力欄、表示欄はプロパティ、ボタンはコマンドとして実装してきます。
 
 ```csharp
@@ -78,7 +126,7 @@ MainViewModel を MvxViewModel の派生とします。
         public IMvxAsyncCommand TranslateCommand { get; private set; }
 ```
 
-コンストラクタでコマンドの処理を実装します。
+コンストラクタでコマンドの処理を実装します。  
 DI された Service のメソッドをコールするようにします。
 
 ```csharp
@@ -91,18 +139,56 @@ DI された Service のメソッドをコールするようにします。
         }
 ```
 
-これで、ViewModelは完成です。
+これで、ViewModelは完成です。  
+完成したコードは以下のようになります。
+
+```csharp
+using MvvmCross.Commands;
+using MvvmCross.ViewModels;
+using XamAppCenterSample2018.Services.Interfaces;
+
+namespace XamAppCenterSample2018.ViewModels
+{
+    public class MainViewModel : MvxViewModel
+    {
+        string inputText = string.Empty;
+        public string InputText
+        {
+            get => inputText;
+            set => SetProperty(ref inputText, value);
+        }
+
+        string translatedText = string.Empty;
+        public string TranslatedText
+        {
+            get => translatedText;
+            set => SetProperty(ref translatedText, value);
+        } 
+
+        public IMvxAsyncCommand TranslateCommand { get; private set; }
+
+        public MainViewModel(ITranslateService translateService) : base()
+        {
+            TranslateCommand = new MvxAsyncCommand(async () =>
+            {
+                TranslatedText = await translateService.Translate(InputText);
+            });
+        }
+
+    }
+}
+```
 
 
 ## iOS の View の作成 ## 
 
-iOS の View を作成します。
+iOS の View を作成します。  
 
-storyborad、xib は、IDEによって更新部分以外も勝手にコードが更新され、 Git との相性が悪いので、今回はコードで UI を記述します。
+storyborad、xib は、IDEによって更新部分以外も勝手にコードが更新され、 Git との相性が悪いので、今回はコードで UI を記述します。  
 
-/OS/Views/MainView.cs ファイルを作成します。
+/OS/Views/MainView.cs ファイルを作成します。  
 
-まずは、using を追加します。
+まずは、using を追加します。  
 
 ```csharp
 using System;
@@ -114,7 +200,9 @@ using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using XamAppCenterSample2018.ViewModels;
 ```
-
+  
+  
+  
 MainView を MvxViewController<MainViewModel> の派生とし、属性を設定します。
 
 ```csharp
@@ -122,7 +210,9 @@ MainView を MvxViewController<MainViewModel> の派生とし、属性を設定�
     [MvxRootPresentation(WrapInNavigationController = false)]
     public class MainView : MvxViewController<MainViewModel>
 ```
-
+  
+  
+  
 フォントサイズや UI エレメントのフィールドを定義します。
 
 ```csharp
@@ -134,7 +224,9 @@ MainView を MvxViewController<MainViewModel> の派生とし、属性を設定�
         UILabel translatedLabel;
         UITextView translatedText;
 ```  
-
+  
+  
+  
 UI エレメントを初期設定するメソッドを定義します。
 
 ```csharp
@@ -142,12 +234,14 @@ UI エレメントを初期設定するメソッドを定義します。
         {
         }
 ```  
-
-InitUI の中に UI エレメントの設定値を記述していきます。
+  
+  
+  
+InitUI の中に UI エレメントの設定値を記述していきます。  
 画面には、「翻訳したい日本語のラベル」「翻訳したい日本語の入力欄」「翻訳された英語のラベル」「翻訳された英語の表示欄」「英語に翻訳するボタン」の要素があります。
-
-
-
+  
+  
+  
 MainView 自体の設定値です。
 
 ```csharp
@@ -157,7 +251,9 @@ MainView 自体の設定値です。
             View.BackgroundColor = UIColor.White;
             View.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
 ``` 
-
+  
+  
+  
 「翻訳したい日本語ラベル」inputLabel の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -185,7 +281,9 @@ MainView 自体の設定値です。
             inputLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             inputLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
-
+  
+  
+  
 「翻訳したい日本語の入力欄」inputText の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -211,7 +309,9 @@ MainView 自体の設定値です。
             inputText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             inputText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
-
+  
+  
+  
 入力完了時にソフトキーボードを閉じるボタンの設定です。
 
 ```csharp
@@ -230,7 +330,9 @@ MainView 自体の設定値です。
             toolBar.SetItems(new UIBarButtonItem[] { spacer, commitButton }, false);
             inputText.InputAccessoryView = toolBar;
 ```  
-
+  
+  
+  
 「英語に翻訳するボタン」translateButton の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -257,7 +359,9 @@ MainView 自体の設定値です。
             translateButton.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             translateButton.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
-
+  
+  
+  
 「翻訳された英語のラベル」translatedLabel の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -286,7 +390,9 @@ MainView 自体の設定値です。
             translatedLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
 ```  
-
+  
+  
+  
 「翻訳された英語の表示欄」translatedText の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -313,7 +419,9 @@ MainView 自体の設定値です。
             translatedText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
 ``` 
-
+  
+  
+  
 バインディングを設定するメソッドです。
 
 ```csharp
@@ -329,7 +437,9 @@ MainView 自体の設定値です。
         }
 
 ```  
-
+  
+  
+  
 ViewDidLoad で InitUI, SetBindingをコールします。
 
 ```csharp
@@ -341,7 +451,9 @@ ViewDidLoad で InitUI, SetBindingをコールします。
             SetBinding();
         }
 ```  
-
+  
+  
+  
 これで、iOS の View は完成です。
 完成したコードは以下のようになります。
 
@@ -626,13 +738,22 @@ XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します�
 「デバッグの開始」を実行します。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build003.png?raw=true)
-
-
-
-アプリが起動すれば成功です。
-
+  
+  
+  
+アプリが起動します。
+  
+  
+     
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build004.png?raw=true)
-
+  
+  
+  
+飜訳が動作すれば成功です。
+  
+  
+   
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build005.png?raw=true)
 
 
 
@@ -654,7 +775,9 @@ Android の axml は、Git との相性も問題がないので、そのまま a
         android:layout_height="wrap_content"
         android:id="@+id/inputTextView" />
 ```
-
+  
+  
+  
 「翻訳したい日本語の入力欄」inputText を追加します。
 また、Binding も記述します。
 
@@ -672,7 +795,9 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         local:MvxBind="Text InputText"
         android:id="@+id/inputText" />
 ```
-
+  
+  
+  
 「英語に翻訳するボタン」translateButton を追加します。
 また、Binding も記述します。
 
@@ -684,7 +809,9 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         local:MvxBind="Click TranslateCommand"
         android:text="@string/translate" />
 ```
-
+  
+  
+  
 「翻訳された英語のラベル」translatedTextView を追加します。
 
 ```xml
@@ -695,7 +822,9 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         android:layout_height="wrap_content"
         android:id="@+id/translatedTextView" />
 ```
-
+  
+  
+  
 「翻訳された英語の表示欄」translatedText を追加します。
 また、Binding も記述します。
 
@@ -710,7 +839,9 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         local:MvxBind="Text TranslatedText"
         android:id="@+id/translatedText" />
 ```
-
+  
+  
+  
 これで、Android の View は完成です。
 完成した axml は以下のようになります。
 
@@ -760,6 +891,152 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         android:id="@+id/translatedText" />
 </LinearLayout>
 ```
+  
+  
+  
+## Android の コードビハインド の作成 ## 
+
+アプリとしての基本動作は View と ViewModel で完成していますが、入力後にソフトキーボードを消す動作が抜けているので、コードビハインドに記述します。
+  
+/Droid/Views/MainActivity.cs を開きます。 
+  
+まずは、using を追加します。  
+  
+```csharp
+using Android.App;
+using Android.Content;
+using Android.Views;
+using Android.Views.InputMethods;
+using Android.OS;
+using Android.Widget;
+using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Binding;
+using XamAppCenterSample2018.ViewModels;
+```
+  
+  
+  
+MainActivity を MvxActivity<MainViewModel> の派生とします。
+  
+```csharp
+    public class MainActivity : MvxActivity<MainViewModel>
+```
+  
+  
+  
+UI エレメントのフィールドを定義します。
+
+```csharp
+        InputMethodManager inputMethodManager;
+        LinearLayout mainLayout;
+        EditText editText;
+```  
+  
+  
+  
+ソフトキーボードを消すメソッドを実装します。
+
+```csharp
+        void HideSoftInput()
+        {
+            inputMethodManager.HideSoftInputFromWindow(mainLayout.WindowToken, HideSoftInputFlags.NotAlways);
+            mainLayout.RequestFocus(); 
+        }
+```
+  
+  
+  
+画面の何も無いところをタッチしたときに、ソフトキーボードを消すようにします。
+
+```csharp
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            HideSoftInput();
+            return false;
+        }
+```
+
+ボタンや翻訳後の文章表示部分をタッチしたときに、ソフトキーボードを消すようにします。
+
+```csharp
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            RequestWindowFeature(WindowFeatures.NoTitle);
+            SetContentView(Resource.Layout.Main);
+
+            editText = (EditText)FindViewById(Resource.Id.inputText);
+            mainLayout = (LinearLayout)FindViewById(Resource.Id.mainLayout);
+            inputMethodManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+
+            var button = (Button)FindViewById(Resource.Id.translateButton);
+            button.Click += (s, e) => HideSoftInput();
+
+            var textView = (TextView)FindViewById(Resource.Id.translatedText);
+            textView.Click += (s, e) => HideSoftInput();
+        }
+```
+
+これで、コードビハインドは完成です。  
+完成したコードは以下のようになります。
+
+```csharp
+using Android.App;
+using Android.Content;
+using Android.Views;
+using Android.Views.InputMethods;
+using Android.OS;
+using Android.Widget;
+using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Binding;
+using XamAppCenterSample2018.ViewModels;
+
+namespace XamAppCenterSample2018.Droid
+{
+    [Activity(Label = "XamAppCenterSample2018", MainLauncher = true, Icon = "@mipmap/icon")]
+    public class MainActivity : MvxActivity<MainViewModel>
+    {
+        InputMethodManager inputMethodManager;
+        LinearLayout mainLayout;
+        EditText editText;
+
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            RequestWindowFeature(WindowFeatures.NoTitle);
+            SetContentView(Resource.Layout.Main);
+
+            editText = (EditText)FindViewById(Resource.Id.inputText);
+            mainLayout = (LinearLayout)FindViewById(Resource.Id.mainLayout);
+            inputMethodManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+
+            var button = (Button)FindViewById(Resource.Id.translateButton);
+            button.Click += (s, e) => HideSoftInput();
+
+            var textView = (TextView)FindViewById(Resource.Id.translatedText);
+            textView.Click += (s, e) => HideSoftInput();
+        }
+
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            HideSoftInput();
+            return false;
+        }
+
+        void HideSoftInput()
+        {
+            inputMethodManager.HideSoftInputFromWindow(mainLayout.WindowToken, HideSoftInputFlags.NotAlways);
+            mainLayout.RequestFocus(); 
+        }
+
+    }
+}
+```
+
+
+
+
+
 
 # 環境構築 #
 
@@ -790,29 +1067,6 @@ sudo chown -R <アカウント名> /usr/local/share
 
 インストールが終われば準備完了です。
 
-  
-# Cognitive Services の Translator Text API 作成 #
-
-Azure ポータルにログインし、「新規」 -> 「translate」 で検索します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/001.png?raw=true)
-  
-  
-Translator Text API を選択します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/002.png?raw=true)
-  
-  
-「作成」をクリックします。 
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/003.png?raw=true)
-  
-  
-項目を入力して「作成」をクリックします。 
-価格レベルは必ず「F0」（無料）にしてください！
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/004.png?raw=true)
-  
-  
-作成した Translator Text API を開いて Key をコピーし保管しておいて下さい。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/005.png?raw=true)
-  
   
 # ソースコードをリポジトリにプッシュ # 
 ソリューションのソースコードを、VSTS, Github, Bitbucketのいずれかにプッシュし下さい。 
