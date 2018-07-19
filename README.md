@@ -74,6 +74,17 @@ https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
 /src/Start/XamAppCenterSample2018.sln を開きます。
   
   
+## API Key の記述 ##   
+  
+/XamAppCenterSample2018/Variables.cs ファイルを開きます。  
+
+先ほど作成した API の Key を記述します。
+
+注意：API Key を記述したソースをパブリックなリポジトリにコミットしないで下さい。
+
+ ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/api_key001.png?raw=true)   
+
+  
 ## ViewModel の作成 ## 
 
 まず、ViewModel を作成しましょう。
