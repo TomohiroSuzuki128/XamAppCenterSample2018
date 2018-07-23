@@ -1,81 +1,72 @@
 # はじめに #
-
+　  
 App Center で自動ビルド、UIテストが試せる iOS, Android のサンプルアプリです。
-
+　  
 Cognitive Services の Translator Text API を利用して、入力した日本語を英語に翻訳してくれます。
-
-&copy;2018 Tomohiro Suzuki All rights reserved.  
-本コンテンツの著作権、および本コンテンツ中に出てくる商標権、団体名、ロゴ、製品、サービスなどはそれぞれ、各権利保有者に帰属します。
-
+　  
 ## iOS ##
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/iPhone.png?raw=true)
-
+　  
 ## Android ##
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android.png?raw=true)
-  
-  
-  
-  
-  
+　  
+　  
 # 必要環境 #
-
+　  
 ## iOS,Android 自動ビルド ##
 - Visual Studio for Mac がインストールされたMac
 - Azure のアカウント
 - App Center のアカウント
-
+　  
 ### iOSで実機ビルドする場合 ###
 - Apple Developer Program への加入必要
-
+　  
 ## iOS UIテスト ##
 - iOS11 以上の iPhone 実機
 - Apple Developer Program への加入は不要
-
+　  
 ## Android UIテスト ##
 - （必須ではないがあると望ましい） Android 7.0 以上の Android 実機
-  
-  
-  
-
+　  
+　  
 # アプリの作成 #
-  
-    
-  
+　  
+　  
 ## Cognitive Services の Translator Text API 作成 ##
-
+　  
 Azure ポータルにログインし、「新規」 -> 「translate」 で検索します。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/001.png?raw=true)
-  
-  
+　  
+　  
 Translator Text API を選択します。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/002.png?raw=true)
-  
-  
+　  
+　  
 「作成」をクリックします。 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/003.png?raw=true)
-  
-  
+　  
+　  
 項目を入力して「作成」をクリックします。 
 価格レベルは必ず「F0」（無料）にしてください！
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/004.png?raw=true)
-  
-  
+　  
+　  
 作成した Translator Text API を開いて Key をコピーし保管しておいて下さい。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/005.png?raw=true)
-   
-  
-  
-  
+　  
+　  
 ## ソリューションを開く ## 
   
 https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/  
 にアクセスしてソリューションを clone または zip ダウンロードしてください。
-  
+　  
+　  
 /src/Start/XamAppCenterSample2018.sln を開きます。
-  
-  
+　  
+　  
 ## API Key の記述 ##   
-  
+　  
+　  
 /XamAppCenterSample2018/Variables.cs ファイルを開きます。  
 
 先ほど作成した API の Key を記述します。
@@ -83,8 +74,8 @@ https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
 注意：API Key を記述したソースをパブリックなリポジトリにコミットしないで下さい。
 
  ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/api_key001.png?raw=true)   
-
-  
+　  
+　  
 ## ViewModel の作成 ## 
 
 まず、ViewModel を作成しましょう。
@@ -98,13 +89,15 @@ using MvvmCross.Commands;
 using MvvmCross.ViewModels;
 using XamAppCenterSample2018.Services.Interfaces;
 ```
-
+　  
+　  
 MainViewModel を MvxViewModel の派生とします。
 
 ```csharp
     public class MainViewModel : MvxViewModel
 ```
-
+　  
+　  
 画面には、「翻訳したい日本語入力欄」「翻訳された英語表示欄」「英語に翻訳するボタン」の要素があります。  
 これらを入力欄、表示欄はプロパティ、ボタンはコマンドとして実装してきます。
 
@@ -125,7 +118,8 @@ MainViewModel を MvxViewModel の派生とします。
 
         public IMvxAsyncCommand TranslateCommand { get; private set; }
 ```
-
+　  
+　  
 コンストラクタでコマンドの処理を実装します。  
 DI された Service のメソッドをコールするようにします。
 
@@ -138,7 +132,8 @@ DI された Service のメソッドをコールするようにします。
             });
         }
 ```
-
+　  
+　  
 これで、ViewModelは完成です。  
 完成したコードは以下のようになります。
 
@@ -178,8 +173,8 @@ namespace XamAppCenterSample2018.ViewModels
     }
 }
 ```
-
-
+　  
+　  
 ## iOS の View の作成 ## 
 
 iOS の View を作成します。  
@@ -187,7 +182,8 @@ iOS の View を作成します。
 storyborad、xib は、IDEによって更新部分以外も勝手にコードが更新され、 Git との相性が悪いので、今回はコードで UI を記述します。  
 
 /OS/Views/MainView.cs ファイルを作成します。  
-
+　  
+　  
 まずは、using を追加します。  
 
 ```csharp
@@ -200,9 +196,8 @@ using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using XamAppCenterSample2018.ViewModels;
 ```
-  
-  
-  
+　  
+　  
 MainView を MvxViewController<MainViewModel> の派生とし、属性を設定します。
 
 ```csharp
@@ -210,9 +205,8 @@ MainView を MvxViewController<MainViewModel> の派生とし、属性を設定�
     [MvxRootPresentation(WrapInNavigationController = false)]
     public class MainView : MvxViewController<MainViewModel>
 ```
-  
-  
-  
+　  
+　  
 フォントサイズや UI エレメントのフィールドを定義します。
 
 ```csharp
@@ -224,9 +218,8 @@ MainView を MvxViewController<MainViewModel> の派生とし、属性を設定�
         UILabel translatedLabel;
         UITextView translatedText;
 ```  
-  
-  
-  
+　  
+　  
 UI エレメントを初期設定するメソッドを定義します。
 
 ```csharp
@@ -234,14 +227,12 @@ UI エレメントを初期設定するメソッドを定義します。
         {
         }
 ```  
-  
-  
-  
+　  
+　  
 InitUI の中に UI エレメントの設定値を記述していきます。  
 画面には、「翻訳したい日本語のラベル」「翻訳したい日本語の入力欄」「翻訳された英語のラベル」「翻訳された英語の表示欄」「英語に翻訳するボタン」の要素があります。
-  
-  
-  
+　  
+　  
 MainView 自体の設定値です。
 
 ```csharp
@@ -251,9 +242,8 @@ MainView 自体の設定値です。
             View.BackgroundColor = UIColor.White;
             View.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
 ``` 
-  
-  
-  
+　  
+　  
 「翻訳したい日本語ラベル」inputLabel の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -281,9 +271,8 @@ MainView 自体の設定値です。
             inputLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             inputLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
-  
-  
-  
+　  
+　  
 「翻訳したい日本語の入力欄」inputText の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -309,9 +298,8 @@ MainView 自体の設定値です。
             inputText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             inputText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
-  
-  
-  
+　  
+　  
 入力完了時にソフトキーボードを閉じるボタンの設定です。
 
 ```csharp
@@ -330,9 +318,8 @@ MainView 自体の設定値です。
             toolBar.SetItems(new UIBarButtonItem[] { spacer, commitButton }, false);
             inputText.InputAccessoryView = toolBar;
 ```  
-  
-  
-  
+　  
+　  
 「英語に翻訳するボタン」translateButton の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -359,9 +346,8 @@ MainView 自体の設定値です。
             translateButton.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             translateButton.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 ```  
-  
-  
-  
+　  
+　  
 「翻訳された英語のラベル」translatedLabel の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -390,9 +376,8 @@ MainView 自体の設定値です。
             translatedLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
 ```  
-  
-  
-  
+　  
+　  
 「翻訳された英語の表示欄」translatedText の設定値と View への追加、制約の設定です。
 
 ```csharp
@@ -419,9 +404,8 @@ MainView 自体の設定値です。
             translatedText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
 ``` 
-  
-  
-  
+　  
+　  
 バインディングを設定するメソッドです。
 
 ```csharp
@@ -437,9 +421,8 @@ MainView 自体の設定値です。
         }
 
 ```  
-  
-  
-  
+　  
+　  
 ViewDidLoad で InitUI, SetBindingをコールします。
 
 ```csharp
@@ -451,9 +434,8 @@ ViewDidLoad で InitUI, SetBindingをコールします。
             SetBinding();
         }
 ```  
-  
-  
-  
+　  
+　  
 これで、iOS の View は完成です。
 完成したコードは以下のようになります。
 
@@ -642,12 +624,12 @@ namespace XamAppCenterSample2018.iOS.Views
     }
 }
 ``` 
-
-
-
+　  
+　  
 では、ここでiOSのアプリを実機デバッグしてみましょう。
 iOSのアプリを実機デバッグするにはXcodeでダミーアプリを実行する必要があります。
-
+　  
+　  
 ## Xcode でのダミーアプリ実行 ##
 
 プロビジョニングプロファイルや証明書の紐付けが自動で行われるようにXcodeでSwiftのダミーアプリを作成します。
@@ -655,67 +637,70 @@ iOSのアプリを実機デバッグするにはXcodeでダミーアプリを実
 [File]->[New]->[Project]でプロジェクトを作成します。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app001.png?raw=true)
-
-
-
+　  
+　  
 iOSのSingle View Applicationを選択し、[Next]を押します。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app002.png?raw=true)
-
-
-
+　  
+　  
 Product Name は XamAppCenterSample2018 にして下さい。
 Organization Identifier はユニークな名前になるようにしてください。
 [Next]を押します。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app003.png?raw=true)
-
-
-
+　  
+　  
 <code>XamAppCenterSample2018Xcode</code>というフォルダを作成し、その中にプロジェクトを保存してください。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app004.png?raw=true)
-
-
-
+　  
+　  
 Bundle Identifier が正しく設定されているのを確認して下さい。
 
 Signingの部分が自動で修正されて、Provisioning Profile と Signing Certificate の部分にエラーのアイコンが表示されてないことを確認してください。
 
 左上のデバッグ実行の部分にご自分のiPhoneが認識されているのを確認してください。
-
+　  
+　  
 全て確認できたらデバッグ実行します。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app005.png?raw=true)
-
+　  
+　  
 もし、以下の表示が出た場合、[常に許可]を押します。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app006.png?raw=true)
-
-
+　  
+　  
 以下の表示が出たら、次の手順で実機の設定で開発元を信頼させます。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app007.png?raw=true)
-
+　  
+　  
 実機の設定アプリを開き[プロファイルとデバイス管理]を開きます。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app008.png?raw=true)
-
+　  
+　  
 デベロッパAPPに[Xcodeに設定したApple ID]が表示されていますのでタップします。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app009.png?raw=true)
-
+　  
+　  
 [Xcodeに設定したApple ID]を信頼をタップして信頼させます。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app010.png?raw=true)
-
-
+　  
+　  
 以下の表示が出た場合、ご自分の iPhoneの中 に XamAppCenterSample2018 と言う名前のアプリが既にインストールされているか確認し、インストールされている場合、アンインストールしてください。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app011.png?raw=true)
-
+　  
+　  
 再度、デバッグ実行し、無事アプリが起動して真っ白な画面が表示されたら成功です。
-
+　  
+　  
 これで、Xcode でのダミーアプリ実行は完了です。
 　  
 　  
