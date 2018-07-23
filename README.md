@@ -891,9 +891,26 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
         android:id="@+id/translatedText" />
 </LinearLayout>
 ```
-  
-  
-  
+　  
+　  
+　  
+  ## 文字列リソースの設定 ## 
+
+/Droid/Resources/values/Strings.xml を開きます。
+
+画面に表示する文字列リソースを設定します。 
+
+```xml
+    <TextView
+        android:text="@string/translated"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/translatedTextView" />
+```
+　  
+　  
+　  
 ## Android の コードビハインド の作成 ## 
 
 アプリとしての基本動作は View と ViewModel で完成していますが、入力後にソフトキーボードを消す動作が抜けているので、コードビハインドに記述します。
