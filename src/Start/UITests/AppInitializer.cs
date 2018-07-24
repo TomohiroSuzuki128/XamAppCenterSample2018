@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Xamarin.UITest;
-using Xamarin.UITest.Queries;
+﻿using Xamarin.UITest;
 
 namespace XamAppCenterSample2018.UITests
 {
@@ -15,6 +11,7 @@ namespace XamAppCenterSample2018.UITests
                 return ConfigureApp
                     .Android
                     .EnableLocalScreenshots()
+                    .PreferIdeSettings()
                     .InstalledApp("com.hiro128777.XamAppCenterSample2018")
                     .StartApp();
             }
