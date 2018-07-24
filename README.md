@@ -1197,8 +1197,14 @@ namespace XamAppCenterSample2018.UITests
 ```
 　  
 　  
-翻訳が成功するテストメソッドを定義します。
-<code>[Test]</code> Attribute を付加するとテストメソッドとして扱われます。
+翻訳が成功するシナリオのテストメソッドを定義します。
+- <code>[Test]</code> Attribute を付加するとテストメソッドとして扱われます。
+- <code>app.Tap</code>で UI エレメントをタップします。
+- <code>c.Marked("inputText")</code>でタップするUI エレメントを指定します。
+- <code>Marked</code>で指定するキーは、iOS では <code>AccessibilityIdentifier</code>、Android では <code>android:id</code>で設定します。
+- <code>app.DismissKeyboard()</code>で、ソフトキーボードを消します。
+- <code>app.Query</code>で UI エレメントを検索します。
+- <code>Assert.AreEqual</code>で、UI エレメントに表示された翻訳後のテキストが正しいか確認しています。
   
 ```csharp
         [Test]
@@ -1220,7 +1226,87 @@ namespace XamAppCenterSample2018.UITests
 ```
 　  
 　  
+翻訳したい日本語が未入力の為、翻訳が失敗するシナリオのテストメソッドを定義します。
+- <code>StringAssert.Contains</code>で、UI エレメントに表示された翻訳後のテキストに指定された文字列が入っているか確認しています。
+  
+```csharp
+        [Test]
+        public async void FailTranslate()
+        {
+            await Task.Delay(2000);
+            app.Tap(c => c.Button("translateButton"));
+            await Task.Delay(4000);
+            var elements = app.Query(c => c.Marked("translatedText"));
+            await Task.Delay(2000);
+            StringAssert.Contains("エラーコード： 400005", elements.FirstOrDefault().Text);
+        }
+```
+　  
+　  
+これで、テストコードは完成です。  
+完成したコードは以下のようになります。
+　  
+```csharp
+using System.Linq;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using Xamarin.UITest;
+
+namespace XamAppCenterSample2018.UITests
+{
+    [TestFixture(Platform.Android)]
+    [TestFixture(Platform.iOS)]
+    public class Tests
+    {
+        IApp app;
+        Platform platform;
+
+        public Tests(Platform platform)
+        {
+            this.platform = platform;
+        }
+
+        [SetUp]
+        public void BeforeEachTest()
+        {
+            app = AppInitializer.StartApp(platform);
+        }
+
+        [Test]
+        public async void SucceedTranslate()
+        {
+            await Task.Delay(2000);
+            app.Tap(c => c.Marked("inputText"));
+            await Task.Delay(2000);
+            app.EnterText("私は毎日電車に乗って会社に行きます。");
+            await Task.Delay(2000);
+            app.DismissKeyboard();
+            await Task.Delay(2000);
+            app.Tap(c => c.Button("translateButton"));
+            await Task.Delay(4000);
+            var elements = app.Query(c => c.Marked("translatedText"));
+            await Task.Delay(2000);
+            Assert.AreEqual("I go to the office by train every day.", elements.FirstOrDefault().Text);
+        }
+
+        [Test]
+        public async void FailTranslate()
+        {
+            await Task.Delay(2000);
+            app.Tap(c => c.Button("translateButton"));
+            await Task.Delay(4000);
+            var elements = app.Query(c => c.Marked("translatedText"));
+            await Task.Delay(2000);
+            StringAssert.Contains("エラーコード： 400005", elements.FirstOrDefault().Text);
+        }
+    }
+}
+
+```
+　  
+　  
 # App Center 利用の為の環境構築 #
+では、これから App Center でビルドとテストを行います。
 　  
 　  
 ## node.js のインストール ## 
