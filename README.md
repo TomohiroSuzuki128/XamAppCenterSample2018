@@ -175,8 +175,19 @@ namespace XamAppCenterSample2018.ViewModels
 ```
 　  
 　  
+　  
+## iOS の バンドル識別子 の設定 ## 
+　  
+　  
+iOS のアプリの v を御自身の固有のものに変更して下さい。
+- アプリケーション名 は XamAppCenterSample2018 にして下さい。
+- バンドル識別子の Organization Identifier の部分は全世界で固有となるような文字列にして下さい。
+　  
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test002.png?raw=true)
+　  
+　  
 ## iOS の View の作成 ## 
-
+　  
 iOS の View を作成します。  
 
 storyborad、xib は、IDEによって更新部分以外も勝手にコードが更新され、 Git との相性が悪いので、今回はコードで UI を記述します。  
@@ -645,7 +656,7 @@ iOSのSingle View Applicationを選択し、[Next]を押します。
 　  
 　  
 Product Name は XamAppCenterSample2018 にして下さい。
-Organization Identifier はユニークな名前になるようにしてください。
+Organization Identifier は先ほど決めたものと同一のものにしてください。
 [Next]を押します。
 
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app003.png?raw=true)
@@ -726,6 +737,15 @@ XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します�
 　  
 飜訳が動作すれば成功です。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build005.png?raw=true)
+　  
+　  
+
+## Android の パッケージ名の設定 ## 
+
+Android のアプリのパッケージ名を御自身の固有のものに変更して下さい。
+- アプリケーション名 は XamAppCenterSample2018 にして下さい。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test001.png?raw=true)
 　  
 　  
 ## Android の View の作成 ## 
@@ -1013,9 +1033,76 @@ namespace XamAppCenterSample2018.Droid
 ```
 　  
 　  
+# テストプロジェクトの作成 #
 
+## AppInitializer の作成 ## 
+　  
+　  
+テスト時にアプリを初期化するクラスを作成します。
+　  
+　  
+まずは、using を追加します。  
+  
+```csharp
+using Xamarin.UITest;
+```  
+　  
+　  
+クラスを定義します。
+  
+```csharp
+namespace XamAppCenterSample2018.UITests
+{
+    public class AppInitializer
+    {
+    }
+}
+```
+　  
+　  
+アプリ初期化するメソッドを定義します。
 
-# 環境構築 #
+```csharp
+namespace XamAppCenterSample2018.UITests
+{
+    public class AppInitializer
+    {
+        public static IApp StartApp(Platform platform)
+        {
+            if (platform == Platform.Android)
+            {
+                return ConfigureApp
+                    .Android
+                    .EnableLocalScreenshots()
+                    .PreferIdeSettings()
+                    .InstalledApp("<あなたのアプリのパッケージ名>")
+                    .StartApp();
+            }
+
+            return ConfigureApp
+                .iOS
+                .EnableLocalScreenshots()
+                .PreferIdeSettings()
+                .InstalledApp("<あなたのアプリのbundle ID>")
+                .StartApp();
+        }
+    }
+}
+```
+　  
+　  
+Android のアプリのパッケージ名は以下で設定できます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test001.png?raw=true)
+　  
+　  
+iOS のアプリの bundle ID は以下で設定できます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test002.png?raw=true)
+　  
+　  
+
+　  
+　  
+# App Center 利用の為の環境構築 #
 　  
 　  
 ## node.js のインストール ## 
