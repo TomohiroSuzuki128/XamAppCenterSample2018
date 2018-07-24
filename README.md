@@ -179,7 +179,7 @@ namespace XamAppCenterSample2018.ViewModels
 ## iOS の バンドル識別子 の設定 ## 
 　  
 　  
-iOS のアプリの v を御自身の固有のものに変更して下さい。
+iOS のアプリの バンドル識別子 を御自身の固有のものに変更して下さい。
 - アプリケーション名 は XamAppCenterSample2018 にして下さい。
 - バンドル識別子の Organization Identifier の部分は全世界で固有となるような文字列にして下さい。
 　  
