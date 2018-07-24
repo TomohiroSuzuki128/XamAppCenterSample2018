@@ -1379,18 +1379,184 @@ nodebrew -v
 ```
 　  
 nodebrewのバージョン情報が表示されればインストール完了です。
+```bash
+nodebrew 1.0.0
+
+Usage:
+    nodebrew help                         Show this message
+    nodebrew install <version>            Download and install <version> (from binary)
+    nodebrew compile <version>            Download and install <version> (from source)
+    nodebrew install-binary <version>     Alias of `install` (For backword compatibility)
+    nodebrew uninstall <version>          Uninstall <version>
+    nodebrew use <version>                Use <version>
+    nodebrew list                         List installed versions
+    nodebrew ls                           Alias for `list`
+    nodebrew ls-remote                    List remote versions
+    nodebrew ls-all                       List remote and installed versions
+    nodebrew alias <key> <value>          Set alias
+    nodebrew unalias <key>                Remove alias
+    nodebrew clean <version> | all        Remove source file
+    nodebrew selfupdate                   Update nodebrew
+    nodebrew migrate-package <version>    Install global NPM packages contained in <version> to current version
+    nodebrew exec <version> -- <command>  Execute <command> using specified <version>
+
+Example:
+    # install
+    nodebrew install v8.9.4
+
+    # use a specific version number
+    nodebrew use v8.9.4
+```
 　  
 　  
 ### node.js のインストール ### 
 　  
 いよいよ node.js をインストールします。
-
-
-
-
-
+　  
+インストールコマンドを実行します。
+```bash
+nodebrew install-binary latest
+```
+　  
+怒られてしまいました。
+```bash
+Fetching: https://nodejs.org/dist/v10.7.0/node-v10.7.0-darwin-x64.tar.gz
+Warning: Failed to create the file 
+Warning: /Users/hiro128/.nodebrew/src/v10.7.0/node-v10.7.0-darwin-x64.tar.gz: 
+Warning: No such file or directory
+                                                                           0.0%
+curl: (23) Failed writing body (0 != 1057)
+download failed: https://nodejs.org/dist/v10.7.0/node-v10.7.0-darwin-x64.tar.gz
+```
+　  
+ディレクトリが無いようなので、mkdirをして、
+```bash
+mkdir ~/.nodebrew
+mkdir ~/.nodebrew/src
+```
+　  
+リトライします。
+```bash
+nodebrew install-binary latest
+```
+　  
+下記のように表示されればインストール終了です。
+```bash
+Fetching: https://nodejs.org/dist/v10.7.0/node-v10.7.0-darwin-x64.tar.gz
+######################################################################## 100.0%
+Installed successfully
+```
+　  
+インストールされた node.js のバージョンを確認します。
+```bash
+nodebrew list
+```
+　  
+インストールされたバージョンと、現在有効なバージョンが表示されます。
+```bash
+v10.7.0
+　  
+current: none
+```
+　  
+使用する node.js バージョンを有効化します。
+```bash
+nodebrew use v10.7.0
+```
+　  
+確認のためにlistを実行し、
+```bash
+nodebrew list
+```
+　  
+指定したバージョンに変わっていれば成功です。
+```bash
+v10.7.0
+　  
+current: v10.7.0
+```
+　  
+　  
+### パスを通す ### 
+　  
+以下のコマンドでnodeコマンドへパスをbashrcへ保存します。
+```bash
+echo 'export PATH=$PATH:/Users/<あなたのhome>/.nodebrew/current/bin' >> ~/.bashrc
+```
+　  
+node.js のバージョンを認します。
+```bash
+node -v
+```
+　  
+うまくいっている場合は、以下のようにバージョン情報が表示されます。
+```bash
+node -v
+v10.7.0
+```
+　  
+ですが、以下のようなメッセージが出た場合は、うまくいってません。
+```bash
+node -v
+-bash: node: command not found
+```
+　  
+先ほど「.bashrc」に書き込んだパスが読み込まれていないようなので、
+「.bash_profile」にコマンドを記述する必要があります。
+　  
+まず、.bash_profile が存在するかどうか確認します。
+```bash
+ls -la
+```
+　  
+存在しない場合、ファイル作成します。
+```bash
+touch .bash_profile
+```
+　  
+作成できたか確認しましょう
+```bash
+ls -la
+```
+　  
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/bash001.png?raw=true)
+　  
+.bash_profileを開きます。
+```bash
+open ~/.bash_profile
+```
+　  
+テキストエディタが開くので下記を記述します。
+```bash
+if [ -f ~/.bashrc ] ; then
+. ~/.bashrc
+fi
+```
+　  
+設定を反映させます。
+```bash
+source ~/.bash_profile
+```
+　  
+再度 node.js のバージョンを確認します。
+```bash
+node -v
+```
+　  
+うまくいっている場合は、以下のようにバージョン情報が表示されます。
+```bash
+node -v
+v10.7.0
+```
+　  
+以上で、node.js のインストールが完了です。
+　  
+　  
 ## App Center CLI のインストール ## 
 　  
+　  
+では、次に App Center CLI をインストールします。
+これをインストールしないとテストのアップロードなどができません。
 　  
 コマンドラインから、以下のコマンドでインストール
 ```bash
@@ -1398,7 +1564,7 @@ npm install -g appcenter-cli
 ```
 　  
 　  
-権限が無いと怒られて、パッケージのインストールに失敗する場合、下記の手順でnpmのデフォルトディレクトリの権限を変更する
+権限が無いと怒られて、パッケージのインストールに失敗する場合、下記の手順でnpmのデフォルトディレクトリの権限を変更します。
 
 npm ディレクトリのパスを確認
 ```bash
