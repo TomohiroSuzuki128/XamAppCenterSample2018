@@ -1034,7 +1034,8 @@ namespace XamAppCenterSample2018.Droid
 　  
 　  
 # テストプロジェクトの作成 #
-
+　  
+　  
 ## AppInitializer の作成 ## 
 　  
 　  
@@ -1045,7 +1046,7 @@ namespace XamAppCenterSample2018.Droid
   
 ```csharp
 using Xamarin.UITest;
-```  
+```
 　  
 　  
 クラスを定義します。
@@ -1060,7 +1061,7 @@ namespace XamAppCenterSample2018.UITests
 ```
 　  
 　  
-アプリ初期化するメソッドを定義します。
+アプリのインスタンスを初期化、アプリを開始するメソッドを定義します。
 
 ```csharp
 namespace XamAppCenterSample2018.UITests
@@ -1091,15 +1092,132 @@ namespace XamAppCenterSample2018.UITests
 ```
 　  
 　  
-Android のアプリのパッケージ名は以下で設定できます。
+Android のアプリのパッケージ名は以下で確認できます。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test001.png?raw=true)
 　  
 　  
-iOS のアプリの bundle ID は以下で設定できます。
+iOS のアプリの bundle ID は以下で確認できます。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test002.png?raw=true)
 　  
 　  
+これで、AppInitializer は完成です。  
+完成したコードは以下のようになります。
+　  
+　  
+```csharp
+using Xamarin.UITest;
 
+namespace XamAppCenterSample2018.UITests
+{
+    public class AppInitializer
+    {
+        public static IApp StartApp(Platform platform)
+        {
+            if (platform == Platform.Android)
+            {
+                return ConfigureApp
+                    .Android
+                    .EnableLocalScreenshots()
+                    .PreferIdeSettings()
+                    .InstalledApp("<あなたのアプリのパッケージ名>")
+                    .StartApp();
+            }
+
+            return ConfigureApp
+                .iOS
+                .EnableLocalScreenshots()
+                .PreferIdeSettings()
+                .InstalledApp("<あなたのアプリのbundle ID>")
+                .StartApp();
+        }
+    }
+}
+```
+　  
+　  
+## テストコードの作成 ## 
+　  
+　  
+テストコードを作成します。
+テストコードはiOS, Android で共用します。
+　  
+　  
+まずは、using を追加します。  
+  
+```csharp
+using System.Linq;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using Xamarin.UITest;
+```
+　  
+　  
+クラスを定義します。
+  
+```csharp
+namespace XamAppCenterSample2018.UITests
+{
+    [TestFixture(Platform.Android)]
+    [TestFixture(Platform.iOS)]
+    public class Tests
+    {
+    }
+}
+```
+　  
+　  
+フィールドを定義します。
+  
+```csharp
+        IApp app;
+        Platform platform;
+```
+　  
+　  
+コンストラクターを定義します。
+アプリの起動時に iOS, Android を指定するために、プラットフォームを保持しておきます。
+  
+```csharp
+        public Tests(Platform platform)
+        {
+            this.platform = platform;
+        }
+```
+　  
+　  
+各テスト実行前にアプリを開始するメソッドを定義します。
+<code>[SetUp]</code> Attribute を付加するとテストメソッドの実行前に実行されます。
+  
+```csharp
+        [SetUp]
+        public void BeforeEachTest()
+        {
+            app = AppInitializer.StartApp(platform);
+        }
+```
+　  
+　  
+翻訳が成功するテストメソッドを定義します。
+<code>[Test]</code> Attribute を付加するとテストメソッドとして扱われます。
+  
+```csharp
+        [Test]
+        public async void SucceedTranslate()
+        {
+            await Task.Delay(2000);
+            app.Tap(c => c.Marked("inputText"));
+            await Task.Delay(2000);
+            app.EnterText("私は毎日電車に乗って会社に行きます。");
+            await Task.Delay(2000);
+            app.DismissKeyboard();
+            await Task.Delay(2000);
+            app.Tap(c => c.Button("translateButton"));
+            await Task.Delay(4000);
+            var elements = app.Query(c => c.Marked("translatedText"));
+            await Task.Delay(2000);
+            Assert.AreEqual("I go to the office by train every day.", elements.FirstOrDefault().Text);
+        }
+```
 　  
 　  
 # App Center 利用の為の環境構築 #
