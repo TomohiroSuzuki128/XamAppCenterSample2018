@@ -1301,7 +1301,6 @@ namespace XamAppCenterSample2018.UITests
         }
     }
 }
-
 ```
 　  
 　  
@@ -1310,9 +1309,86 @@ namespace XamAppCenterSample2018.UITests
 　  
 　  
 ## node.js のインストール ## 
-この方法についてはWeb上に情報がたくさんあるので、Webの情報を参考に行なってください。
+
+以下のコマンドで node.js がインストールされている確認できます。
+```bash
+node -v 
+```
+　  
+以下のように表示されればインストールされていません。
+```bash
+-bash: node: command not found
+```
 　  
 　  
+### Homebrew（パッケージ管理システム） のインストール ### 
+　  
+インストールコマンドを実行します。
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+　  
+インストールを実行するか確認されるので RETRUN します。
+```bash
+Press RETURN to continue or any other key to abort
+```
+　  
+インストールが終わるまで待ちます。
+以下のように Xcode のコマンドラインツールなどもインストールされますので結構時間がかかります。
+```bash
+Downloading Command Line Tools (macOS High Sierra version 10.13) for Xcode
+Downloaded Command Line Tools (macOS High Sierra version 10.13) for Xcode
+Installing Command Line Tools (macOS High Sierra version 10.13) for Xcode
+```
+　  
+途中でパスワードを聞かれたら入力してください。
+　  
+　  
+下記のように表示されればインストール終了です。
+```bash
+==> Installation successful!
+
+==> Homebrew has enabled anonymous aggregate user behaviour analytics.
+Read the analytics documentation (and how to opt-out) here:
+  https://docs.brew.sh/Analytics.html
+
+==> Next steps:
+- Run `brew help` to get started
+- Further documentation: 
+    https://docs.brew.sh
+```
+　  
+　  
+### nodebrew のインストール ### 
+　  
+次にnodebrewをインストールします。
+　  
+インストールコマンドを実行します。
+```bash
+brew install nodebrew
+```
+　  
+下記のように表示されればインストール終了です。
+```bash
+🍺  /usr/local/Cellar/nodebrew/1.0.0: 8 files, 38.4KB, built in 5 seconds
+```
+　  
+念のため、インストールが正常に完了したか確認します。
+```bash
+nodebrew -v
+```
+　  
+nodebrewのバージョン情報が表示されればインストール完了です。
+　  
+　  
+### node.js のインストール ### 
+　  
+いよいよ node.js をインストールします。
+
+
+
+
+
 ## App Center CLI のインストール ## 
 　  
 　  
