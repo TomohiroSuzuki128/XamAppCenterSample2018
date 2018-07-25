@@ -918,12 +918,13 @@ local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
 画面に表示する文字列リソースを設定します。 
 
 ```xml
-    <TextView
-        android:text="@string/translated"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/translatedTextView" />
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="input">翻訳したい日本語</string>
+    <string name="translate">英語に翻訳する</string>
+    <string name="translated">翻訳された英語</string>
+    <string name="app_name">XamAppCenterSample2018.Droid</string>
+</resources>
 ```
 　  
 　  
@@ -1920,4 +1921,3 @@ appcenter login
 　  
 　  
 お疲れ様でした。これで今回のハンズオンは終了です！！
-
