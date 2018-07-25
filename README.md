@@ -1894,28 +1894,30 @@ appcenter test run uitest --app <App Center のURLに表示されているアプ
  --devices <デバイスのID> --app-path <apkのパス> --test-series "master" --locale "ja_JP"
  --build-dir <UITestがビルドされたディレクトリのパス> --uitest-tools-dir <test-cloud.exeのディレクトリのパス>
 ```
-
+　  
 （例）
 ```bash
 appcenter test run uitest --app "TomohiroSuzuki128/XamAppCenterSample2018Droid" --devices c8376925 --app-path "/Users/hiro128/Projects/XamAppCenterSample2018/src/Droid/bin/Release/com.hiro128777.XamAppCenterSample2018.apk" --test-series "master" --locale "ja_JP" --build-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/UITests/bin/Debug/" --uitest-tools-dir "/Users/hiro128/Projects/XamAppCenterSample2018/src/packages/Xamarin.UITest.2.2.4/tools"
 
 ```  
-
+　  
 コンソールで App Center にログインします（まだログインしていない場合）
 
 ```bash
 appcenter login
 ``` 
-
+　  
 ブラウザに表示された認証コードをコンソールに入力します。
-
+　  
 上で作成した、appcenter test run uitest コマンドを実行します。
-
+　  
 テストが実行されます。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/033.png?raw=true)
 
 テストが成功すれば完了です。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/034.png?raw=true) 
-
-
+　  
+　  
+　  
+お疲れ様でした。これで今回のハンズオンは終了です！！
 
