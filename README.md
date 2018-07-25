@@ -1063,6 +1063,41 @@ namespace XamAppCenterSample2018.Droid
 ```
 　  
 　  
+## Android アプリのデバッグ ##
+　  
+　  
+では、ここで Android のアプリを実機デバッグしてみましょう。
+
+実機をお持ちの方はせっかくですから実機でデバッグしてみましょう。
+お持ちでない方はシミュレータでデバッグしてみましょう。
+　  
+　  
+### シミュレータデバッグ ###
+　  
+XamAppCenterSample2018.Droid > Debug > [シミュレータの機種名] に設定します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug002.png?raw=true)
+　  
+　  
+「デバッグの開始」を実行します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug003.png?raw=true)
+　  
+　  
+アプリが起動し、飜訳が動作すれば成功です。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug004.png?raw=true)
+　  
+　  
+### 実機デバッグ ###
+　  
+実機をお持ちの方は、ここで Android のアプリを実機デバッグしてみましょう。
+　  
+　  
+　  
+　  
+(作成中)
+　  
+　  
+　  
+　  
 # テストプロジェクトの作成 #
 　  
 　  
