@@ -64,6 +64,9 @@ https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
 /src/Start/XamAppCenterSample2018.sln を開きます。
 　  
 　  
+# 共有コードの作成 #
+　  
+　  
 ## API Key の記述 ##   
 　  
 　  
@@ -174,6 +177,9 @@ namespace XamAppCenterSample2018.ViewModels
 }
 ```
 　  
+　  
+　  
+# iOS アプリの作成 #
 　  
 　  
 ## iOS の バンドル識別子 の設定 ## 
@@ -768,6 +774,10 @@ XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します�
 　  
 飜訳が動作すれば成功です。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build005.png?raw=true)
+　  
+　  
+　  
+# Android アプリの作成 #
 　  
 　  
 ## Android の パッケージ名の設定 ## 
