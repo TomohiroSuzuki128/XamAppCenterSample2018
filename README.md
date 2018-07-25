@@ -637,11 +637,41 @@ namespace XamAppCenterSample2018.iOS.Views
 ``` 
 　  
 　  
+## iOS アプリのデバッグ ##
+　  
+　  
 では、ここでiOSのアプリを実機デバッグしてみましょう。
+
+実機をお持ちの方はせっかくですから実機でデバッグしてみましょう。
+お持ちでない方はシミュレータでデバッグしてみましょう。
+
+### シミュレータデバッグ ###
+　  
+　  
+XamAppCenterSample2018.iOS > Debug > [シミュレータの機種名] に設定します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug001.png?raw=true)
+　  
+　  
+「デバッグの開始」を実行します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build003.png?raw=true)
+　  
+　  
+アプリが起動します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build004.png?raw=true)
+　  
+　  
+飜訳が動作すれば成功です。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build005.png?raw=true)
+　  
+　  
+### 実機デバッグ ###
+　  
+　  
+実機をお持ちの方は、ここでiOSのアプリを実機デバッグしてみましょう。
 iOSのアプリを実機デバッグするにはXcodeでダミーアプリを実行する必要があります。
 　  
 　  
-## Xcode でのダミーアプリ実行 ##
+#### Xcode でのダミーアプリ実行 ####
 
 プロビジョニングプロファイルや証明書の紐付けが自動で行われるようにXcodeでSwiftのダミーアプリを作成します。
 
@@ -715,7 +745,7 @@ Signingの部分が自動で修正されて、Provisioning Profile と Signing C
 これで、Xcode でのダミーアプリ実行は完了です。
 　  
 　  
-## iOS アプリのビルド ## 
+#### iOS アプリのビルド #### 
 　  
 /XamAppCenterSample2018/XamAppCenterSample2018.iOS/Info.plist ファイルを開きます。
 　  
@@ -739,7 +769,6 @@ XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します�
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build005.png?raw=true)
 　  
 　  
-
 ## Android の パッケージ名の設定 ## 
 
 Android のアプリのパッケージ名を御自身の固有のものに変更して下さい。
@@ -1303,6 +1332,8 @@ namespace XamAppCenterSample2018.UITests
 }
 ```
 　  
+　  
+
 　  
 # App Center 利用の為の環境構築 #
 では、これから App Center でビルドとテストを行います。
