@@ -64,11 +64,10 @@ https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
 /src/Start/XamAppCenterSample2018.sln を開きます。
 　  
 　  
+　  
 # 共有コードの作成 #
 　  
-　  
 ## API Key の記述 ##   
-　  
 　  
 /XamAppCenterSample2018/Variables.cs ファイルを開きます。  
 
@@ -181,9 +180,7 @@ namespace XamAppCenterSample2018.ViewModels
 　  
 # iOS アプリの作成 #
 　  
-　  
 ## iOS の バンドル識別子 の設定 ## 
-　  
 　  
 iOS のアプリの バンドル識別子 を御自身の固有のものに変更して下さい。
 - アプリケーション名 は XamAppCenterSample2018 にして下さい。
@@ -642,17 +639,14 @@ namespace XamAppCenterSample2018.iOS.Views
 }
 ``` 
 　  
-　  　  
+　  
 　  
 ## iOS アプリのデバッグ ##
-　  
 　  
 では、ここでiOSのアプリを実機デバッグしてみましょう。
 
 実機をお持ちの方はせっかくですから実機でデバッグしてみましょう。  
 お持ちでない方はシミュレータでデバッグしてみましょう。
-　  
-　  
 　  
 ### シミュレータデバッグ ###
 　  
@@ -778,7 +772,6 @@ XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します�
 　  
 　  
 # Android アプリの作成 #
-　  
 　  
 ## Android の パッケージ名の設定 ## 
 
