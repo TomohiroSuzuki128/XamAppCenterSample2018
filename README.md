@@ -636,6 +636,7 @@ namespace XamAppCenterSample2018.iOS.Views
 }
 ``` 
 　  
+　  　  
 　  
 ## iOS アプリのデバッグ ##
 　  
@@ -644,7 +645,9 @@ namespace XamAppCenterSample2018.iOS.Views
 
 実機をお持ちの方はせっかくですから実機でデバッグしてみましょう。
 お持ちでない方はシミュレータでデバッグしてみましょう。
-
+　  
+　  
+　  
 ### シミュレータデバッグ ###
 　  
 　  
