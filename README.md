@@ -650,7 +650,6 @@ namespace XamAppCenterSample2018.iOS.Views
 　  
 ### シミュレータデバッグ ###
 　  
-　  
 XamAppCenterSample2018.iOS > Debug > [シミュレータの機種名] に設定します。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug001.png?raw=true)
 　  
@@ -669,13 +668,12 @@ XamAppCenterSample2018.iOS > Debug > [シミュレータの機種名] に設定�
 　  
 ### 実機デバッグ ###
 　  
-　  
 実機をお持ちの方は、ここでiOSのアプリを実機デバッグしてみましょう。
 iOSのアプリを実機デバッグするにはXcodeでダミーアプリを実行する必要があります。
 　  
 　  
 #### Xcode でのダミーアプリ実行 ####
-
+　  
 プロビジョニングプロファイルや証明書の紐付けが自動で行われるようにXcodeでSwiftのダミーアプリを作成します。
 
 [File]->[New]->[Project]でプロジェクトを作成します。
