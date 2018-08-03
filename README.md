@@ -1157,15 +1157,18 @@ XamAppCenterSample2018.Droid > Debug > [シミュレータの機種名] に設�
 　  
 XamAppCenterSample2018.Droid > Debug > [あなたのAndroidデバイス名] に設定します。
 　  
+　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android008.png?raw=true)
 　  
 　  
 アプリが起動します。
 　  
+　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android009.png?raw=true)
 　  
 　  
 飜訳が動作すれば成功です。
+　  
 　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android010.png?raw=true)
 　  
