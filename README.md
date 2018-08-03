@@ -1099,32 +1099,44 @@ XamAppCenterSample2018.Droid > Debug > [シミュレータの機種名] に設�
 　  
 実機の開発者モードを有効にし、USBデバッグを有効にしないと実機デバッグができないので変更します。
 　  
+　  
 「システム」をタップします。
+　  
 　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android001.png?raw=true)
 　  
 　  
 「端末情報」をタップします。
 　  
+　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android002.png?raw=true)
 　  
 　  
 「ソフトウェア情報」をタップします。
 　  
+　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android003.png?raw=true)
 　  
 　  
-「システム」をタップします。
+「ビルド番号」を連打します。
+　  
 　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android004.png?raw=true)
 　  
 　  
-「システム」をタップします。
+開発者モードが有効になりました。
+　  
 　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android005.png?raw=true)
 　  
 　  
+「開発者向けオプション」をタップ。
+　  
+　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android006.png?raw=true)
+　  
+　  
+「開発者向けオプション」を ON にし、「USBデバッグ」を ON にします。
 　  
 　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android007.png?raw=true)
