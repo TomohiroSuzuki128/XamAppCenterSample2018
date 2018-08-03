@@ -1121,10 +1121,10 @@ XamAppCenterSample2018.Droid > Debug > [シミュレータの機種名] に設�
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android008.png?raw=true)
 　  
 　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android009.jpg?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android009.png?raw=true)
 　  
 　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android0010.jpg?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android0010.png?raw=true)
 　  
 　  
 　  
