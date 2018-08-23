@@ -1628,7 +1628,7 @@ current: v10.7.0
 　  
 以下のコマンドでnodeコマンドへパスをbashrcへ保存します。
 ```bash
-echo 'export PATH=$PATH:/Users/<あなたのhome>/.nodebrew/current/bin' >> ~/.bashrc
+echo 'export PATH=/Users/<あなたのhome>/.nodebrew/current/bin:$PATH' >> ~/.bashrc
 ```
 　  
 node.js のバージョンを認します。
