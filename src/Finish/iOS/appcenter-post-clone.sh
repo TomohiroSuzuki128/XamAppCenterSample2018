@@ -8,7 +8,7 @@ set -e # Exit immediately if a command exits with a non-zero status (failure)
 # Setup
 
 # 1.) The target file
-filename = "$PWD/../XamAppCenterSample2018/Variables.cs"
+filename = "$PWD/../../XamAppCenterSample2018/Variables.cs"
 
 # 2.) The text that will be replaced
 stringToFind="\[ENTER YOUR API KEY\]"
