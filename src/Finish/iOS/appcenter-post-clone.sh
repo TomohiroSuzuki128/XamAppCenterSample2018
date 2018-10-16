@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # Insert the iOS App Center Secret into Variables.cs file in my common project
 
