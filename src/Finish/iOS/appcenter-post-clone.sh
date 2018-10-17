@@ -32,6 +32,11 @@ echo "          Text to replace:" $stringToFind
 echo "**************************************************************************************************"
 echo ""
 
+# for test
+files=""$DIR_NAME/XamAppCenterSample2018/*"
+for filepath in $files; do
+  echo $filepath
+done
 
 # Check if file exists first
 if [ -e $filename]
