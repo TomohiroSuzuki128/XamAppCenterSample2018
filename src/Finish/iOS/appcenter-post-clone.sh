@@ -40,8 +40,7 @@ for filepath in $files; do
 done
 
 # Check if file exists first
-if [ -e $filename]
-then
+if [ -e $filename ]; then
     echo "Target file found"
 else
     echo "Target file($filename) not found. Exiting."
