@@ -122,7 +122,6 @@
     <Compile Include="Views\MainView.cs" />
     <Compile Include="Presenters\ExPresenter.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
-    <Compile Include="Variables.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

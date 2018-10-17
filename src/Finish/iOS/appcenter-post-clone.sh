@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
-# Insert the iOS App Center Secret into Variables.cs file in my common project
+# Insert App Center Secret into Variables.cs file in my common project
 
-set -e # Exit immediately if a command exits with a non-zero status (failure)
+# Exit immediately if a command exits with a non-zero status (failure)
+set -e 
 
 ##################################################
 # Setup
 
 # 1.) The target file
-CURRENT_DIRECTORY=$(cd $(dirname $0); pwd)
-DIR_NAME=$(dirname ${CURRENT_DIRECTORY})
-filename="$DIR_NAME/XamAppCenterSample2018/Variables.cs"
+MyWorkingDir=$(cd $(dirname $0); pwd)
+DirName=$(dirname ${MyWorkingDir})
+filename="$DirName/XamAppCenterSample2018/Variables.cs"
 
 # 2.) The text that will be replaced
 stringToFind="\[ENTER YOUR API KEY\]"
@@ -22,21 +23,17 @@ AppCenterSecret=$API_Key # this is set up in the App Center build config
 
 
 echo ""
-echo "**************************************************************************************************"
-echo "App Center Secret Inserter"
-echo "**************************************************************************************************"
-echo "        Working directory:" $PWD
+echo "##################################################################################################"
+echo "Post clone script"
+echo "  *Insert App Center Secret"
+echo "##################################################################################################"
+echo "        Working directory:" $DirName
 echo "Secret from env variables:" $AppCenterSecret
 echo "              Target file:" $filename
 echo "          Text to replace:" $stringToFind
-echo "**************************************************************************************************"
+echo "##################################################################################################"
 echo ""
 
-# for test
-files="$DIR_NAME/XamAppCenterSample2018/*"
-for filepath in $files; do
-  echo $filepath
-done
 
 # Check if file exists first
 if [ -e $filename ]; then
@@ -83,6 +80,6 @@ then
 fi
 
 echo ""
-echo "**************************************************************************************************"
-echo "Script complete"
-echo "**************************************************************************************************"
+echo "##################################################################################################"
+echo "Post clone script completed"
+echo "##################################################################################################"
