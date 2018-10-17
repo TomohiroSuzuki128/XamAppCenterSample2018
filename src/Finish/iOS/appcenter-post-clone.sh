@@ -43,7 +43,7 @@ if [ -e $filename]
 then
     echo "Target file found"
 else
-    echo "Target file not found. Exiting."
+    echo "Target file($filename) not found. Exiting."
     exit 1 # exit with unspecified error code. Should be obvious why we can't continue the script
 fi
 
