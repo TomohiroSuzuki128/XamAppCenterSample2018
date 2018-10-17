@@ -34,7 +34,7 @@ echo "**************************************************************************
 echo ""
 
 # for test
-files="$DIR_NAME/XamAppCenterSample2018/*"
+files="$DIR_NAME/iOS/*"
 for filepath in $files; do
   echo $filepath
 done
