@@ -10,8 +10,7 @@ set -e # Exit immediately if a command exits with a non-zero status (failure)
 # 1.) The target file
 CURRENT_DIRECTORY=$(cd $(dirname $0); pwd)
 DIR_NAME=$(dirname ${CURRENT_DIRECTORY})
-#filename="$DIR_NAME/XamAppCenterSample2018/Variables.cs"
-filename="$DIR_NAME/iOS/Variables.cs"
+filename="$DIR_NAME/XamAppCenterSample2018/Variables.cs"
 
 # 2.) The text that will be replaced
 stringToFind="\[ENTER YOUR API KEY\]"
@@ -34,7 +33,7 @@ echo "**************************************************************************
 echo ""
 
 # for test
-files="$DIR_NAME/iOS/*"
+files="$DIR_NAME/XamAppCenterSample2018/*"
 for filepath in $files; do
   echo $filepath
 done
