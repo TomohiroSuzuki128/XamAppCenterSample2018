@@ -28,7 +28,7 @@ echo ""
 
 
 # for test
-files="$APPCENTER_OUTPUT_DIRECTORY/*"
+files="$APPCENTER_SOURCE_DIRECTORY/*"
 for filepath in $files
 do
   echo $filepath
