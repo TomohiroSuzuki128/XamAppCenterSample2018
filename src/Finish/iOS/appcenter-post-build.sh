@@ -26,6 +26,11 @@ echo "Test Series: $testSeriesName"
 echo "##################################################################################################"
 echo ""
 
+for pathfile in $APPCENTER_OUTPUT_DIRECTORY
+do
+    echo $pathfile
+done
+
 echo "> Run UI test command"
 # Note: must put a space after each parameter/value pair
 appcenter test run uitest --app $appName --devices $deviceSetName --app-path $APPCENTER_OUTPUT_DIRECTORY/$ipaFileName --test-series $testSeriesName --locale "ja_JP" --build-dir $APPCENTER_SOURCE_DIRECTORY/$uiTestProjectName/bin/Debug --uitest-tools-dir $APPCENTER_SOURCE_DIRECTORY/packages/Xamarin.UITest.*/tools --token $appCenterLoginApiToken 
