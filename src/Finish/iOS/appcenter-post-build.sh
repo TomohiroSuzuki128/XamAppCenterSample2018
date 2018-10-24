@@ -29,7 +29,7 @@ echo ""
 
 # for test
 echo $APPCENTER_SOURCE_DIRECTORY
-files="$APPCENTER_SOURCE_DIRECTORY/src/Finish*"
+files="$APPCENTER_SOURCE_DIRECTORY/src/Finish/*"
 for filepath in $files
 do
   echo $filepath
