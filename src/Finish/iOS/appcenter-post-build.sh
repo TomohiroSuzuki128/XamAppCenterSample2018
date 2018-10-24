@@ -26,9 +26,12 @@ echo "Test Series: $testSeriesName"
 echo "##################################################################################################"
 echo ""
 
-for pathfile in $APPCENTER_OUTPUT_DIRECTORY
+
+# for test
+files="$APPCENTER_OUTPUT_DIRECTORY/*"
+for filepath in $files
 do
-    echo $pathfile
+  echo $filepath
 done
 
 echo "> Run UI test command"
