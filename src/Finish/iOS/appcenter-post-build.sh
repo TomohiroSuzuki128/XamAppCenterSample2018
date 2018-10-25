@@ -37,6 +37,9 @@ do
   echo $filepath
 done
 
+echo "> Build UI test projects"
+find $sourceFileRootDir -regex '.*Test.*\.csproj' -exec msbuild {} \;
+
 echo "> Run UI test command"
 # Note: must put a space after each parameter/value pair
 appcenter test run uitest --app $appName --devices $deviceSetName --app-path $APPCENTER_OUTPUT_DIRECTORY/$ipaFileName --test-series $testSeriesName --locale "ja_JP" --build-dir $sourceFileRootDir/$uiTestProjectName/bin/Debug --uitest-tools-dir $sourceFileRootDir/packages/Xamarin.UITest.*/tools --token $appCenterLoginApiToken 
