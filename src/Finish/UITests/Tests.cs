@@ -30,15 +30,21 @@ namespace XamAppCenterSample2018.UITests
         public async void SucceedTranslate()
         {
             await Task.Delay(2000);
+            app.Screenshot("App launched");
+            await Task.Delay(2000);
             app.Tap(c => c.Marked("inputText"));
             await Task.Delay(2000);
             app.EnterText("私は毎日電車に乗って会社に行きます。");
+            await Task.Delay(2000);
+            app.Screenshot("Japanese text entered");
             await Task.Delay(2000);
             app.DismissKeyboard();
             await Task.Delay(2000);
             app.Tap(c => c.Button("translateButton"));
             await Task.Delay(4000);
             var elements = app.Query(c => c.Marked("translatedText"));
+            await Task.Delay(2000);
+            app.Screenshot("Japanese text translated");
             await Task.Delay(2000);
             Assert.AreEqual("I go to the office by train every day.", elements.FirstOrDefault().Text);
         }
@@ -47,11 +53,15 @@ namespace XamAppCenterSample2018.UITests
         public async void FailTranslate()
         {
             await Task.Delay(2000);
+            app.Screenshot("App launched");
+            await Task.Delay(2000);
             app.Tap(c => c.Button("translateButton"));
             await Task.Delay(4000);
             var elements = app.Query(c => c.Marked("translatedText"));
             await Task.Delay(2000);
-            StringAssert.Contains("エラーコード： 400005", elements.FirstOrDefault().Text);
+            app.Screenshot("None message displayed");
+            await Task.Delay(2000);
+            StringAssert.Contains(string.Empty, elements.FirstOrDefault().Text);
         }
     }
 }

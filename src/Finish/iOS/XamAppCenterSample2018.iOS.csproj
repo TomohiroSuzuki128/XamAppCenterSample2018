@@ -115,6 +115,7 @@
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
     <None Include="appcenter-post-clone.sh" />
+    <None Include="appcenter-post-build.sh" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
