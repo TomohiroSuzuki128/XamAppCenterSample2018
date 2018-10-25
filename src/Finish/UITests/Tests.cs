@@ -59,9 +59,9 @@ namespace XamAppCenterSample2018.UITests
             await Task.Delay(4000);
             var elements = app.Query(c => c.Marked("translatedText"));
             await Task.Delay(2000);
-            app.Screenshot("Error message displayed");
+            app.Screenshot("None message displayed");
             await Task.Delay(2000);
-            StringAssert.Contains("エラーコード： 400005", elements.FirstOrDefault().Text);
+            StringAssert.Contains(string.Empty, elements.FirstOrDefault().Text);
         }
     }
 }
