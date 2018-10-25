@@ -30,7 +30,8 @@ echo ""
 
 # for test
 echo $APPCENTER_SOURCE_DIRECTORY
-files="$APPCENTER_SOURCE_DIRECTORY/src/Finish/*"
+echo ""
+files="$APPCENTER_SOURCE_DIRECTORY/src/Finish/UITests/*"
 for filepath in $files
 do
   echo $filepath
