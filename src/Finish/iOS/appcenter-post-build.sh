@@ -14,7 +14,7 @@ deviceSetName="TomohiroSuzuki128/my-devices"
 ipaFileName="XamAppCenterSample2018.iOS.ipa"
 sourceFileRootDir="$APPCENTER_SOURCE_DIRECTORY/src/Finish"
 uiTestProjectName="UITests"
-testSeriesName="master"
+testSeriesName="all-tests"
 ##################################################
 
 echo "##################################################################################################"
