@@ -45,6 +45,6 @@ echo "> Run UI test command"
 appcenter test run uitest --app $appName --devices $deviceSetName --app-path $APPCENTER_OUTPUT_DIRECTORY/$ipaFileName --test-series $testSeriesName --locale "ja_JP" --build-dir $sourceFileRootDir/$uiTestProjectName/bin/Debug --uitest-tools-dir $sourceFileRootDir/packages/Xamarin.UITest.*/tools --token $appCenterLoginApiToken 
 
 echo ""
-echo "**************************************************************************************************"
+echo "##################################################################################################"
 echo "Post Build Script complete"
-echo "**************************************************************************************************"
+echo "##################################################################################################"
