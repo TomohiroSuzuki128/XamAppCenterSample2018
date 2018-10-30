@@ -8,7 +8,7 @@ set -e
 ##################################################
 # variables
 
-appCenterLoginApiToken=$AppCenterLoginForAutomatedUITests # this comes from the build environment variables
+appCenterLoginApiToken=$AppCenterLoginToken # this comes from the build environment variables
 appName="TomohiroSuzuki128/XamAppCenterSample2018iOS"
 deviceSetName="TomohiroSuzuki128/my-devices"
 ipaFileName="XamAppCenterSample2018.iOS.ipa"
@@ -26,16 +26,6 @@ echo " Device Set: $deviceSetName"
 echo "Test Series: $testSeriesName"
 echo "##################################################################################################"
 echo ""
-
-
-# for test
-echo $APPCENTER_SOURCE_DIRECTORY
-echo ""
-files="$APPCENTER_SOURCE_DIRECTORY/src/Finish/UITests/*"
-for filepath in $files
-do
-  echo $filepath
-done
 
 echo "> Build UI test projects"
 find $sourceFileRootDir -regex '.*Test.*\.csproj' -exec msbuild {} \;
