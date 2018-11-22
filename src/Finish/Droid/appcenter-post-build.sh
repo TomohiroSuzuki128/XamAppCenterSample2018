@@ -32,7 +32,7 @@ echo ""
 files="$APPCENTER_OUTPUT_DIRECTORY/*"
 for filepath in $files
  do
- echo $filepath
+  echo $filepath
  done
 
 
