@@ -11,7 +11,7 @@ set -e
 appCenterLoginApiToken=$AppCenterLoginToken # this comes from the build environment variables
 appName="TomohiroSuzuki128/XamAppCenterSample2018iOS"
 deviceSetName="TomohiroSuzuki128/my-devices"
-ipaFileName="XamAppCenterSample2018.iOS.ipa"
+publishedAppFileName="XamAppCenterSample2018.iOS.ipa"
 sourceFileRootDir="$APPCENTER_SOURCE_DIRECTORY/src/Finish"
 uiTestProjectName="UITests"
 testSeriesName="all-tests"
@@ -32,7 +32,7 @@ find $sourceFileRootDir -regex '.*Test.*\.csproj' -exec msbuild {} \;
 
 echo "> Run UI test command"
 # Note: must put a space after each parameter/value pair
-appcenter test run uitest --app $appName --devices $deviceSetName --app-path $APPCENTER_OUTPUT_DIRECTORY/$ipaFileName --test-series $testSeriesName --locale "ja_JP" --build-dir $sourceFileRootDir/$uiTestProjectName/bin/Debug --uitest-tools-dir $sourceFileRootDir/packages/Xamarin.UITest.*/tools --token $appCenterLoginApiToken 
+appcenter test run uitest --app $appName --devices $deviceSetName --app-path $APPCENTER_OUTPUT_DIRECTORY/$publishedAppFileName --test-series $testSeriesName --locale "ja_JP" --build-dir $sourceFileRootDir/$uiTestProjectName/bin/Debug --uitest-tools-dir $sourceFileRootDir/packages/Xamarin.UITest.*/tools --token $appCenterLoginApiToken 
 
 echo ""
 echo "##################################################################################################"
