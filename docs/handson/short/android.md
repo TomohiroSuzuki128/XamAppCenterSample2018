@@ -2,6 +2,7 @@
 　  
 App Center で Xamarin.Android アプリの自動ビルド、UIテストが試せる ハンズオンです。
 　  
+　  
 Cognitive Services の Translator Text API を利用して、入力した日本語を英語に翻訳してくれるサンプルアプリを題材としています。
 　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android.png?raw=true)
@@ -111,7 +112,7 @@ Visual Studio App Center のビルド設定を開きます。
 /src/Finish/XamAppCenterSample2018/Variables.cs を確認してください。
 　  
 　  
-** /src/Finish/XamAppCenterSample2018/Variables.cs **
+**/src/Finish/XamAppCenterSample2018/Variables.cs**
 ```csharp
 using System;
 
@@ -136,7 +137,7 @@ App Center には ビルドする`cspoj`と同じ階層に、`appcenter-post-clo
 よって、`appcenter-post-clone.sh`に`[ENTER YOUR API KEY]`を本物のキーに置き換えを行う処理を書きます。
 　  
 　  
-** /src/Finish/Droid/appcenter-post-clone.sh **
+**/src/Finish/Droid/appcenter-post-clone.sh**
 ```sh
 #!/usr/bin/env bash
 
