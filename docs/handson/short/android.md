@@ -14,12 +14,10 @@ Cognitive Services の Translator Text API を利用して、入力した日本�
 　  
 # 必要環境 #
 　  
-## Android 自動ビルド ##
-- Visual Studio for Mac がインストールされたMac
-- Azure のアカウント
-- App Center のアカウント
-　  
-## Android UIテスト ##
+- Visual Studio for Mac 最新版のインストール
+- 有効な Github のアカウント
+- 有効な Azure のアカウント
+- 有効な App Center のアカウント（テストの無料試用が終了している場合、11,088円を Microsoft に支払う必要があります）
 - （必須ではないが確認用にあると望ましい） Android 7.0 以上の Android 実機
 　  
 　  
@@ -370,6 +368,8 @@ App Center のビルド設定を開きます。
 Visual Studio App Center には ビルドする`cspoj`と同じ階層に、`appcenter-post-build.sh`という名前でシェルスクリプトを配置しておくと、自動認識し build 後に自動実行してくれる機能があります。
 よって、`appcenter-post-build.sh`に、自動実機UIテストを実行する処理を書きます。
 　  
+ファイルはすでに準備されていますので、設定値を書き換えてください。
+　  
 　  
 **/src/Finish/Droid/appcenter-post-build.sh**
 ```sh
@@ -384,8 +384,8 @@ set -e
 # variables
 
 appCenterLoginApiToken=$AppCenterLoginToken # this comes from the build environment variables
-appName="TomohiroSuzuki128/XamAppCenterSample2018Droid"
-deviceSetName="TomohiroSuzuki128/my-devices-android"
+appName="TomohiroSuzuki128/XamAppCenterSample2018Droid" # 自分のアプリ名に書き換える
+deviceSetName="TomohiroSuzuki128/my-devices-android" # 自分のデバイスセット名に書き換える
 publishedAppFileName="com.hiro128777.XamAppCenterSample2018.apk"
 sourceFileRootDir="$APPCENTER_SOURCE_DIRECTORY/src/Finish"
 uiTestProjectName="UITests"
@@ -436,6 +436,7 @@ echo "##########################################################################
 - 「指定したファイルが見つからない」エラーが発生すること
 - 環境変数の中身がよくわからないこと
 です。
+
 　  
 　  
 よってスクリプトを自作するときには、下記のように環境変数やディレクトリの中身をコンソールに表示させながらスクリプトを書くことで効率よくデバッグできます。
