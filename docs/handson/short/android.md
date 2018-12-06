@@ -355,9 +355,9 @@ App Center のビルド設定を開きます。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android028.png?raw=true)
 　  
 　  
-keystore ファイルをアップします。
-key alias, Key password は「新しい証明書を作成」画面で入力したものを入力します。
-Keystore パスワードは Key password と同じものを入力してください。
+`keystore` ファイルをアップします。
+`key alias`, `Key password` は「新しい証明書を作成」画面で入力したものを入力します。
+`Keystore` パスワードは `Key password` と同じものを入力してください。
 入力したら保存します。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android029.png?raw=true)
 　  
