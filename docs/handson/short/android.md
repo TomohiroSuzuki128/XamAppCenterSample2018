@@ -97,7 +97,7 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
 　  
 　  
 Visual Studio App Center のビルド設定を開きます。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/andtoid001.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android001.png?raw=true)
 　  
 　  
 `Environment variables` に環境変数名とキーの値を登録します。
