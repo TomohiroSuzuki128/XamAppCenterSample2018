@@ -336,7 +336,9 @@ App Center で iOS 実機での自動UIテストを行うには、証明書と P
 Apple Developer Program のサイトで証明書（.cer）、Provisioning Profile（.mobileprovision） を作成し、ローカルの Mac の キーチェーンアクセス で 証明書（.p12） を作成します。
 　  
 　  
-この方法についてはWeb上に情報がたくさんあるので、以下のリンクのWebの情報を参考に行なってください。
+この方法についてはWeb上に情報がたくさんあるので、以下のセクションのリンクのWebの情報を参考に行なってください。
+　  
+　  
 　  
 ### 証明書を準備します。 ###
 　  
@@ -348,6 +350,7 @@ Apple Developer Program のサイトで証明書（.cer）、Provisioning Profil
 　  
 　  
 [Provisioning Profile作成方法](https://i-app-tec.com/ios/app-release.html#2)
+　  
 　  
 　  
 作成した Provisioning Profile（.mobileprovision）、証明書（.p12）を保管しておきます。
