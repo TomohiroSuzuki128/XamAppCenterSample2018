@@ -110,7 +110,7 @@ Visual Studio App Center のビルド設定を開きます。
 /src/Finish/XamAppCenterSample2018/Variables.cs を確認してください。
 　  
 　  
-/src/Finish/XamAppCenterSample2018/Variables.cs
+** /src/Finish/XamAppCenterSample2018/Variables.cs **
 ```csharp
 using System;
 
@@ -135,9 +135,7 @@ App Center には ビルドする`cspoj`と同じ階層に、`appcenter-post-clo
 よって、`appcenter-post-clone.sh`に`[ENTER YOUR API KEY]`を本物のキーに置き換えを行う処理を書きます。
 　  
 　  
-/src/Finish/Droid/appcenter-post-clone.sh
-　  
-　  
+** /src/Finish/Droid/appcenter-post-clone.sh **
 ```sh
 #!/usr/bin/env bash
 
