@@ -54,6 +54,16 @@ https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
 にアクセスしてリポジトリを Fork してください。
 　  
 　  
+## Android の パッケージ名の設定 ## 
+　  
+　  
+ソリューションを開き、Android のアプリのパッケージ名を御自身の固有のものに変更して下さい。
+- アプリケーション名 は XamAppCenterSample2018 にして下さい。
+　  
+　  
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test001.png?raw=true)
+　  
+　  
 ## Visual Studio App Center に App を作成する ## 
 　  
 　  
