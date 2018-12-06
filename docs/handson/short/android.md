@@ -1,4 +1,4 @@
-# Xamarin.Android App Center ハンズオン テキスト#
+# Xamarin.Android App Center ハンズオン テキスト #
 　  
 　  
 # はじめに #
