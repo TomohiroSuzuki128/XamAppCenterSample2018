@@ -1,4 +1,8 @@
+# Xamarin.Android App Center ハンズオン テキスト#
+　  
+　  
 # はじめに #
+　  
 　  
 App Center で Xamarin.Android アプリの自動ビルド、UIテストが試せる ハンズオンです。
 　  
