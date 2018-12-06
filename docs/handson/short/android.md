@@ -246,5 +246,256 @@ echo "##########################################################################
 　  
 　  
 以上で、Visual Studio App Center で、秘匿情報をビルド時にインサートする手順は完了です。
+　  
+　  
+　  
+　  
+　  
+　  
+# Visual Studio App Center で、自動ビルド後に Android の自動実機UIテストを実行する #
+　  
+　  
+次は、いよいよ自動ビルド後に Android の自動実機UIテストを実行する設定を進めていきます。
+　  
+　  
+** Visual Studio App Center のテスト設定に実機UIテストを走らせるデバイスの組み合わせのセットを登録します
+　  
+　  
+Visual Studio App Center では、1回のテストで、複数の実機の自動UIテストを走らせることができますので、テストを走らせる実機を選択して登録しておきます。
+　  
+　  
+Visual Studio App Center のテスト設定のデバイスセット設定を開きます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android011.png?raw=true)
+　  
+　  
+`Set name` を設定し、テストを実行するデバイスにチェックを入れ `New device set` で保存します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android012.png?raw=true)
+　  
+　  
+Device set が登録されていることを確認します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android013.png?raw=true)
+　  
+　  
+　  
+　  
+## Visual Studio App Center にログインするキーを準備します。 ##
+　  
+　  
+自動実行されるシェルスクリプトが自動テストを実行するときに、事前に取得しておいたキーを使って App Center にログインします。そのキーをスクリプトから利用できるように環境変数に登録しておきます。
+　  
+　  
+「Account settings」を開きます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android014.png?raw=true)
+　  
+　  
+「New API token」を開きます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android015.png?raw=true)
+　  
+　  
+APIの利用目的の説明とアクセス権を設定し保存します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android016.png?raw=true)
+　  
+　  
+キーが表示されるのでコピーしメモ（保管）しておきます。キーは画面を閉じると2度と表示されないのでご注意ください。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android017.png?raw=true)
+　  
+　  
+キーが登録されていることを確認します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android018.png?raw=true)
+　  
+　  
+次にビルド設定を開きます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android019.png?raw=true)
+　  
+　  
+環境変数にキーを設定して、保存します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android020.png?raw=true)
+　  
+　  
+## keystore ファイルを準備します。 ##
+　  
+　  
+実機での自動UIテストを行うには keystore が必要になりますので作成します。
+　  
+　  
+Visual Studio for Mac で、Android のプロジェクトを Release に設定して、ビルド ->  発行のためのアーカイブ を押下します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android021.png?raw=true)
+　  
+　  
+「署名と配布」を押下します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android022.png?raw=true)
+　  
+　  
+アドホックを選択して「次へ」を押下します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android023.png?raw=true)
+　  
+　  
+「キーの新規作成」を押下します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android024.png?raw=true)
+　  
+　  
+項目を入力し、「OK」を押下します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android025.png?raw=true)
+　  
+　  
+エイリアス名を右クリックし、「エイリアス情報を表示」を押下します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android026.png?raw=true)
+　  
+　  
+keystore ファイルの場所が表示されるので、ファイルを取得します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android027.png?raw=true)
+　  
+　  
+App Center のビルド設定を開きます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android028.png?raw=true)
+　  
+　  
+keystore ファイルをアップします。
+key alias, Key password は「新しい証明書を作成」画面で入力したものを入力します。
+Keystore パスワードは Key password と同じものを入力してください。
+入力したら保存します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android029.png?raw=true)
+　  
+　  
+　  
+　  
+## build 後に自動実行されるシェルスクリプトを準備します。 ##
+　  
+　  
+Visual Studio App Center には ビルドする`cspoj`と同じ階層に、`appcenter-post-build.sh`という名前でシェルスクリプトを配置しておくと、自動認識し build 後に自動実行してくれる機能があります。
+よって、`appcenter-post-build.sh`に、自動実機UIテストを実行する処理を書きます。
+　  
+　  
+**/src/Finish/Droid/appcenter-post-build.sh**
+```sh
+#!/usr/bin/env bash
+
+# Post Build Script
+
+# Exit immediately if a command exits with a non-zero status (failure)
+set -e 
+
+##################################################
+# variables
+
+appCenterLoginApiToken=$AppCenterLoginToken # this comes from the build environment variables
+appName="TomohiroSuzuki128/XamAppCenterSample2018Droid"
+deviceSetName="TomohiroSuzuki128/my-devices-android"
+publishedAppFileName="com.hiro128777.XamAppCenterSample2018.apk"
+sourceFileRootDir="$APPCENTER_SOURCE_DIRECTORY/src/Finish"
+uiTestProjectName="UITests"
+testSeriesName="all-tests-android"
+##################################################
+
+echo "##################################################################################################"
+echo "Post Build Script"
+echo "##################################################################################################"
+echo "Starting Xamarin.UITest"
+echo "   App Name: $appName"
+echo " Device Set: $deviceSetName"
+echo "Test Series: $testSeriesName"
+echo "##################################################################################################"
+echo ""
+
+echo "> Build UI test projects"
+find $sourceFileRootDir -regex '.*Test.*\.csproj' -exec msbuild {} \;
+
+echo "> Run UI test command"
+# Note: must put a space after each parameter/value pair
+appcenter test run uitest --app $appName --devices $deviceSetName --app-path $APPCENTER_OUTPUT_DIRECTORY/$publishedAppFileName --test-series $testSeriesName --locale "ja_JP" --build-dir $sourceFileRootDir/$uiTestProjectName/bin/Debug --uitest-tools-dir $sourceFileRootDir/packages/Xamarin.UITest.*/tools --token $appCenterLoginApiToken 
+
+echo ""
+echo "##################################################################################################"
+echo "Post Build Script complete"
+echo "##################################################################################################"
+```
+　  
+　  
+このスクリプトがやっていることは、
+- UIテストプロジェクトをビルドする。
+- App Center に、自動UIテストのコマンドを発行し、実行させる。
+の2つです。
+　  
+　  
+このスクリプトを含んだリポジトリをプッシュすると、以下のように、App Center 側で認識されます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android030.png?raw=true)
+　  
+　  
+　  
+　  
+## スクリプトのデバッグ方法。 ##
+　  
+　  
+このようなスクリプトを自作するときに一番困るのが、
+- 「指定したファイルが見つからない」エラーが発生すること
+- 環境変数の中身がよくわからないこと
+です。
+　  
+　  
+よってスクリプトを自作するときには、下記のように環境変数やディレクトリの中身をコンソールに表示させながらスクリプトを書くことで効率よくデバッグできます。
+　  
+　  
+```sh
+# for test
+echo $APPCENTER_SOURCE_DIRECTORY
+echo ""
+files="$APPCENTER_SOURCE_DIRECTORY/src/Finish/UITests/*"
+for filepath in $files
+do
+  echo $filepath
+done
+```
+　  
+　  
+　  
+　  
+## ビルドを実行し、テスト結果を確認してテストが正しく実行されていることを確認します。 ##
+　  
+　  
+正しく実行されていれば、以下のようにテスト結果が確認できます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android031.png?raw=true)
+　  
+　  
+また、テストコード内に以下のように、`app.Screenshot("<スクリーンショット名>")`と記述することで、スクーンショットが自動で保存されます。
+　  
+　  
+```csharp
+[Test]
+public async void SucceedTranslate()
+{
+    await Task.Delay(2000);
+    app.Screenshot("App launched");
+    await Task.Delay(2000);
+    app.Tap(c => c.Marked("inputText"));
+    await Task.Delay(2000);
+    app.EnterText("私は毎日電車に乗って会社に行きます。");
+    await Task.Delay(2000);
+    app.Screenshot("Japanese text entered");
+    await Task.Delay(2000);
+    app.DismissKeyboard();
+    await Task.Delay(2000);
+    app.Tap(c => c.Button("translateButton"));
+    await Task.Delay(4000);
+    var elements = app.Query(c => c.Marked("translatedText"));
+    await Task.Delay(2000);
+    app.Screenshot("Japanese text translated");
+    await Task.Delay(2000);
+    Assert.AreEqual("I go to the office by train every day.", elements.FirstOrDefault().Text);
+}
+```
+　  
+　  
+保存されたスクリンショットは以下の手順で確認できます。
+　  
+　  
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android032.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android033.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android034.png?raw=true)
+　  
+　  
+これで、リポジトリにプッシュすると自動ビルドが走り、自動実機UIテストが実行されるようになりました！！
+　  
+　  
+お疲れ様でした。これでハンズオンは終了です。
 
 
