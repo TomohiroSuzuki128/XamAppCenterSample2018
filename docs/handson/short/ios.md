@@ -327,23 +327,45 @@ APIの利用目的の説明とアクセス権を設定し保存します。
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/ios020.png?raw=true)
 　  
 　  
-## 証明書とプロビジョニングファイルを準備します。 ##
+## 証明書と Provisioning Profile を準備します。 ##
 　  
 　  
-iOS で App Center 内で実機での自動UIテストを行うには、証明書とプロビジョニングファイルが必要になりますので準備します。
+App Center で iOS 実機での自動UIテストを行うには、証明書と Provisioning Profile が必要になりますので準備します。
+　  
+　  
+Apple Developer Program のサイトで証明書（.cer）、Provisioning Profile（.mobileprovision） を作成し、ローカルの Mac の キーチェーンアクセス で 証明書（.p12） を作成します。
+　  
+　  
+この方法についてはWeb上に情報がたくさんあるので、以下のリンクのWebの情報を参考に行なってください。
 　  
 ### 証明書を準備します。 ###
 　  
 　  
-
-Apple Developer Program のサイトで証明書（.cer）、Provisioning Profile（.mobileprovision） を作成し、ローカルの Mac の キーチェーンアクセス で 証明書（.p12） を作成します。
-この方法についてはWeb上に情報がたくさんあるので、Webの情報を参考に行なってください。
+[証明書作成方法](https://i-app-tec.com/ios/app-release.html#1)
+　  
+　  
+### Provisioning Profile を準備します。 ###
+　  
+　  
+[Provisioning Profile作成方法](https://i-app-tec.com/ios/app-release.html#2)
 　  
 　  
 作成した Provisioning Profile（.mobileprovision）、証明書（.p12）を保管しておきます。
 　  
-### プロビジョニングファイルを準備します。 ###
 　  
+## 作成した Provisioning Profile（.mobileprovision）、証明書（.p12）を App Center にアップロードします ##
+　  
+　  
+ビルド設定を開きます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/ios019.png?raw=true)
+　  
+　  
+`Build type` を `Device build` に変更します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/ios040.png?raw=true)
+　  
+　  
+作成した Provisioning Profile（.mobileprovision）、証明書（.p12）を アップロードし、保存します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/ios041.png?raw=true)  
 　  
 　  
 ## build 後に自動実行されるシェルスクリプトを準備します。 ##
