@@ -101,9 +101,7 @@ Visual Studio App Center のビルド設定を開きます。
 　  
 　  
 `Environment variables` に環境変数名とキーの値を登録します。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/andtoid002.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android002.png?raw=true)
 　  
 　  
 ## ソースコード上に置き換え用の目印となる文字列を準備します。 ##
@@ -236,14 +234,14 @@ echo "##########################################################################
 　  
 　  
 このスクリプトを含んだリポジトリをプッシュすると、以下のように、App Center 側で認識されます。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/andtoid003.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android003.png?raw=true)
 　  
 　  
 ## ビルドを実行し、ログを確認してシェルスクリプトが正しく実行されていることを確認。 ##
 　  
 　  
 正しく実行されていれば、以下のようにログで確認できます。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/andtoid004.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android004.png?raw=true)
 　  
 　  
 以上で、Visual Studio App Center で、秘匿情報をビルド時にインサートする手順は完了です。
