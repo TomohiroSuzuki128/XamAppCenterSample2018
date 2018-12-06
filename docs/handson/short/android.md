@@ -3,6 +3,7 @@
 App Center で Xamarin.Android アプリの自動ビルド、UIテストが試せる ハンズオンです。
 　  
 Cognitive Services の Translator Text API を利用して、入力した日本語を英語に翻訳してくれるサンプルアプリを題材としています。
+　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android.png?raw=true)
 　  
 　  
@@ -232,6 +233,7 @@ echo "##########################################################################
 　  
 　  
 このスクリプトを含んだリポジトリをプッシュすると、以下のように、App Center 側で認識されます。
+　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/docs/handson/short/images/android003.png?raw=true)
 　  
 　  
