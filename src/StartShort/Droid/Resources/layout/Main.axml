@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="@string/input"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputTextView" />
+    <EditText
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lines="7"
+        local:MvxBind="Text InputText"
+        android:id="@+id/inputText" />
+    <Button
+        android:id="@+id/translateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxBind="Click TranslateCommand"
+        android:text="@string/translate" />
+    <TextView
+        android:text="@string/translated"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/translatedTextView" />
+    <TextView
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lines="7"
+        local:MvxBind="Text TranslatedText"
+        android:id="@+id/translatedText" />
+</LinearLayout>
