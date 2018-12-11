@@ -54,12 +54,18 @@ https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
 にアクセスしてリポジトリを Fork してください。
 　  
 　  
+## ソリューションを開きます。 ##
+　  
+　  
+/src/StartShort/XamAppCenterSample2018.sln を開いてください。
+　  
+　  
 ## Android の パッケージ名の設定 ## 
 　  
 　  
-ソリューションを開き、Android のアプリのパッケージ名を御自身の固有のものに変更して下さい。
+Android プロジェクト を右クリックし、オプションを開き、さらに、Android アプリケーション 設定画面を開いて、Android のアプリのパッケージ名を御自身の固有のものに変更して下さい。
 - アプリケーション名 は XamAppCenterSample2018 にして下さい。
-　  
+- パッケージ名の `hiro127777` の部分は全世界で固有となるような文字列にして下さい。　  
 　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test001.png?raw=true)
 　  
