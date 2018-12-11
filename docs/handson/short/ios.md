@@ -65,7 +65,7 @@ https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
 ## iOS の バンドル識別子 の設定 ## 
 　  
 iOS プロジェクトの `Info.plist` を開き、iOS のアプリの バンドル識別子 を御自身の固有のものに変更して下さい。
-- アプリケーション名 は XamAppCenterSample2018 にして下さい。
+- アプリケーション名 は `XamAppCenterSample2018` にして下さい。
 - バンドル識別子の Organization Identifier の部分（hiro127777）は全世界で固有となるような文字列にして下さい。
 
 　  
