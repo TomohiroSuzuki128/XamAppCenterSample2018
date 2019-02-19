@@ -60,21 +60,32 @@ https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
 　  
 　  
 /src/Start/XamAppCenterSample2018.sln を開いてください。
-　  
-　  
+  
+  
 ## iOS の バンドル識別子 の設定 ## 
-　  
+  
 iOS プロジェクトの `Info.plist` を開き、iOS のアプリの バンドル識別子 を御自身の固有のものに変更して下さい。
 - アプリケーション名 は `XamAppCenterSample2018` にして下さい。
 - バンドル識別子の Organization Identifier の部分（hiro127777）は全世界で固有となるような文字列にして下さい。
-　  
-　  
+  
+  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test002.png?raw=true)
-　  
-　  
+  
+  
 # 共有コードの作成 #
+  
+  
+## API Key の記述 ##   
 　  
-　  
+/XamAppCenterSample2018/Variables.cs ファイルを開きます。  
+
+先ほど作成した API の Key を記述します。
+
+注意：API Key を記述したソースをパブリックなリポジトリにコミットしないで下さい。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/api_key001.png?raw=true)
+  
+  
 ## ViewModel の作成 ## 
 
 まず、ViewModel を作成しましょう。

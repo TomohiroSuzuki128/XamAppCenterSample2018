@@ -1,26 +1,24 @@
-# Xamarin.iOS App Center ハンズオン テキスト 完全版 #
+# Xamarin.Android App Center ハンズオン テキスト #
 　  
 　  
 # はじめに #
 　  
 　  
-App Center で Xamarin.iOS アプリの自動ビルド、UIテストが試せる ハンズオンです。
+App Center で Xamarin.Android アプリの自動ビルド、UIテストが試せる ハンズオンです。
 　  
 　  
 Cognitive Services の Translator Text API を利用して、入力した日本語を英語に翻訳してくれるサンプルアプリを題材としています。
 　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/iPhone.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android.png?raw=true)
 　  
 　  
 # 必要環境 #
 　  
 - Visual Studio for Mac 最新版のインストール
-- Xcode 最新版のインストール
 - 有効な Github のアカウント
 - 有効な Azure のアカウント
 - 有効な App Center のアカウント（テストの無料試用が終了している場合、11,088円を Microsoft に支払う必要があります）
-- 有効な Apple のディベロッパー登録
-- iOS11 以上のインストールされた iPhone の実機
+- （必須ではないが確認用にあると望ましい） Android 7.0 以上の Android 実機
 　  
 　  
 # アプリの準備 #
@@ -60,21 +58,32 @@ https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
 　  
 　  
 /src/Start/XamAppCenterSample2018.sln を開いてください。
-　  
-　  
-## iOS の バンドル識別子 の設定 ## 
-　  
-iOS プロジェクトの `Info.plist` を開き、iOS のアプリの バンドル識別子 を御自身の固有のものに変更して下さい。
-- アプリケーション名 は `XamAppCenterSample2018` にして下さい。
-- バンドル識別子の Organization Identifier の部分（hiro127777）は全世界で固有となるような文字列にして下さい。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test002.png?raw=true)
-　  
-　  
+  
+  
+## Android の パッケージ名の設定 ## 
+
+Android のアプリのパッケージ名を御自身の固有のものに変更して下さい。
+- アプリケーション名 は XamAppCenterSample2018 にして下さい。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test001.png?raw=true)
+  
+  
+  
+  
 # 共有コードの作成 #
+  
+  
+## API Key の記述 ##   
 　  
-　  
+/XamAppCenterSample2018/Variables.cs ファイルを開きます。  
+
+先ほど作成した API の Key を記述します。
+
+注意：API Key を記述したソースをパブリックなリポジトリにコミットしないで下さい。
+
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/api_key001.png?raw=true)
+  
+  
 ## ViewModel の作成 ## 
 
 まず、ViewModel を作成しましょう。
@@ -172,587 +181,409 @@ namespace XamAppCenterSample2018.ViewModels
     }
 }
 ```
-　  
-　  
-## iOS の View の作成 ## 
-　  
-iOS の View を作成します。  
+  
+  
+  
+  
+## Android の View の作成 ## 
 
-storyborad、xib は、IDEによって更新部分以外も勝手にコードが更新され、 Git との相性が悪いので、今回はコードで UI を記述します。  
+/Droid/Resources/layout/Main.axml を開きます。
 
-/OS/Views/MainView.cs ファイルを作成します。  
+Android の View を作成します。
+Android の axml は、Git との相性も問題がないので、そのまま axml に記述します。
+
+「翻訳したい日本語ラベル」inputTextView を追加します。
+
+```xml
+    <TextView
+        android:text="@string/input"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputTextView" />
+```
+　  
+　  
+「翻訳したい日本語の入力欄」inputText を追加します。
+また、Binding も記述します。
+
+local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
+というフォーマットで記述します。
+
+```xml
+    <EditText
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lines="7"
+        local:MvxBind="Text InputText"
+        android:id="@+id/inputText" />
+```
+　  
+　  
+「英語に翻訳するボタン」translateButton を追加します。
+また、Binding も記述します。
+
+```xml
+    <Button
+        android:id="@+id/translateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxBind="Click TranslateCommand"
+        android:text="@string/translate" />
+```
+　  
+　  
+「翻訳された英語のラベル」translatedTextView を追加します。
+
+```xml
+    <TextView
+        android:text="@string/translated"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/translatedTextView" />
+```
+　  
+　  
+「翻訳された英語の表示欄」translatedText を追加します。
+また、Binding も記述します。
+
+```xml
+    <TextView
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lines="7"
+        local:MvxBind="Text TranslatedText"
+        android:id="@+id/translatedText" />
+```
+　  
+　  
+これで、Android の View は完成です。
+完成した axml は以下のようになります。
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="@string/input"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputTextView" />
+    <EditText
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lines="7"
+        local:MvxBind="Text InputText"
+        android:id="@+id/inputText" />
+    <Button
+        android:id="@+id/translateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxBind="Click TranslateCommand"
+        android:text="@string/translate" />
+    <TextView
+        android:text="@string/translated"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/translatedTextView" />
+    <TextView
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lines="7"
+        local:MvxBind="Text TranslatedText"
+        android:id="@+id/translatedText" />
+</LinearLayout>
+```
+　  
+　  
+  ## 文字列リソースの設定 ## 
+
+/Droid/Resources/values/Strings.xml を開きます。
+
+画面に表示する文字列リソースを設定します。 
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="input">翻訳したい日本語</string>
+    <string name="translate">英語に翻訳する</string>
+    <string name="translated">翻訳された英語</string>
+    <string name="app_name">XamAppCenterSample2018.Droid</string>
+</resources>
+```
+　  
+　  
+## Android の コードビハインド の作成 ## 
+
+アプリとしての基本動作は View と ViewModel で完成していますが、入力後にソフトキーボードを消す動作が抜けているので、コードビハインドに記述します。
+  
+/Droid/Views/MainActivity.cs を開きます。 
 　  
 　  
 まずは、using を追加します。  
-
+  
 ```csharp
-using System;
-using UIKit;
-using Foundation;
-using CoreGraphics;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platforms.Ios.Presenters.Attributes;
-using MvvmCross.Platforms.Ios.Views;
+using Android.App;
+using Android.Content;
+using Android.Views;
+using Android.Views.InputMethods;
+using Android.OS;
+using Android.Widget;
+using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Binding;
 using XamAppCenterSample2018.ViewModels;
 ```
 　  
 　  
-MainView を MvxViewController<MainViewModel> の派生とし、属性を設定します。
-
+MainActivity を MvxActivity<MainViewModel> の派生とします。
+  
 ```csharp
-    [Register("MainView")]
-    [MvxRootPresentation(WrapInNavigationController = false)]
-    public class MainView : MvxViewController<MainViewModel>
+    public class MainActivity : MvxActivity<MainViewModel>
 ```
 　  
 　  
-フォントサイズや UI エレメントのフィールドを定義します。
+UI エレメントのフィールドを定義します。
 
 ```csharp
-        static readonly nfloat fontSize = 20;
-
-        UILabel inputLabel;
-        UITextView inputText;
-        UIButton translateButton;
-        UILabel translatedLabel;
-        UITextView translatedText;
+        InputMethodManager inputMethodManager;
+        LinearLayout mainLayout;
+        EditText editText;
 ```  
 　  
 　  
-UI エレメントを初期設定するメソッドを定義します。
+ソフトキーボードを消すメソッドを実装します。
 
 ```csharp
-        void InitUI()
+        void HideSoftInput()
         {
+            inputMethodManager.HideSoftInputFromWindow(mainLayout.WindowToken, HideSoftInputFlags.NotAlways);
+            mainLayout.RequestFocus(); 
         }
-```  
+```
 　  
 　  
-InitUI の中に UI エレメントの設定値を記述していきます。  
-画面には、「翻訳したい日本語のラベル」「翻訳したい日本語の入力欄」「翻訳された英語のラベル」「翻訳された英語の表示欄」「英語に翻訳するボタン」の要素があります。
-　  
-　  
-MainView 自体の設定値です。
+画面の何も無いところをタッチしたときに、ソフトキーボードを消すようにします。
 
 ```csharp
-            View.ContentMode = UIViewContentMode.ScaleToFill;
-            View.LayoutMargins = new UIEdgeInsets(0, 16, 0, 16);
-            View.Frame = new CGRect(0, 0, 375, 667);
-            View.BackgroundColor = UIColor.White;
-            View.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
-``` 
-　  
-　  
-「翻訳したい日本語ラベル」inputLabel の設定値と View への追加、制約の設定です。
-
-```csharp
-            inputLabel = new UILabel
-            {
-                Frame = new CGRect(0, 0, 375, 20),
-                Opaque = false,
-                UserInteractionEnabled = false,
-                ContentMode = UIViewContentMode.Left,
-                Text = "翻訳したい日本語",
-                TextAlignment = UITextAlignment.Left,
-                LineBreakMode = UILineBreakMode.TailTruncation,
-                Lines = 0,
-                BaselineAdjustment = UIBaselineAdjustment.AlignBaselines,
-                AdjustsFontSizeToFitWidth = false,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                Font = UIFont.SystemFontOfSize(fontSize),
-            };
-            View.AddSubview(inputLabel);
-
-            inputLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
-            inputLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
-
-            inputLabel.TopAnchor.ConstraintEqualTo(View.TopAnchor, 70).Active = true;
-            inputLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            inputLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
-```  
-　  
-　  
-「翻訳したい日本語の入力欄」inputText の設定値と View への追加、制約の設定です。
-
-```csharp
-            inputText = new UITextView
-            {
-                Frame = new CGRect(0, 0, 375, 200),
-                ContentMode = UIViewContentMode.ScaleToFill,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                KeyboardType = UIKeyboardType.Twitter,
-                Font = UIFont.SystemFontOfSize(fontSize),
-                AccessibilityIdentifier = "inputText",
-            };
-
-            inputText.Layer.BorderWidth = 1;
-            inputText.Layer.BorderColor = UIColor.LightGray.CGColor;
-
-            View.AddSubview(inputText);
-
-            inputText.HeightAnchor.ConstraintEqualTo(View.HeightAnchor, 0.3f).Active = true;
-            inputText.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
-
-            inputText.TopAnchor.ConstraintEqualTo(inputLabel.BottomAnchor, 5).Active = true;
-            inputText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            inputText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
-```  
-　  
-　  
-入力完了時にソフトキーボードを閉じるボタンの設定です。
-
-```csharp
-            var toolBar = new UIToolbar
-            {
-                BarStyle = UIBarStyle.Default,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-            };
-            toolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
-            toolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
-
-            var spacer = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
-            var commitButton = new UIBarButtonItem(UIBarButtonSystemItem.Done);
-
-            commitButton.Clicked += (s, e) => View.EndEditing(true);
-            toolBar.SetItems(new UIBarButtonItem[] { spacer, commitButton }, false);
-            inputText.InputAccessoryView = toolBar;
-```  
-　  
-　  
-「英語に翻訳するボタン」translateButton の設定値と View への追加、制約の設定です。
-
-```csharp
-            translateButton = new UIButton(UIButtonType.RoundedRect)
-            {
-                Frame = new CGRect(0, 0, 375, 20),
-                Opaque = false,
-                ContentMode = UIViewContentMode.ScaleToFill,
-                HorizontalAlignment = UIControlContentHorizontalAlignment.Center,
-                VerticalAlignment = UIControlContentVerticalAlignment.Center,
-                LineBreakMode = UILineBreakMode.MiddleTruncation,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                Font = UIFont.SystemFontOfSize(fontSize),
-                AccessibilityIdentifier = "translateButton",
-            };
-
-            translateButton.SetTitle("英語に翻訳する", UIControlState.Normal);
-            View.AddSubview(translateButton);
-
-            translateButton.HeightAnchor.ConstraintEqualTo(40f).Active = true;
-            translateButton.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
-
-            translateButton.TopAnchor.ConstraintEqualTo(inputText.BottomAnchor, 20).Active = true;
-            translateButton.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            translateButton.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
-```  
-　  
-　  
-「翻訳された英語のラベル」translatedLabel の設定値と View への追加、制約の設定です。
-
-```csharp
-            translatedLabel = new UILabel
-            {
-                Frame = new CGRect(0, 0, 375, 20),
-                Opaque = false,
-                UserInteractionEnabled = false,
-                ContentMode = UIViewContentMode.Left,
-                Text = "翻訳された英語",
-                TextAlignment = UITextAlignment.Left,
-                LineBreakMode = UILineBreakMode.TailTruncation,
-                Lines = 0,
-                BaselineAdjustment = UIBaselineAdjustment.AlignBaselines,
-                AdjustsFontSizeToFitWidth = false,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                Font = UIFont.SystemFontOfSize(fontSize),
-            };
-            View.AddSubview(translatedLabel);
-
-            translatedLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
-            translatedLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
-
-            translatedLabel.TopAnchor.ConstraintEqualTo(translateButton.BottomAnchor, 20).Active = true;
-            translatedLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            translatedLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
-
-```  
-　  
-　  
-「翻訳された英語の表示欄」translatedText の設定値と View への追加、制約の設定です。
-
-```csharp
-            translatedText = new UITextView
-            {
-                Frame = new CGRect(0, 0, 375, 200),
-                ContentMode = UIViewContentMode.ScaleToFill,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                Font = UIFont.SystemFontOfSize(fontSize),
-                AccessibilityIdentifier = "translatedText",
-                Editable = false,
-            };
-
-            translatedText.Layer.BorderWidth = 1;
-            translatedText.Layer.BorderColor = UIColor.LightGray.CGColor;
-
-            View.AddSubview(translatedText);
-
-            translatedText.HeightAnchor.ConstraintEqualTo(View.HeightAnchor, 0.3f).Active = true;
-            translatedText.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
-
-            translatedText.TopAnchor.ConstraintEqualTo(translatedLabel.BottomAnchor, 5).Active = true;
-            translatedText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            translatedText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
-
-``` 
-　  
-　  
-バインディングを設定するメソッドです。
-
-```csharp
-        void SetBinding()
+        public override bool OnTouchEvent(MotionEvent e)
         {
-            var set = this.CreateBindingSet<MainView, MainViewModel>();
-
-            set.Bind(inputText).To(vm => vm.InputText);
-            set.Bind(translatedText).To(vm => vm.TranslatedText);
-            set.Bind(translateButton).To(vm => vm.TranslateCommand);
-
-            set.Apply();
+            HideSoftInput();
+            return false;
         }
-
-```  
+```
 　  
 　  
-ViewDidLoad で InitUI, SetBindingをコールします。
+ボタンや翻訳後の文章表示部分をタッチしたときに、ソフトキーボードを消すようにします。
 
 ```csharp
-        public override void ViewDidLoad()
+        protected override void OnCreate(Bundle bundle)
         {
-            base.ViewDidLoad();
+            base.OnCreate(bundle);
+            RequestWindowFeature(WindowFeatures.NoTitle);
+            SetContentView(Resource.Layout.Main);
 
-            InitUI();
-            SetBinding();
+            editText = (EditText)FindViewById(Resource.Id.inputText);
+            mainLayout = (LinearLayout)FindViewById(Resource.Id.mainLayout);
+            inputMethodManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+
+            var button = (Button)FindViewById(Resource.Id.translateButton);
+            button.Click += (s, e) => HideSoftInput();
+
+            var textView = (TextView)FindViewById(Resource.Id.translatedText);
+            textView.Click += (s, e) => HideSoftInput();
         }
-```  
+```
 　  
 　  
-これで、iOS の View は完成です。
+これで、コードビハインドは完成です。  
 完成したコードは以下のようになります。
 
 ```csharp
-using System;
-using UIKit;
-using Foundation;
-using CoreGraphics;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platforms.Ios.Presenters.Attributes;
-using MvvmCross.Platforms.Ios.Views;
+using Android.App;
+using Android.Content;
+using Android.Views;
+using Android.Views.InputMethods;
+using Android.OS;
+using Android.Widget;
+using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Binding;
 using XamAppCenterSample2018.ViewModels;
 
-namespace XamAppCenterSample2018.iOS.Views
+namespace XamAppCenterSample2018.Droid
 {
-    [Register("MainView")]
-    [MvxRootPresentation(WrapInNavigationController = false)]
-    public class MainView : MvxViewController<MainViewModel>
+    [Activity(Label = "XamAppCenterSample2018", MainLauncher = true, Icon = "@mipmap/icon")]
+    public class MainActivity : MvxActivity<MainViewModel>
     {
-		static readonly nfloat fontSize = 20;
+        InputMethodManager inputMethodManager;
+        LinearLayout mainLayout;
+        EditText editText;
 
-        UILabel inputLabel;
-        UITextView inputText;
-        UIButton translateButton;
-        UILabel translatedLabel;
-        UITextView translatedText;
-
-        public override void ViewDidLoad()
+        protected override void OnCreate(Bundle bundle)
         {
-            base.ViewDidLoad();
+            base.OnCreate(bundle);
+            RequestWindowFeature(WindowFeatures.NoTitle);
+            SetContentView(Resource.Layout.Main);
 
-            InitUI();
-            SetBinding();
+            editText = (EditText)FindViewById(Resource.Id.inputText);
+            mainLayout = (LinearLayout)FindViewById(Resource.Id.mainLayout);
+            inputMethodManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+
+            var button = (Button)FindViewById(Resource.Id.translateButton);
+            button.Click += (s, e) => HideSoftInput();
+
+            var textView = (TextView)FindViewById(Resource.Id.translatedText);
+            textView.Click += (s, e) => HideSoftInput();
         }
 
-        void InitUI()
+        public override bool OnTouchEvent(MotionEvent e)
         {
-            View.ContentMode = UIViewContentMode.ScaleToFill;
-            View.LayoutMargins = new UIEdgeInsets(0, 16, 0, 16);
-            View.Frame = new CGRect(0, 0, 375, 667);
-            View.BackgroundColor = UIColor.White;
-            View.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
-
-            inputLabel = new UILabel
-            {
-                Frame = new CGRect(0, 0, 375, 20),
-                Opaque = false,
-                UserInteractionEnabled = false,
-                ContentMode = UIViewContentMode.Left,
-                Text = "翻訳したい日本語",
-                TextAlignment = UITextAlignment.Left,
-                LineBreakMode = UILineBreakMode.TailTruncation,
-                Lines = 0,
-                BaselineAdjustment = UIBaselineAdjustment.AlignBaselines,
-                AdjustsFontSizeToFitWidth = false,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                Font = UIFont.SystemFontOfSize(fontSize),
-            };
-            View.AddSubview(inputLabel);
-
-            inputLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
-            inputLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
-
-            inputLabel.TopAnchor.ConstraintEqualTo(View.TopAnchor, 70).Active = true;
-            inputLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            inputLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
-
-            inputText = new UITextView
-            {
-                Frame = new CGRect(0, 0, 375, 200),
-                ContentMode = UIViewContentMode.ScaleToFill,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                KeyboardType = UIKeyboardType.Twitter,
-                Font = UIFont.SystemFontOfSize(fontSize),
-                AccessibilityIdentifier = "inputText",
-            };
-
-            inputText.Layer.BorderWidth = 1;
-            inputText.Layer.BorderColor = UIColor.LightGray.CGColor;
-
-            View.AddSubview(inputText);
-
-            inputText.HeightAnchor.ConstraintEqualTo(View.HeightAnchor, 0.3f).Active = true;
-            inputText.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
-
-            inputText.TopAnchor.ConstraintEqualTo(inputLabel.BottomAnchor, 5).Active = true;
-            inputText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            inputText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
-
-            var toolBar = new UIToolbar
-            {
-                BarStyle = UIBarStyle.Default,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-            };
-            toolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
-            toolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
-
-            var spacer = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
-            var commitButton = new UIBarButtonItem(UIBarButtonSystemItem.Done);
-
-            commitButton.Clicked += (s, e) => View.EndEditing(true);
-            toolBar.SetItems(new UIBarButtonItem[] { spacer, commitButton }, false);
-            inputText.InputAccessoryView = toolBar;
-
-            translateButton = new UIButton(UIButtonType.RoundedRect)
-            {
-                Frame = new CGRect(0, 0, 375, 20),
-                Opaque = false,
-                ContentMode = UIViewContentMode.ScaleToFill,
-                HorizontalAlignment = UIControlContentHorizontalAlignment.Center,
-                VerticalAlignment = UIControlContentVerticalAlignment.Center,
-                LineBreakMode = UILineBreakMode.MiddleTruncation,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                Font = UIFont.SystemFontOfSize(fontSize),
-                AccessibilityIdentifier = "translateButton",
-            };
-
-            translateButton.SetTitle("英語に翻訳する", UIControlState.Normal);
-            View.AddSubview(translateButton);
-
-            translateButton.HeightAnchor.ConstraintEqualTo(40f).Active = true;
-            translateButton.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
-
-            translateButton.TopAnchor.ConstraintEqualTo(inputText.BottomAnchor, 20).Active = true;
-            translateButton.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            translateButton.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
-
-            translatedLabel = new UILabel
-            {
-                Frame = new CGRect(0, 0, 375, 20),
-                Opaque = false,
-                UserInteractionEnabled = false,
-                ContentMode = UIViewContentMode.Left,
-                Text = "翻訳された英語",
-                TextAlignment = UITextAlignment.Left,
-                LineBreakMode = UILineBreakMode.TailTruncation,
-                Lines = 0,
-                BaselineAdjustment = UIBaselineAdjustment.AlignBaselines,
-                AdjustsFontSizeToFitWidth = false,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                Font = UIFont.SystemFontOfSize(fontSize),
-            };
-            View.AddSubview(translatedLabel);
-
-            translatedLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
-            translatedLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
-
-            translatedLabel.TopAnchor.ConstraintEqualTo(translateButton.BottomAnchor, 20).Active = true;
-            translatedLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            translatedLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
-
-            translatedText = new UITextView
-            {
-                Frame = new CGRect(0, 0, 375, 200),
-                ContentMode = UIViewContentMode.ScaleToFill,
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                Font = UIFont.SystemFontOfSize(fontSize),
-                AccessibilityIdentifier = "translatedText",
-                Editable = false,
-            };
-
-            translatedText.Layer.BorderWidth = 1;
-            translatedText.Layer.BorderColor = UIColor.LightGray.CGColor;
-
-            View.AddSubview(translatedText);
-
-            translatedText.HeightAnchor.ConstraintEqualTo(View.HeightAnchor, 0.3f).Active = true;
-            translatedText.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
-
-            translatedText.TopAnchor.ConstraintEqualTo(translatedLabel.BottomAnchor, 5).Active = true;
-            translatedText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            translatedText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+            HideSoftInput();
+            return false;
         }
 
-        void SetBinding()
+        void HideSoftInput()
         {
-            var set = this.CreateBindingSet<MainView, MainViewModel>();
-
-            set.Bind(inputText).To(vm => vm.InputText);
-            set.Bind(translatedText).To(vm => vm.TranslatedText);
-            set.Bind(translateButton).To(vm => vm.TranslateCommand);
-
-            set.Apply();
+            inputMethodManager.HideSoftInputFromWindow(mainLayout.WindowToken, HideSoftInputFlags.NotAlways);
+            mainLayout.RequestFocus(); 
         }
 
     }
 }
-``` 
-　  
-　  
-## iOS アプリのデバッグ ##
-　  
-では、ここでiOSのアプリを実機デバッグしてみましょう。
+```
 
-実機をお持ちの方はせっかくですから実機でデバッグしてみましょう。  
+  
+  
+  
+## Android アプリのデバッグ ##
+  
+  
+では、ここで Android のアプリを実機デバッグしてみましょう。
+
+実機をお持ちの方はせっかくですから実機でデバッグしてみましょう。
 お持ちでない方はシミュレータでデバッグしてみましょう。
+　  
 　  
 ### シミュレータデバッグ ###
 　  
-XamAppCenterSample2018.iOS > Debug > [シミュレータの機種名] に設定します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug001.png?raw=true)
+XamAppCenterSample2018.Droid > Debug > [シミュレータの機種名] に設定します。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug002.png?raw=true)
 　  
 　  
 「デバッグの開始」を実行します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build003.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug003.png?raw=true)
 　  
 　  
-アプリが起動します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build004.png?raw=true)
-　  
-　  
-飜訳が動作すれば成功です。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build005.png?raw=true)
+アプリが起動し、飜訳が動作すれば成功です。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug004.png?raw=true)
 　  
 　  
 ### 実機デバッグ ###
 　  
-実機をお持ちの方は、ここでiOSのアプリを実機デバッグしてみましょう。
-iOSのアプリを実機デバッグするにはXcodeでダミーアプリを実行する必要があります。
+実機をお持ちの方は、ここで Android のアプリを実機デバッグしてみましょう。
 　  
 　  
-#### Xcode でのダミーアプリ実行 ####
+### 実機の開発者モードを有効にし、USBデバッグを有効にする ###
 　  
-プロビジョニングプロファイルや証明書の紐付けが自動で行われるようにXcodeでSwiftのダミーアプリを作成します。
-
-[File]->[New]->[Project]でプロジェクトを作成します。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app001.png?raw=true)
+実機の開発者モードを有効にし、USBデバッグを有効にしないと実機デバッグができないので変更します。
 　  
 　  
-iOSのSingle View Applicationを選択し、[Next]を押します。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app002.png?raw=true)
+「システム」をタップします。
 　  
 　  
-Product Name は XamAppCenterSample2018 にして下さい。
-Organization Identifier は先ほど決めたものと同一のものにしてください。
-[Next]を押します。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app003.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android001.png?raw=true)
 　  
 　  
-<code>XamAppCenterSample2018Xcode</code>というフォルダを作成し、その中にプロジェクトを保存してください。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app004.png?raw=true)
+　  
+「端末情報」をタップします。
 　  
 　  
-Bundle Identifier が正しく設定されているのを確認して下さい。
-
-Signingの部分が自動で修正されて、Provisioning Profile と Signing Certificate の部分にエラーのアイコンが表示されてないことを確認してください。
-
-左上のデバッグ実行の部分にご自分のiPhoneが認識されているのを確認してください。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android002.png?raw=true)
 　  
 　  
-全て確認できたらデバッグ実行します。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app005.png?raw=true)
+　  
+「ソフトウェア情報」をタップします。
 　  
 　  
-もし、以下の表示が出た場合、[常に許可]を押します。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app006.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android003.png?raw=true)
 　  
 　  
-以下の表示が出たら、次の手順で実機の設定で開発元を信頼させます。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app007.png?raw=true)
+　  
+「ビルド番号」を連打します。
 　  
 　  
-実機の設定アプリを開き[プロファイルとデバイス管理]を開きます。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app008.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android004.png?raw=true)
 　  
 　  
-デベロッパAPPに[Xcodeに設定したApple ID]が表示されていますのでタップします。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app009.png?raw=true)
+　  
+開発者モードが有効になりました。
 　  
 　  
-[Xcodeに設定したApple ID]を信頼をタップして信頼させます。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app010.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android005.png?raw=true)
 　  
 　  
-以下の表示が出た場合、ご自分の iPhoneの中 に XamAppCenterSample2018 と言う名前のアプリが既にインストールされているか確認し、インストールされている場合、アンインストールしてください。
-
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/dammy_app011.png?raw=true)
+　  
+「開発者向けオプション」をタップ。
 　  
 　  
-再度、デバッグ実行し、無事アプリが起動して真っ白な画面が表示されたら成功です。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android006.png?raw=true)
 　  
 　  
-これで、Xcode でのダミーアプリ実行は完了です。
+　  
+「開発者向けオプション」を ON にし、「USBデバッグ」を ON にします。
 　  
 　  
-#### iOS アプリのビルド #### 
-　  
-/XamAppCenterSample2018/XamAppCenterSample2018.iOS/Info.plist ファイルを開きます。
-　  
-「バンドル識別子」の文字列を先ほど Xcode で設定した、Bundle Identifier と一字一句違わないように設定します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build001.png?raw=true)
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android007.png?raw=true)
 　  
 　  
-XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build002.png?raw=true)
+これで実機デバッグの準備が整いました。
 　  
 　  
-「デバッグの開始」を実行します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build003.png?raw=true)
+　  
+### 実機デバッグ開始 ###
+　  
+　  
+XamAppCenterSample2018.Droid > Debug > [あなたのAndroidデバイス名] に設定します。
+　  
+　  
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android008.png?raw=true)
+　  
+　  
 　  
 　  
 アプリが起動します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build004.png?raw=true)
+　  
+　  
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android009.png?raw=true)
+　  
+　  
 　  
 　  
 飜訳が動作すれば成功です。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/ios_build005.png?raw=true)
 　  
+　  
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android010.png?raw=true)
+　
+
+  
 　  
 　  
 　  
@@ -1667,410 +1498,10 @@ iOS のアプリの バンドル識別子 を御自身の固有のものに変�
 
 # Android アプリの作成 #
 　  
-## Android の パッケージ名の設定 ## 
 
-Android のアプリのパッケージ名を御自身の固有のものに変更して下さい。
-- アプリケーション名 は XamAppCenterSample2018 にして下さい。
 
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test001.png?raw=true)
 　  
 　  
-## Android の View の作成 ## 
-
-/Droid/Resources/layout/Main.axml を開きます。
-
-Android の View を作成します。
-Android の axml は、Git との相性も問題がないので、そのまま axml に記述します。
-
-「翻訳したい日本語ラベル」inputTextView を追加します。
-
-```xml
-    <TextView
-        android:text="@string/input"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/inputTextView" />
-```
-　  
-　  
-「翻訳したい日本語の入力欄」inputText を追加します。
-また、Binding も記述します。
-
-local:MvxBind="[View のプロパティ名] [ViewModel のプロパティ名]"
-というフォーマットで記述します。
-
-```xml
-    <EditText
-        android:inputType="textMultiLine"
-        android:gravity="top|left"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:lines="7"
-        local:MvxBind="Text InputText"
-        android:id="@+id/inputText" />
-```
-　  
-　  
-「英語に翻訳するボタン」translateButton を追加します。
-また、Binding も記述します。
-
-```xml
-    <Button
-        android:id="@+id/translateButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        local:MvxBind="Click TranslateCommand"
-        android:text="@string/translate" />
-```
-　  
-　  
-「翻訳された英語のラベル」translatedTextView を追加します。
-
-```xml
-    <TextView
-        android:text="@string/translated"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/translatedTextView" />
-```
-　  
-　  
-「翻訳された英語の表示欄」translatedText を追加します。
-また、Binding も記述します。
-
-```xml
-    <TextView
-        android:inputType="textMultiLine"
-        android:gravity="top|left"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:lines="7"
-        local:MvxBind="Text TranslatedText"
-        android:id="@+id/translatedText" />
-```
-　  
-　  
-これで、Android の View は完成です。
-完成した axml は以下のようになります。
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:local="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mainLayout"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:text="@string/input"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/inputTextView" />
-    <EditText
-        android:inputType="textMultiLine"
-        android:gravity="top|left"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:lines="7"
-        local:MvxBind="Text InputText"
-        android:id="@+id/inputText" />
-    <Button
-        android:id="@+id/translateButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        local:MvxBind="Click TranslateCommand"
-        android:text="@string/translate" />
-    <TextView
-        android:text="@string/translated"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/translatedTextView" />
-    <TextView
-        android:inputType="textMultiLine"
-        android:gravity="top|left"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:lines="7"
-        local:MvxBind="Text TranslatedText"
-        android:id="@+id/translatedText" />
-</LinearLayout>
-```
-　  
-　  
-  ## 文字列リソースの設定 ## 
-
-/Droid/Resources/values/Strings.xml を開きます。
-
-画面に表示する文字列リソースを設定します。 
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="input">翻訳したい日本語</string>
-    <string name="translate">英語に翻訳する</string>
-    <string name="translated">翻訳された英語</string>
-    <string name="app_name">XamAppCenterSample2018.Droid</string>
-</resources>
-```
-　  
-　  
-## Android の コードビハインド の作成 ## 
-
-アプリとしての基本動作は View と ViewModel で完成していますが、入力後にソフトキーボードを消す動作が抜けているので、コードビハインドに記述します。
-  
-/Droid/Views/MainActivity.cs を開きます。 
-　  
-　  
-まずは、using を追加します。  
-  
-```csharp
-using Android.App;
-using Android.Content;
-using Android.Views;
-using Android.Views.InputMethods;
-using Android.OS;
-using Android.Widget;
-using MvvmCross.Platforms.Android.Views;
-using MvvmCross.Platforms.Android.Binding;
-using XamAppCenterSample2018.ViewModels;
-```
-　  
-　  
-MainActivity を MvxActivity<MainViewModel> の派生とします。
-  
-```csharp
-    public class MainActivity : MvxActivity<MainViewModel>
-```
-　  
-　  
-UI エレメントのフィールドを定義します。
-
-```csharp
-        InputMethodManager inputMethodManager;
-        LinearLayout mainLayout;
-        EditText editText;
-```  
-　  
-　  
-ソフトキーボードを消すメソッドを実装します。
-
-```csharp
-        void HideSoftInput()
-        {
-            inputMethodManager.HideSoftInputFromWindow(mainLayout.WindowToken, HideSoftInputFlags.NotAlways);
-            mainLayout.RequestFocus(); 
-        }
-```
-　  
-　  
-画面の何も無いところをタッチしたときに、ソフトキーボードを消すようにします。
-
-```csharp
-        public override bool OnTouchEvent(MotionEvent e)
-        {
-            HideSoftInput();
-            return false;
-        }
-```
-　  
-　  
-ボタンや翻訳後の文章表示部分をタッチしたときに、ソフトキーボードを消すようにします。
-
-```csharp
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-            RequestWindowFeature(WindowFeatures.NoTitle);
-            SetContentView(Resource.Layout.Main);
-
-            editText = (EditText)FindViewById(Resource.Id.inputText);
-            mainLayout = (LinearLayout)FindViewById(Resource.Id.mainLayout);
-            inputMethodManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
-
-            var button = (Button)FindViewById(Resource.Id.translateButton);
-            button.Click += (s, e) => HideSoftInput();
-
-            var textView = (TextView)FindViewById(Resource.Id.translatedText);
-            textView.Click += (s, e) => HideSoftInput();
-        }
-```
-　  
-　  
-これで、コードビハインドは完成です。  
-完成したコードは以下のようになります。
-
-```csharp
-using Android.App;
-using Android.Content;
-using Android.Views;
-using Android.Views.InputMethods;
-using Android.OS;
-using Android.Widget;
-using MvvmCross.Platforms.Android.Views;
-using MvvmCross.Platforms.Android.Binding;
-using XamAppCenterSample2018.ViewModels;
-
-namespace XamAppCenterSample2018.Droid
-{
-    [Activity(Label = "XamAppCenterSample2018", MainLauncher = true, Icon = "@mipmap/icon")]
-    public class MainActivity : MvxActivity<MainViewModel>
-    {
-        InputMethodManager inputMethodManager;
-        LinearLayout mainLayout;
-        EditText editText;
-
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-            RequestWindowFeature(WindowFeatures.NoTitle);
-            SetContentView(Resource.Layout.Main);
-
-            editText = (EditText)FindViewById(Resource.Id.inputText);
-            mainLayout = (LinearLayout)FindViewById(Resource.Id.mainLayout);
-            inputMethodManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
-
-            var button = (Button)FindViewById(Resource.Id.translateButton);
-            button.Click += (s, e) => HideSoftInput();
-
-            var textView = (TextView)FindViewById(Resource.Id.translatedText);
-            textView.Click += (s, e) => HideSoftInput();
-        }
-
-        public override bool OnTouchEvent(MotionEvent e)
-        {
-            HideSoftInput();
-            return false;
-        }
-
-        void HideSoftInput()
-        {
-            inputMethodManager.HideSoftInputFromWindow(mainLayout.WindowToken, HideSoftInputFlags.NotAlways);
-            mainLayout.RequestFocus(); 
-        }
-
-    }
-}
-```
-　  
-　  
-## Android アプリのデバッグ ##
-　  
-　  
-では、ここで Android のアプリを実機デバッグしてみましょう。
-
-実機をお持ちの方はせっかくですから実機でデバッグしてみましょう。
-お持ちでない方はシミュレータでデバッグしてみましょう。
-　  
-　  
-### シミュレータデバッグ ###
-　  
-XamAppCenterSample2018.Droid > Debug > [シミュレータの機種名] に設定します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug002.png?raw=true)
-　  
-　  
-「デバッグの開始」を実行します。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug003.png?raw=true)
-　  
-　  
-アプリが起動し、飜訳が動作すれば成功です。
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/debug004.png?raw=true)
-　  
-　  
-### 実機デバッグ ###
-　  
-実機をお持ちの方は、ここで Android のアプリを実機デバッグしてみましょう。
-　  
-　  
-### 実機の開発者モードを有効にし、USBデバッグを有効にする ###
-　  
-実機の開発者モードを有効にし、USBデバッグを有効にしないと実機デバッグができないので変更します。
-　  
-　  
-「システム」をタップします。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android001.png?raw=true)
-　  
-　  
-　  
-「端末情報」をタップします。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android002.png?raw=true)
-　  
-　  
-　  
-「ソフトウェア情報」をタップします。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android003.png?raw=true)
-　  
-　  
-　  
-「ビルド番号」を連打します。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android004.png?raw=true)
-　  
-　  
-　  
-開発者モードが有効になりました。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android005.png?raw=true)
-　  
-　  
-　  
-「開発者向けオプション」をタップ。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android006.png?raw=true)
-　  
-　  
-　  
-「開発者向けオプション」を ON にし、「USBデバッグ」を ON にします。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android007.png?raw=true)
-　  
-　  
-これで実機デバッグの準備が整いました。
-　  
-　  
-　  
-### 実機デバッグ開始 ###
-　  
-　  
-XamAppCenterSample2018.Droid > Debug > [あなたのAndroidデバイス名] に設定します。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android008.png?raw=true)
-　  
-　  
-　  
-　  
-アプリが起動します。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android009.png?raw=true)
-　  
-　  
-　  
-　  
-飜訳が動作すれば成功です。
-　  
-　  
-![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android010.png?raw=true)
-　
-
 
 
 
