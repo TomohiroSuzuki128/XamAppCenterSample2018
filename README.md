@@ -1102,16 +1102,16 @@ Visual Studio App Center のビルド設定を開きます。
 ## ソリューションを開きます。 ##
 　  
 　  
-/src/StartShort/XamAppCenterSample2018.sln を開いてください。
+/src/Start/XamAppCenterSample2018.sln を開いてください。
 　  
 　  
 ## ソースコード上に置き換え用の目印となる文字列を準備します。 ##
 　  
 　  
-/src/StartShort/XamAppCenterSample2018/Variables.cs を確認してください。
+/src/Start/XamAppCenterSample2018/Variables.cs を確認してください。
 　  
 　  
-**/src/StartShort/XamAppCenterSample2018/Variables.cs**
+**/src/Start/XamAppCenterSample2018/Variables.cs**
 ```csharp
 using System;
 
@@ -1380,7 +1380,7 @@ Visual Studio App Center には ビルドする`cspoj`と同じ階層に、`appc
 ファイルはすでに準備されていますので、設定値を書き換えてください。
 　  
 　  
-**/src/StartShort/iOS/appcenter-post-build.sh**
+**/src/Start/iOS/appcenter-post-build.sh**
 ```sh
 #!/usr/bin/env bash
 
@@ -1396,7 +1396,7 @@ appCenterLoginApiToken=$AppCenterLoginToken # this comes from the build environm
 appName="TomohiroSuzuki128/XamAppCenterSample2018iOS" # 自分のアプリ名に書き換える
 deviceSetName="TomohiroSuzuki128/my-devices" # 自分のデバイスセット名に書き換える
 publishedAppFileName="XamAppCenterSample2018.iOS.ipa"
-sourceFileRootDir="$APPCENTER_SOURCE_DIRECTORY/src/StartShort"
+sourceFileRootDir="$APPCENTER_SOURCE_DIRECTORY/src/Start"
 uiTestProjectName="UITests"
 testSeriesName="all-tests"
 ##################################################
@@ -1455,7 +1455,7 @@ echo "##########################################################################
 # for test
 echo $APPCENTER_SOURCE_DIRECTORY
 echo ""
-files="$APPCENTER_SOURCE_DIRECTORY/src/StartShort/UITests/*"
+files="$APPCENTER_SOURCE_DIRECTORY/src/Start/UITests/*"
 for filepath in $files
 do
   echo $filepath
