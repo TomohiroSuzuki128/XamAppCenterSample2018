@@ -1,6 +1,9 @@
 # Xamarin.Android App Center ハンズオン テキスト #
-　  
-　  
+  
+  
+[iOS はこちら](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/master/README.md)
+  
+  
 # はじめに #
 　  
 　  
