@@ -1122,7 +1122,7 @@ App Center には ビルドする`cspoj`と同じ階層に、`appcenter-post-clo
 よって、`appcenter-post-clone.sh`に`[ENTER YOUR API KEY]`を本物のキーに置き換えを行う処理を書きます。
 　  
 　  
-**/src/StartShort/iOS/appcenter-post-clone.sh**
+**/src/Start/iOS/appcenter-post-clone.sh**
 ```sh
 #!/usr/bin/env bash
 
