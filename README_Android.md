@@ -922,16 +922,16 @@ Visual Studio App Center のビルド設定を開きます。
 ## ソリューションを開きます。 ##
 　  
 　  
-/src/StartShort/XamAppCenterSample2018.sln を開いてください。
+/src/Start/XamAppCenterSample2018.sln を開いてください。
 　  
 　  
 ## ソースコード上に置き換え用の目印となる文字列を準備します。 ##
 　  
 　  
-/src/StartShort/XamAppCenterSample2018/Variables.cs を確認してください。
+/src/Start/XamAppCenterSample2018/Variables.cs を確認してください。
 　  
 　  
-**/src/StartShort/XamAppCenterSample2018/Variables.cs**
+**/src/Start/XamAppCenterSample2018/Variables.cs**
 ```csharp
 using System;
 
@@ -956,7 +956,7 @@ App Center には ビルドする`cspoj`と同じ階層に、`appcenter-post-clo
 よって、`appcenter-post-clone.sh`に`[ENTER YOUR API KEY]`を本物のキーに置き換えを行う処理を書きます。
 　  
 　  
-**/src/StartShort/Droid/appcenter-post-clone.sh**
+**/src/Start/Droid/appcenter-post-clone.sh**
 ```sh
 #!/usr/bin/env bash
 
@@ -1203,7 +1203,7 @@ Visual Studio App Center には ビルドする`cspoj`と同じ階層に、`appc
 ファイルはすでに準備されていますので、設定値を書き換えてください。
 　  
 　  
-**/src/StartShort/Droid/appcenter-post-build.sh**
+**/src/Start/Droid/appcenter-post-build.sh**
 ```sh
 #!/usr/bin/env bash
 
@@ -1219,7 +1219,7 @@ appCenterLoginApiToken=$AppCenterLoginToken # this comes from the build environm
 appName="TomohiroSuzuki128/XamAppCenterSample2018Droid" # 自分のアプリ名に書き換える
 deviceSetName="TomohiroSuzuki128/my-devices-android" # 自分のデバイスセット名に書き換える
 publishedAppFileName="com.hiro128777.XamAppCenterSample2018.apk"
-sourceFileRootDir="$APPCENTER_SOURCE_DIRECTORY/src/StartShort"
+sourceFileRootDir="$APPCENTER_SOURCE_DIRECTORY/src/Start"
 uiTestProjectName="UITests"
 testSeriesName="all-tests-android"
 ##################################################
@@ -1278,7 +1278,7 @@ echo "##########################################################################
 # for test
 echo $APPCENTER_SOURCE_DIRECTORY
 echo ""
-files="$APPCENTER_SOURCE_DIRECTORY/src/StartShort/UITests/*"
+files="$APPCENTER_SOURCE_DIRECTORY/src/Start/UITests/*"
 for filepath in $files
 do
   echo $filepath
