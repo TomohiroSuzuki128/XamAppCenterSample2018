@@ -766,6 +766,9 @@ XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します�
 テスト時にアプリを初期化するクラスを作成します。
 　  
 　  
+/UITests/AppInitializercs ファイルを開きます。
+　  
+　  
 まずは、using を追加します。  
   
 ```csharp
