@@ -67,7 +67,7 @@ https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/
 iOS プロジェクトの `Info.plist` を開き、iOS のアプリの バンドル識別子 を御自身の固有のものに変更して下さい。
 - アプリケーション名 は `XamAppCenterSample2018` にして下さい。
 - バンドル識別子の Organization Identifier の部分（hiro127777）は全世界で固有となるような文字列にして下さい。
-
+　  
 　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test002.png?raw=true)
 　  
@@ -755,27 +755,282 @@ XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します�
 　  
 　  
 　  
+　  
+　  
+# テストプロジェクトの作成 #
+　  
+　  
+## AppInitializer の作成 ## 
+　  
+　  
+テスト時にアプリを初期化するクラスを作成します。
+　  
+　  
+/UITests/AppInitializercs ファイルを開きます。
+　  
+　  
+まずは、using を追加します。  
+  
+```csharp
+using Xamarin.UITest;
+```
+　  
+　  
+クラスを定義します。
+  
+```csharp
+namespace XamAppCenterSample2018.UITests
+{
+    public class AppInitializer
+    {
+    }
+}
+```
+　  
+　  
+アプリのインスタンスを初期化、アプリを開始するメソッドを定義します。
 
+```csharp
+namespace XamAppCenterSample2018.UITests
+{
+    public class AppInitializer
+    {
+        public static IApp StartApp(Platform platform)
+        {
+            if (platform == Platform.Android)
+            {
+                return ConfigureApp
+                    .Android
+                    .EnableLocalScreenshots()
+                    .PreferIdeSettings()
+                    .InstalledApp("<あなたのアプリのパッケージ名>")
+                    .StartApp();
+            }
 
+            return ConfigureApp
+                .iOS
+                .EnableLocalScreenshots()
+                .PreferIdeSettings()
+                .InstalledApp("<あなたのアプリのbundle ID>")
+                .StartApp();
+        }
+    }
+}
+```
+　  
+　  
+Android のアプリのパッケージ名は以下で確認できます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test001.png?raw=true)
+　  
+　  
+iOS のアプリの bundle ID は以下で確認できます。
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/test002.png?raw=true)
+　  
+　  
+これで、AppInitializer は完成です。  
+完成したコードは以下のようになります。
+　  
+　  
+```csharp
+using Xamarin.UITest;
 
+namespace XamAppCenterSample2018.UITests
+{
+    public class AppInitializer
+    {
+        public static IApp StartApp(Platform platform)
+        {
+            if (platform == Platform.Android)
+            {
+                return ConfigureApp
+                    .Android
+                    .EnableLocalScreenshots()
+                    .PreferIdeSettings()
+                    .InstalledApp("<あなたのアプリのパッケージ名>")
+                    .StartApp();
+            }
 
+            return ConfigureApp
+                .iOS
+                .EnableLocalScreenshots()
+                .PreferIdeSettings()
+                .InstalledApp("<あなたのアプリのbundle ID>")
+                .StartApp();
+        }
+    }
+}
+```
+　  
+　  
+## テストコードの作成 ## 
+　  
+　  
+テストコードを作成します。
+テストコードはiOS, Android で共用します。
+　  
+　  
+まずは、using を追加します。  
+  
+```csharp
+using System.Linq;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using Xamarin.UITest;
+```
+　  
+　  
+クラスを定義します。
+  
+```csharp
+namespace XamAppCenterSample2018.UITests
+{
+    [TestFixture(Platform.Android)]
+    [TestFixture(Platform.iOS)]
+    public class Tests
+    {
+    }
+}
+```
+　  
+　  
+フィールドを定義します。
+  
+```csharp
+        IApp app;
+        Platform platform;
+```
+　  
+　  
+コンストラクターを定義します。
+アプリの起動時に iOS, Android を指定するために、プラットフォームを保持しておきます。
+  
+```csharp
+        public Tests(Platform platform)
+        {
+            this.platform = platform;
+        }
+```
+　  
+　  
+各テスト実行前にアプリを開始するメソッドを定義します。
+<code>[SetUp]</code> Attribute を付加するとテストメソッドの実行前に実行されます。
+  
+```csharp
+        [SetUp]
+        public void BeforeEachTest()
+        {
+            app = AppInitializer.StartApp(platform);
+        }
+```
+　  
+　  
+翻訳が成功するシナリオのテストメソッドを定義します。
+- <code>[Test]</code> Attribute を付加するとテストメソッドとして扱われます。
+- <code>app.Tap</code>で UI エレメントをタップします。
+- <code>c.Marked("inputText")</code>でタップするUI エレメントを指定します。
+- <code>Marked</code>で指定するキーは、iOS では <code>AccessibilityIdentifier</code>、Android では <code>android:id</code>で設定します。
+- <code>app.DismissKeyboard()</code>で、ソフトキーボードを消します。
+- <code>app.Query</code>で UI エレメントを検索します。
+- <code>Assert.AreEqual</code>で、UI エレメントに表示された翻訳後のテキストが正しいか確認しています。
+  
+```csharp
+        [Test]
+        public async void SucceedTranslate()
+        {
+            await Task.Delay(2000);
+            app.Tap(c => c.Marked("inputText"));
+            await Task.Delay(2000);
+            app.EnterText("私は毎日電車に乗って会社に行きます。");
+            await Task.Delay(2000);
+            app.DismissKeyboard();
+            await Task.Delay(2000);
+            app.Tap(c => c.Button("translateButton"));
+            await Task.Delay(4000);
+            var elements = app.Query(c => c.Marked("translatedText"));
+            await Task.Delay(2000);
+            Assert.AreEqual("I go to the office by train every day.", elements.FirstOrDefault().Text);
+        }
+```
+　  
+　  
+翻訳したい日本語が未入力の為、翻訳が失敗するシナリオのテストメソッドを定義します。
+- <code>StringAssert.Contains</code>で、UI エレメントに表示された翻訳後のテキストに指定された文字列が入っているか確認しています。
+  
+```csharp
+        [Test]
+        public async void FailTranslate()
+        {
+            await Task.Delay(2000);
+            app.Tap(c => c.Button("translateButton"));
+            await Task.Delay(4000);
+            var elements = app.Query(c => c.Marked("translatedText"));
+            await Task.Delay(2000);
+            StringAssert.Contains(string.Empty, elements.FirstOrDefault().Text);
+        }
+```
+　  
+　  
+これで、テストコードは完成です。  
+完成したコードは以下のようになります。
+　  
+```csharp
+using System.Linq;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using Xamarin.UITest;
 
+namespace XamAppCenterSample2018.UITests
+{
+    [TestFixture(Platform.Android)]
+    [TestFixture(Platform.iOS)]
+    public class Tests
+    {
+        IApp app;
+        Platform platform;
 
+        public Tests(Platform platform)
+        {
+            this.platform = platform;
+        }
 
+        [SetUp]
+        public void BeforeEachTest()
+        {
+            app = AppInitializer.StartApp(platform);
+        }
 
+        [Test]
+        public async void SucceedTranslate()
+        {
+            await Task.Delay(2000);
+            app.Tap(c => c.Marked("inputText"));
+            await Task.Delay(2000);
+            app.EnterText("私は毎日電車に乗って会社に行きます。");
+            await Task.Delay(2000);
+            app.DismissKeyboard();
+            await Task.Delay(2000);
+            app.Tap(c => c.Button("translateButton"));
+            await Task.Delay(4000);
+            var elements = app.Query(c => c.Marked("translatedText"));
+            await Task.Delay(2000);
+            Assert.AreEqual("I go to the office by train every day.", elements.FirstOrDefault().Text);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
+        [Test]
+        public async void FailTranslate()
+        {
+            await Task.Delay(2000);
+            app.Tap(c => c.Button("translateButton"));
+            await Task.Delay(4000);
+            var elements = app.Query(c => c.Marked("translatedText"));
+            await Task.Delay(2000);
+            StringAssert.Contains(string.Empty, elements.FirstOrDefault().Text);
+        }
+    }
+}
+```
+　 
+　 
 ## Visual Studio App Center に App を作成する ## 
 　  
 　  
@@ -786,7 +1041,7 @@ App Name, OS, Platform を入力、選択し、「Add new app」をクリック
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/006.png?raw=true)
 　  
 　  
-## App Center で Android のビルドの設定 ##
+## App Center で iOS のビルドの設定 ##
 　  
 　  
 「Build」を選択し、ソースコードをホストしたサービスを選択します。
@@ -867,7 +1122,7 @@ App Center には ビルドする`cspoj`と同じ階層に、`appcenter-post-clo
 よって、`appcenter-post-clone.sh`に`[ENTER YOUR API KEY]`を本物のキーに置き換えを行う処理を書きます。
 　  
 　  
-**/src/StartShort/iOS/appcenter-post-clone.sh**
+**/src/Start/iOS/appcenter-post-clone.sh**
 ```sh
 #!/usr/bin/env bash
 
@@ -987,6 +1242,21 @@ echo "##########################################################################
 　  
 　  
 次は、いよいよ自動ビルド後に iOS の自動実機UIテストを実行する設定を進めていきます。
+　  
+　  
+　  
+　  
+## Visual Studio App Center のテスト 30-day trial を有効にします ##
+　  
+　  
+「Test」 -> 「new test run」をクリック
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/016.png?raw=true)
+　  
+　  
+「Start 30-day trial」をクリック
+![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/017.png?raw=true)
+　  
+　  
 　  
 　  
 ## Visual Studio App Center のテスト設定に実機UIテストを走らせるデバイスの組み合わせのセットを登録します ##
@@ -1799,7 +2069,20 @@ XamAppCenterSample2018.Droid > Debug > [あなたのAndroidデバイス名] に�
 　  
 　  
 ![](https://github.com/TomohiroSuzuki128/XamAppCenterSample2018/blob/develop/images/Android010.png?raw=true)
-　  
+　
+
+
+
+
+
+
+
+
+
+
+
+
+
 　  
 　  
 # テストプロジェクトの作成 #
@@ -2071,6 +2354,10 @@ namespace XamAppCenterSample2018.UITests
     }
 }
 ```
+
+
+
+
 　  
 　  
 
