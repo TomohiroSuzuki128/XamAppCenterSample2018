@@ -780,7 +780,7 @@ XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します�
 テスト時にアプリを初期化するクラスを作成します。
 　  
 　  
-/UITests/AppInitializercs ファイルを開きます。
+/UITests/AppInitializer.cs ファイルを開きます。
 　  
 　  
 まずは、using を追加します。  
@@ -881,6 +881,9 @@ namespace XamAppCenterSample2018.UITests
 　  
 テストコードを作成します。
 テストコードはiOS, Android で共用します。
+　  
+　  
+/UITests/Tests.cs ファイルを開きます。
 　  
 　  
 まずは、using を追加します。  
