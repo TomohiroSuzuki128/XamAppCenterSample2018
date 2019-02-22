@@ -865,7 +865,9 @@ namespace XamAppCenterSample2018.UITests
 ```
   
   
-## API Key を消し、ソースを Github にコミット、プッシュする ## 　 
+  
+  
+## API Key を消し、ソースをリモートにプッシュします ##
   
   
 API へのアクセスキーなどの秘匿情報などは、リポジトリにプッシュしてはいけませんので、ダミー文字列に置き換えます。
@@ -889,7 +891,10 @@ namespace XamAppCenterSample2018
 ```
 　  
 　  
-上記のように、一旦、API Key にダミーの文字列を設定しておきます。  
+上記のように、一旦、API Key にダミーの文字列を設定しておきます。
+  
+  
+この時点で、ソースを一度リモートにプッシュしてください。
   
   
 ## Visual Studio App Center に App を作成する ## 
