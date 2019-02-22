@@ -863,8 +863,35 @@ namespace XamAppCenterSample2018.UITests
     }
 }
 ```
-　 
-　 
+  
+  
+## API Key を消し、ソースを Github にコミット、プッシュする ## 　 
+  
+  
+API へのアクセスキーなどの秘匿情報などは、リポジトリにプッシュしてはいけませんので、ダミー文字列に置き換えます。
+  
+  
+/src/Start/XamAppCenterSample2018/Variables.cs を確認してください。
+　  
+　  
+**/src/Start/XamAppCenterSample2018/Variables.cs**
+```csharp
+using System;
+
+namespace XamAppCenterSample2018
+{
+    public static class Variables
+    {
+        // NOTE: Replace this example key with a valid subscription key.
+        public static readonly string ApiKey = "********";
+    }
+}
+```
+　  
+　  
+上記のように、一旦、API Key にダミーの文字列を設定しておきます。  
+  
+  
 ## Visual Studio App Center に App を作成する ## 
 　  
 　  
