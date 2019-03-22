@@ -767,7 +767,5 @@ XamAppCenterSample2018.iOS > Debug > [あなたのiPhone名] に設定します�
 　  
 　  
 　  
-　  
-　  
 お疲れ様でした。これでハンズオンは終了です。
 
